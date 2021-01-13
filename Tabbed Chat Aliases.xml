@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.0">
+    <AliasPackage>
+        <AliasGroup isActive="yes" isFolder="yes">
+            <name>Tabbed Chat</name>
+            <script></script>
+            <command></command>
+            <packageName></packageName>
+            <regex></regex>
+            <Alias isActive="yes" isFolder="no">
+                <name>Toggle blinking (temporary change)</name>
+                <script>if demonnic.chat.config.blink then
+  demonnic.chat.config.blink = false
+  demonnic.chat.tabsToBlink = {}
+  demonnic:echo(&quot;Blinking temporarily turned &lt;red&gt;off&lt;grey&gt;. It will reset if you edit your tabbed chat configuration, or close and reopen mudlet. To make it permanent, change demonnic.chat.config.blink to false in \&quot;Demonnic-&gt;Tabbed Chat-&gt;Configuration options\&quot; under scripts\n&quot;)
+else
+  demonnic.chat.config.blink = true
+  demonnic.chat:blink()
+  demonnic:echo(&quot;Blinking temporarily turned &lt;red&gt;on&lt;grey&gt;. It will reset if you edit your tabbed chat configuration, or close and reopen mudlet. To make it permanent, change demonnic.chat.config.blink to true in \&quot;Demonnic-&gt;Tabbed Chat-&gt;Configuration options\&quot; under scripts\n&quot;)
+end</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^dblink$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>fixChat</name>
+                <script>local currentsetting = demonnic.chat.config.location
+local newsetting = &quot;&quot;
+if currentsetting == &quot;topright&quot; then 
+  newsetting = &quot;bottomleft&quot; 
+elseif currentsetting == &quot;topleft&quot; then
+  newsetting = &quot;bottomright&quot;
+elseif currentsetting == &quot;bottomleft&quot; then
+  newsetting = &quot;topright&quot;
+elseif currentsetting == &quot;bottomright&quot; then
+  newsetting = &quot;topleft&quot;
+end
+
+demonnic.chat.config.location = newsetting
+demonnic.chat:create()
+demonnic.chat.config.location = currentsetting
+demonnic.chat:create()</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^fixchat$</regex>
+            </Alias>
+        </AliasGroup>
+    </AliasPackage>
+</MudletPackage>

@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.0">
+    <AliasPackage>
+        <AliasGroup isActive="no" isFolder="yes">
+            <name>Shaman</name>
+            <script>--[[
+AnimalTotem = bear
+ElementalTotem = obsidian
+SpiritualTotem = quartz
+]]--
+
+--[[Elemental Spells
+Ice Missile
+Flameburst
+Scalding Blast
+Fire Ward
+Cold Ward
+Scorching Touch
+Molten Spray
+Earthen Grasp
+Scathing Wind
+Corrosive Blast
+Arieks Shattering Iceball
+Earthen Rain
+Etherportal
+Gaseous Cloud
+Greater Earthen Grasp
+]]--
+
+--[[Animal Spells
+Wolfspeed
+Pythonsting
+Snailspeed
+Molevision
+Pantherspeed
+Mousestrength
+Summon Beast
+Hawkvision
+Bearstrength
+Shrewtamness
+Lionrage
+Elephantstrength
+Ravenflight
+Greater Pythonsting
+Greater Ravenflight
+]]--
+
+
+--[[Spiritual Spells
+Spirit Armor
+Transfer Wellness
+Lesser Mending
+Reveal Spirit Essence
+Purify Spirit
+Mending
+Soul Disturbance
+Malison
+Sense Spirit
+Protection from Animals
+Wellness
+Greater Mending
+Spirit Anguish
+Spirit Sight
+Greater Soul Disturbance
+Spirit Ward
+Spirit Jump
+Reveal True Form
+Greater Spirit Ward
+Greater Spirit Sight
+Greater Spirit Anguish
+]]--
+
+--[[
+Alias Name:
+Pattern: ^sa(?: (.+))?$
+Code:
+mySpell = &quot;Spirit Armor&quot;
+if myTotem == SpiritualTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..SpiritualTotem)
+	myTotem = SpiritualTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+end
+]]--</script>
+            <command></command>
+            <packageName></packageName>
+            <regex></regex>
+            <Alias isActive="yes" isFolder="no">
+                <name>RestMemMed</name>
+                <script>send (&quot;rest;mem;med;exp;blood&quot;)</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^zz$</regex>
+            </Alias>
+            <AliasGroup isActive="yes" isFolder="yes">
+                <name>Animal Sphere</name>
+                <script></script>
+                <command></command>
+                <packageName></packageName>
+                <regex></regex>
+                <Alias isActive="yes" isFolder="no">
+                    <name>WolfSpeed</name>
+                    <script>mySpell = &quot;Wolfspeed&quot;
+if myTotem == AnimalTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..AnimalTotem)
+	myTotem = AnimalTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+end	</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^wolf(?: (.+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>PantherSpeed</name>
+                    <script>mySpell = &quot;Pantherspeed&quot;
+if myTotem == AnimalTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..AnimalTotem)
+	myTotem = AnimalTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+end	</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^panther(?: (.+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>SummonBeast</name>
+                    <script>mySpell = &quot;Summon Beast&quot;
+if myTotem == AnimalTotem then
+	send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..AnimalTotem)
+	myTotem = AnimalTotem
+	send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end	</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^beast(?: (.+))?$</regex>
+                </Alias>
+            </AliasGroup>
+            <AliasGroup isActive="yes" isFolder="yes">
+                <name>Elemental Sphere</name>
+                <script></script>
+                <command></command>
+                <packageName></packageName>
+                <regex></regex>
+                <Alias isActive="yes" isFolder="no">
+                    <name>FlameBurst</name>
+                    <script>mySpell = &quot;Flameburst&quot;
+if myTotem == ElementalTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..ElementalTotem)
+	myTotem = ElementalTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+	end
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^fb(?: (.+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>ScaldingBlast</name>
+                    <script>mySpell = &quot;Scalding blast&quot;
+if myTotem == ElementalTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..ElementalTotem)
+	myTotem = ElementalTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+	end
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^sb(?: (.+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>ScorchingTouch</name>
+                    <script>mySpell = &quot;Scorching touch&quot;
+if myTotem == ElementalTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..ElementalTotem)
+	myTotem = ElementalTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+	end
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^sct(?: (.+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>MoltenSpray</name>
+                    <script>mySpell = &quot;Molten spray&quot;
+if myTotem == ElementalTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..ElementalTotem)
+	myTotem = ElementalTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+	end
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ms(?: (.+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>ColdWard</name>
+                    <script>mySpell = &quot;Cold Ward&quot;
+if myTotem == ElementalTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..ElementalTotem)
+	myTotem = ElementalTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^cw(?: (.+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>FireWard</name>
+                    <script>mySpell = &quot;Fire Ward&quot;
+if myTotem == ElementalTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..ElementalTotem)
+	myTotem = ElementalTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^fw(?: (.+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>ElementalAffinity</name>
+                    <script>mySpell = &quot;Elemental Affinity&quot;
+if myTotem == ElementalTotem then
+	send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..ElementalTotem)
+	myTotem = ElementalTotem
+	send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ea(?: (.+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>IceMissile</name>
+                    <script>mySpell = &quot;Ice Missile&quot;
+if myTotem == ElementalTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..ElementalTotem)
+	myTotem = ElementalTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+	end
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^im(?: (.+))?$</regex>
+                </Alias>
+            </AliasGroup>
+            <AliasGroup isActive="yes" isFolder="yes">
+                <name>Spiritual Sphere</name>
+                <script></script>
+                <command></command>
+                <packageName></packageName>
+                <regex></regex>
+                <Alias isActive="yes" isFolder="no">
+                    <name>SpiritArmor</name>
+                    <script>mySpell = &quot;Spirit Armor&quot;
+if myTotem == SpiritualTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..SpiritualTotem)
+	myTotem = SpiritualTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+end	</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ca(?: (.+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Mending</name>
+                    <script>mySpell = &quot;Mending&quot;
+if myTotem == SpiritualTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..SpiritualTotem)
+	myTotem = SpiritualTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+end
+</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^cc(?: (.+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>test</name>
+                    <script>--Alias Name:SpiritArmor
+--Pattern: ^sa(?: (.+))?$
+
+--Code--
+mySpell = &quot;Spirit Armor&quot;
+if myTotem == SpiritualTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..SpiritualTotem)
+	myTotem = SpiritualTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^testsa(?: (.+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>GreaterMending</name>
+                    <script>mySpell = &quot;Greater Mending&quot;
+if myTotem == SpiritualTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..SpiritualTotem)
+	myTotem = SpiritualTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ch(?: (.+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>SpiritWard</name>
+                    <script>mySpell = &quot;Spirit Ward&quot;
+if myTotem == SpiritualTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..SpiritualTotem)
+	myTotem = SpiritualTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;' me&quot;)
+	end
+end	</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ward(?: (.+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Spirit Anguish</name>
+                    <script>mySpell = &quot;Spirit Anguish&quot;
+if myTotem == SpiritualTotem then
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+	end
+else
+	send(&quot;rem &quot;..myTotem)
+	send(&quot;hold &quot;..SpiritualTotem)
+	myTotem = SpiritualTotem
+	if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+		else
+			send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+	end
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^sa(?: (.+))?$</regex>
+                </Alias>
+            </AliasGroup>
+        </AliasGroup>
+    </AliasPackage>
+</MudletPackage>

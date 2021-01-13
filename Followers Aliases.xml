@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.0">
+    <AliasPackage>
+        <AliasGroup isActive="yes" isFolder="yes">
+            <name>Followers</name>
+            <script></script>
+            <command></command>
+            <packageName></packageName>
+            <regex></regex>
+            <Alias isActive="yes" isFolder="no">
+                <name>Order Followers</name>
+                <script>send(&quot;order followers &quot; .. matches[2])
+</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^of (.*)$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Order Followers Bash</name>
+                <script>if matches[2] then send(&quot;order followers bash &quot; .. matches[2])
+else
+	send(&quot;order followers bash&quot;)
+end</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^ofb (.*)$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Order Followers Backstab</name>
+                <script>if matches[2] then 
+	send(&quot;order followers bac &quot; .. matches[2])
+	Target = matches[2]
+	echo (&quot;======================================== Target set to: &quot; .. Target .. &quot;\n&quot;)
+else
+	send(&quot;order followers bac&quot;)
+end</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^b (.*)$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Order Followers Get</name>
+                <script>send(&quot;order followers get &quot; .. matches[2])
+</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^ofg (.*)$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Order Followers Fist</name>
+                <script>--^f(\s([\w\.]+))?$
+if matches[2] then send(&quot;order followers cast 'Bigbys Clenched Fist' &quot;.. matches[2])
+else
+	send(&quot;order followers cast 'Bigbys Clenched Fist' &quot;)
+end</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^f(\s([\w\.]+))?$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Order Followers Kill</name>
+                <script>if matches[2] then 
+	send(&quot;order followers kill &quot; .. matches[2])
+	Target = matches[2]
+	echo (&quot;======================================== Target set to: &quot; .. Target .. &quot;\n&quot;)
+else
+	send(&quot;order followers kill&quot;)
+end</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^ofk (.*)$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Order Followers Haste</name>
+                <script>if matches[2] then send(&quot;order followers cast 'Haste' &quot; .. matches[2])
+else
+	send(&quot;order followers cast 'Haste' self&quot;)
+end</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^ofh(\s([\w\.]+))?$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Order Followers Detect Invis</name>
+                <script>--^ofdi (.*)$
+if matches[2] then send(&quot;order followers cast 'Detect Invis' &quot; .. matches[2])
+else
+	send(&quot;order followers cast 'Detect Invis' self&quot;)
+end</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^ofdi (.*)$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Order Followers Cast</name>
+                <script>if matches[2] then send(&quot;order followers cast '&quot;..matches[2]..&quot;' Drev&quot;)
+else
+	send(&quot;order followers cast '&quot;..matches[2]..&quot;' self&quot;)
+end</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^ofc(\s([\w\.]+))?$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Power Word Blind</name>
+                <script>send(&quot;of cast 'power word blind' &quot;..matches[2])</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^pwb (.*)$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Order Followers Improved Invis</name>
+                <script>--^ofdi (.*)$
+if matches[2] then send(&quot;order followers cast 'improved Invis' &quot; .. matches[2])
+else
+	send(&quot;order followers cast 'Improved Invis' &quot;..myName)
+end</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^ofii(\s([\w\.]+))?$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Order Followers Fireball</name>
+                <script>--^f(\s([\w\.]+))?$
+if matches[2] then send(&quot;order followers cast 'Fireball' &quot; .. matches[2])
+else
+	send(&quot;order followers cast 'Fireball' &quot;)
+end</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^fb(\s([\w\.]+))?$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Order Followers cast Electrical Execution</name>
+                <script>--^f(\s([\w\.]+))?$
+if matches[2] then send(&quot;order followers cast 'Electrical Execution' &quot; .. matches[2])
+else
+	send(&quot;order followers cast 'Electrical Execution' &quot;)
+end</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^ee(\s([\w\.]+))?$</regex>
+            </Alias>
+        </AliasGroup>
+    </AliasPackage>
+</MudletPackage>

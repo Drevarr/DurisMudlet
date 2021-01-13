@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.0">
+    <AliasPackage>
+        <AliasGroup isActive="no" isFolder="yes">
+            <name>Summoner</name>
+            <script></script>
+            <command></command>
+            <packageName></packageName>
+            <regex></regex>
+            <AliasGroup isActive="yes" isFolder="yes">
+                <name>Followers</name>
+                <script></script>
+                <command></command>
+                <packageName></packageName>
+                <regex></regex>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Order Followers</name>
+                    <script>send(&quot;order followers &quot; .. matches[2])
+</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^of (.*)$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Order Followers Bash</name>
+                    <script>if matches[2] then send(&quot;order followers bash &quot; .. matches[2])
+else
+	send(&quot;order followers bash&quot;)
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ofb (.*)$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Order Followers Backstab</name>
+                    <script>if matches[2] then
+	send(&quot;order followers bac &quot; .. matches[2])
+	Target = matches[2]
+	echo (&quot;======================================== Target set to: &quot; .. Target .. &quot;\n&quot;)
+else
+	send(&quot;order followers bac&quot;)
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^b (.*)$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Order Followers Get</name>
+                    <script>send(&quot;order followers get &quot; .. matches[2])
+</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ofg (.*)$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Order Followers Fist</name>
+                    <script>--^f(\s([\w\.]+))?$
+if matches[2] then send(&quot;order followers cast 'Bigbys Clenched Fist' &quot;.. matches[2])
+else
+	send(&quot;order followers cast 'Bigbys Clenched Fist' &quot;)
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^f(\s([\w\.]+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Order Followers Kill</name>
+                    <script>if matches[2] then
+	send(&quot;order followers kill &quot; .. matches[2])
+	Target = matches[2]
+	echo (&quot;======================================== Target set to: &quot; .. Target .. &quot;\n&quot;)
+else
+	send(&quot;order followers kill&quot;)
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ofk (.*)$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Order Followers Haste</name>
+                    <script>if matches[2] then send(&quot;order followers cast 'Haste' &quot; .. matches[2])
+else
+	send(&quot;order followers cast 'Haste' self&quot;)
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ofh(\s([\w\.]+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Order Followers Detect Invis</name>
+                    <script>--^ofdi (.*)$
+if matches[2] then send(&quot;order followers cast 'Detect Invis' &quot; .. matches[2])
+else
+	send(&quot;order followers cast 'Detect Invis' self&quot;)
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ofdi (.*)$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Order Followers Cast</name>
+                    <script>if matches[2] then send(&quot;order followers cast '&quot;..matches[2]..&quot;' Drev&quot;)
+else
+	send(&quot;order followers cast '&quot;..matches[2]..&quot;' self&quot;)
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ofc(\s([\w\.]+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Power Word Blind</name>
+                    <script>send(&quot;of cast 'power word blind' &quot;..matches[2])</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^pwb (.*)$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Order Followers Improved Invis</name>
+                    <script>--^ofdi (.*)$
+if matches[2] then send(&quot;order followers cast 'improved Invis' &quot; .. matches[2])
+else
+	send(&quot;order followers cast 'Improved Invis' &quot;..myName)
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ofii(\s([\w\.]+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Order Followers Fireball</name>
+                    <script>--^f(\s([\w\.]+))?$
+if matches[2] then send(&quot;order followers cast 'Fireball' &quot; .. matches[2])
+else
+	send(&quot;order followers cast 'Fireball' &quot;)
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^fb(\s([\w\.]+))?$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Order Followers cast Electrical Execution</name>
+                    <script>--^f(\s([\w\.]+))?$
+if matches[2] then send(&quot;order followers cast 'Electrical Execution' &quot; .. matches[2])
+else
+	send(&quot;order followers cast 'Electrical Execution' &quot;)
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ee(\s([\w\.]+))?$</regex>
+                </Alias>
+            </AliasGroup>
+            <AliasGroup isActive="yes" isFolder="yes">
+                <name>SummonerSpells</name>
+                <script></script>
+                <command></command>
+                <packageName></packageName>
+                <regex></regex>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>1st Circle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Detect Magic</name>
+                        <script>--^ct(\s([\w\.]+))?$
+mySpell = &quot;Detect Magic&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^detm(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Minor Creation</name>
+                        <script>if matches[2] then send(&quot;cast 'minor creation' &quot; .. matches[2])
+else
+	send(&quot;cast 'minor creation'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^mc(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Preserve</name>
+                        <script>mySpell = &quot;Preserve&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' corpse&quot;)
+end
+</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^pres(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Protection from Undead</name>
+                        <script>--^ct(\s([\w\.]+))?$
+mySpell = &quot;Protection from Undead&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' self&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^protu(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Slashing Darkness</name>
+                        <script>mySpell = &quot;Slashing Darkness&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end
+</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^sd(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>2nd Circle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Chill Touch</name>
+                        <script>--^ct(\s([\w\.]+))?$
+mySpell = &quot;Chill Touch&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end
+</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^ct(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Protection from Living</name>
+                        <script>--^vt(\s([\w\.]+))?$
+mySpell = &quot;Protection from Living&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' self&quot;)
+end
+</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^protl(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Protection from Cold</name>
+                        <script>--^protc(\s([\w\.]+))?$
+mySpell = &quot;Protection from Cold&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' self&quot;)
+end
+</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^protc(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Sleep</name>
+                        <script>--^sleep(\s([\w\.]+))?$
+mySpell = &quot;Sleep&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^sleep(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Vampiric Touch</name>
+                        <script>--^vt(\s([\w\.]+))?$
+mySpell = &quot;Vampiric Touch&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end
+</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^vt(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>3rd Circle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Animate Dead</name>
+                        <script>--^emb(\s([\w\.]+))?$
+mySpell = &quot;Animate Dead&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' corpse&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^ad(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Dispel Magic</name>
+                        <script>--^dm(\s([\w\.]+))?$
+mySpell = &quot;Dispel Magic&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end	</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^dm(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Embalm</name>
+                        <script>--^emb(\s([\w\.]+))?$
+mySpell = &quot;Embalm&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' corpse&quot;)
+end
+</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^emb(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Sense Follower</name>
+                        <script>--^sense(\s([\w\.]+))?$
+mySpell = &quot;Sense Follower&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end	</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^sense(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>4th Circle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Life Leech</name>
+                        <script>--^ll(\s([\w\.]+))?$
+mySpell = &quot;Life Leech&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^li(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Strength</name>
+                        <script>--^str(\s([\w\.]+))?$
+mySpell = &quot;Strength&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' self&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^str(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Unmaking</name>
+                        <script>--^unmake(\s([\w\.]+))?$
+mySpell = &quot;Unmaking&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' corpse&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^unmake(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Wither</name>
+                        <script>--^wi(\s([\w\.]+))?$
+mySpell = &quot;Wither&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^wi(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>5th Circle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Coldshield</name>
+                        <script>--^colds(\s([\w\.]+))?$
+mySpell = &quot;Coldshield&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^cs(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Fireshield</name>
+                        <script>--^fires(\s([\w\.]+))?$
+mySpell = &quot;Fireshield&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^fires(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Heal Undead</name>
+                        <script>--^hu(\s([\w\.]+))?$
+mySpell = &quot;Heal Undead&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^hu(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Levitate</name>
+                        <script>--^lev(\s([\w\.]+))?$
+mySpell = &quot;Levitate&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' self&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^lev(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Raise Spectre</name>
+                        <script>--^rs(\s([\w\.]+))?$
+mySpell = &quot;Raise Spectre&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' corpse&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^rs(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Teleport</name>
+                        <script>--^tel(\s([\w\.]+))?$
+mySpell = &quot;Teleport&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^tel(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Concealment</name>
+                        <script>--^conc(\s([\w\.]+))?$
+mySpell = &quot;Concealment&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' &quot;..myName)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^conc(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>6th Circle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Vitalize Undead</name>
+                        <script>--^vu(\s([\w\.]+))?$
+mySpell = &quot;Vitalize Undead&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' self&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^vu(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Enervation</name>
+                        <script>--^en(\s([\w\.]+))?$
+mySpell = &quot;Enervation&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^en(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Cone of Cold</name>
+                        <script>--^ct(\s([\w\.]+))?$
+mySpell = &quot;Cone of Cold&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end
+</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^cc(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>7th Circle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Knock</name>
+                        <script>--^knock(\s([\w\.]+))?$
+mySpell = &quot;Knock&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end
+</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^knock(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Protect Undead</name>
+                        <script>--^pu(\s([\w\.]+))?$
+mySpell = &quot;Protect Undead&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' self&quot;)
+end
+</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^pu(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Raise Wraith</name>
+                        <script>--^rw(\s([\w\.]+))?$
+mySpell = &quot;Raise Wraith&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' corpse&quot;)
+end
+</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^rw(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>8th Circle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Detect Invisibility</name>
+                        <script>--^di(\s([\w\.]+))?$
+mySpell = &quot;Detect Invisibility&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' self&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^di(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Improved Invisibility</name>
+                        <script>--^invis(\s([\w\.]+))?$
+mySpell = &quot;Improved Invisibility&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' self&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^invis(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Negative Concussion Blast</name>
+                        <script>--^ncb(\s([\w\.]+))?$
+mySpell = &quot;Negative Concussion Blast&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^ncb(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Haste</name>
+                        <script>--^has(\s([\w\.]+))?$
+mySpell = &quot;Haste&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' self&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^has(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>9thCircle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Energy Drain</name>
+                        <script>--^ncb(\s([\w\.]+))?$
+mySpell = &quot;Energy Drain&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^ed(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>10thCircle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Raise Lich</name>
+                        <script>--^rw(\s([\w\.]+))?$
+mySpell = &quot;Raise Lich&quot;
+
+if matches[2] then send(&quot;cast '&quot;..mySpell..&quot;' &quot; .. matches[2])
+	else
+		send(&quot;cast '&quot;..mySpell..&quot;' corpse&quot;)
+end
+</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^rl(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+            </AliasGroup>
+            <Alias isActive="yes" isFolder="no">
+                <name>Slash Casting</name>
+                <script>--^\/(\w+)(\s([\w\.]+))?$
+castSpell(Summoner, matches[2], matches[3])</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^\/(\w+)(\s([\w\.]+))?$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>SpellUp</name>
+                <script>CheckSpells = {&quot;protection from undead&quot;, &quot;protection from cold&quot;, &quot;protection from living&quot;, &quot;sense follower&quot;, &quot;strength&quot;, &quot;levitate&quot;, &quot;coldshield&quot;, &quot;stone skin&quot;, &quot;detect invisibility&quot;, &quot;haste&quot;, &quot;invisibility&quot;}
+CheckSpellsAlias = {&quot;protu&quot;, &quot;protc&quot;, &quot;protl&quot;, &quot;sense&quot;, &quot;str&quot;, &quot;lev&quot;, &quot;cs&quot;, &quot;pu&quot;, &quot;di&quot;, &quot;has&quot;, &quot;invis&quot;}
+
+
+send(&quot;score&quot;)
+--- Loop through active to find missing spells
+cecho(&quot;\n&lt;cyan&gt;&lt;=================================== Spell Up Activated\n&quot;)
+
+for i,v in ipairs(CheckSpells) do
+	if myActiveSpells[v] then echo(v..&quot; is active\n&quot;)
+	else
+		-- cecho(&quot;&lt;cyan&gt;&lt;===casting &quot;..v&quot;\n&quot;)
+		expandAlias(CheckSpellsAlias[table.index_of(CheckSpells, v)], false)
+	end
+end
+
+send(&quot;score&quot;)</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^su$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Rest Mem Med</name>
+                <script>send(&quot;rest;mem;med;exp;blood&quot;)</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^zz$</regex>
+            </Alias>
+        </AliasGroup>
+    </AliasPackage>
+</MudletPackage>

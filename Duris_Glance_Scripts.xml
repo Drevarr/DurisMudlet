@@ -1,0 +1,1573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.001">
+	<ScriptPackage>
+		<ScriptGroup isActive="yes" isFolder="yes">
+			<name>DurisScripts</name>
+			<packageName></packageName>
+			<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+</script>
+			<eventHandlerList />
+			<ScriptGroup isActive="no" isFolder="yes">
+				<name>EXPBOT</name>
+				<packageName></packageName>
+				<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+</script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>doCombat</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+function doCombat()
+	if mySpellCount[10]&gt;0 then
+		send("cast 'creeping doom' "..myTarget)
+		mySpellCount[10] = mySpellCount[10]-1
+	elseif mySpellCount[9]&gt;0 then
+		send("cast 'sunray' "..myTarget)
+		mySpellCount[9] = mySpellCount[9]-1
+	elseif mySpellCount[7]&gt;0 then
+		send("cast 'cyclone' "..myTarget)
+		mySpellCount[7] = mySpellCount[7]-1		
+	elseif mySpellCount[6]&gt;0 then
+		send("cast 'earthen maul' "..myTarget)
+		mySpellCount[6] = mySpellCount[6]-1			
+	elseif mySpellCount[4]&gt;0 then
+		send("cast 'lightning bolt' "..myTarget)
+		mySpellCount[4] = mySpellCount[4]-1
+	elseif mySpellCount[2]&gt;0 then
+		send("cast 'sticks to snakes' "..myTarget)
+		mySpellCount[2] = mySpellCount[2]-1
+	end
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>checkRoom</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+function checkRoom()
+	send("look room")
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>checkSpells</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+function checkSpells()
+	if spellsMissing then
+		send("commune")
+	else
+		checkHealth()
+	end
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>checkHealth</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+function checkHealth()
+	if myHEALTH &lt; myHealthMax then
+		doHealSelf()
+	else
+		checkRoom()
+	end
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>doHealSelf</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+function doHealSelf()
+	if tonumber(myLevel)&gt;20 then
+		send("cast 'natures touch' me")
+	elseif tonumber(myLevel)&gt;15 then
+		if checkSpring then
+			send("drink spring")
+		else
+			send("cast 'create spring'")
+			send("drink spring")
+		end
+	else
+		send("rest")
+	end
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>XPBOT</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+function XPBot()
+	if myCombatStatus then
+		doCombat()
+	else
+		checkSpells()
+	end
+end	</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>TableFunctions</name>
+				<packageName></packageName>
+				<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+
+
+
+</script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>MinValue</name>
+					<packageName></packageName>
+					<script>function table.min( myTable)
+   local minValue
+   for name, value in ipairs( myTable) do
+      minValue = ((not minValue or value &lt; minValue) and value)  or minValue
+   end
+   return minValue
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>spairs</name>
+					<packageName></packageName>
+					<script>function spairs(t, order)
+    -- collect the keys
+    local keys = {}
+    for k in pairs(t) do keys[#keys+1] = k end
+
+    -- if order function given, sort by it by passing the table and keys a, b,
+    -- otherwise just sort the keys 
+    if order then
+        table.sort(keys, function(a,b) return order(t, a, b) end)
+    else
+        table.sort(keys)
+    end
+
+    -- return the iterator function
+    local i = 0
+    return function()
+        i = i + 1
+        if keys[i] then
+            return keys[i], t[keys[i]]
+        end
+    end
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="no" isFolder="no">
+					<name>spairs_print_ascending</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+function spairs_print(tableName, order)
+		for k,v in spairs(tableName, function(t,a,b) return t[b] &gt; t[a] end) do
+   			cecho("Left3", "&lt;green&gt;"..k.." (&lt;yellow&gt;"..v..")\n")
+		end
+end
+</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Assign Heal Targets</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+healT={}
+function spairs_var(tableName, order)
+		i=1
+		for k,v in spairs(tableName, function(t,a,b) return t[b] &gt; t[a] end) do
+   			--cecho("Left2", "&lt;green&gt;"..k.."&lt;yellow&gt;"..v.."\n")
+			healT["healTarget"..i] = k
+			i = i+1
+		end
+end
+</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Table Contains</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+function table.contains(table, element)
+  for _, value in pairs(table) do
+    if value == element then
+      return true
+    end
+  end
+  return false
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Sets</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+function addToSet(set, key)
+    set[key] = true
+end
+
+function removeFromSet(set, key)
+    set[key] = nil
+end
+
+function setContains(set, key)
+    return set[key] ~= nil
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>findString</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+
+function findString(str, word)
+
+	if string.find(str, word) then
+		print ("The word was found.")
+	else
+		print ("The word was not found.")
+	end
+end</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>Variables</name>
+				<packageName></packageName>
+				<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+</script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>myVariables</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+myName="Idor"
+myLevel="10"
+myClass="Paladin"
+myRace="Halfling"
+myRacewar="Good"
+myInstrument="drums"
+mySong="SongOfSleep"
+myBag="satchel"
+myTank="Drella"
+myTankCond=""
+myTankPos=""
+myEnemy=""
+myEnemyCond=""
+myEnemyPos=""
+myWeapon="sword"
+LootVar="all"
+autoId = false
+mySkills= mySkills or {}
+Dismount_Flag = 1
+
+CombatMiss = CombatMiss or 0
+CombatHit = CombatHit or 0
+CombatDodge = CombatDodge or 0
+
+myPrevExp = myPrevExp or nil
+myCurExp = myCurExp or nil
+
+myInRoom = myInRoom or {}
+listInRoom = listInRoom or {}
+myActiveSpells = myActiveSpells or {}
+myRescueList= myRescueList or {}
+myTankList= myTankList or {}
+mySpellCount = mySpellCount or {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+
+myCombatStatus=false
+spellsMissing = true
+checkSpring = false
+
+
+BardSongList=[[Songs
+========================
+ 
+&lt;khaki&gt;Sleep          &lt;DodgerBlue&gt;Flute
+&lt;khaki&gt;Calming        &lt;DodgerBlue&gt;Harp
+&lt;khaki&gt;Discord        &lt;DodgerBlue&gt;Flute
+&lt;khaki&gt;Harmony        &lt;DodgerBlue&gt;Flute
+&lt;khaki&gt;Protection     &lt;DodgerBlue&gt;Horn
+&lt;khaki&gt;Forgetfulness  &lt;DodgerBlue&gt;Mandolin
+&lt;khaki&gt;Cowardice      &lt;DodgerBlue&gt;Drums
+&lt;khaki&gt;Peace          &lt;DodgerBlue&gt;Harp
+&lt;khaki&gt;Dissonance     &lt;DodgerBlue&gt;Horn
+&lt;khaki&gt;Flight         &lt;DodgerBlue&gt;Horn
+&lt;khaki&gt;Dragons        &lt;DodgerBlue&gt;Horn
+&lt;khaki&gt;Healing        &lt;DodgerBlue&gt;Lyre
+&lt;khaki&gt;Harming        &lt;DodgerBlue&gt;Lyre
+&lt;khaki&gt;Storms         &lt;DodgerBlue&gt;Drums
+&lt;khaki&gt;Heroism        &lt;DodgerBlue&gt;Drums
+&lt;khaki&gt;Revelation     &lt;DodgerBlue&gt;Mandolin
+&lt;khaki&gt;Chaos          &lt;DodgerBlue&gt;Drums
+&lt;khaki&gt;Charming       &lt;DodgerBlue&gt;Flute
+ 
+]]
+
+Skill_List = {"1h Bludgeon","1h piercing","1h slashing","2h bludgeon","2h slashing","appraise","Attack","Aura of Battle Lust","Aura of Endurance","Aura of Improved Healing","Aura of Precision","Aura of Protection","awareness","backstab","Bandage","Bash","Blindfighting","Carve","Circle","Cleave","Climb","concentration","Control Flee","Detect Evil","Detect Good","Dirttoss","Disarm","disguise","Dodge","Double","double attack","drums","Dual Wield","Evade","First Aid","Fishing","flute","Garrote","Guard","Hamstring","harp","hide","horn","Instant Kill","Kick","Lay Hands","listen","lore","lyre","mandolin","Meditate","Mine","Mount","Parry","Pick Lock","Quick Chant","Quick Step","Ranged Weapons","Rescue","Retreat","riff","Riposte","Safe Fall","salvage","scribe","Shadowstep","shield block","Skewer","Slip","sneak","sneaky strike","song of calming","song of chaos","song of charming","song of cowardice","song of discord","song of dissonance","song of dragons","song of flight","song of forgetfulness","song of harming","song of harmony","song of healing","song of heroism","song of peace","song of protection","song of revelation","song of sleep","song of storms","sorcerous spell knowledge","Spinal Tap","Steal","Subterfuge","Summon Mount","Swim","Switch Opponents","Trap","trip","Triple Attack","Unarmed Damage","Vicious Attack"}
+</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Prompt_Variables</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+myHEALTH = 100
+myHEALTH_MAX = 100</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Direction Lookup</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+flee_Dir = {north = "South",
+	east = "West",
+	south = "North",
+	west = "east",
+	up = "down",
+	down = "up",
+	northwest = "southeast",
+	northeast = "southwest",
+	southeast = "northwest",
+	southwest = "northeast",
+	n = "S",
+	e = "W",
+	s = "N",
+	w = "E",
+	u = "D",
+	d = "U",
+	nw = "SE",
+	ne = "SW",
+	se = "NW",
+	sw = "NE"
+}</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Items with Proc</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+
+
+Proc_Items = {
+"a gleaming dwarven warhammer covered with runic script",
+"a long slime-covered tendril with an unblinking eye",
+"a two-handed adamantite dwarven battle-hammer",
+"an ancient adamantium warhammer of dwarven kings",
+"the black dagger of reckoning",
+"the mithril axe of the dwarven lords",
+"the righteous warhammer of Clangeddin Silverbeard",
+"the smouldering forge hammer of Urtengor",
+"a cold steel axe called 'Brainripper'",
+"a diamondine short spear called 'Mankiller'",
+"the jewel of the Spider Queen",
+"its razor sharp talons",
+"Sunlash, the barbed whip of Injustice and Pain",
+"the bastard sword 'Stalker'",
+"the flaming whip of Mrinlor",
+"the granite dagger 'BloodFeast'",
+"the great claymore 'Mist'",
+"the helm of the dragonlords",
+"the platemail of the DragonLord",
+"a searing two-handed sword of lightning",
+"a massive spiked demon mace of the tanar'ri",
+"Pek'Nasisk, the venom lash",
+"Shokurung'otaghe'rakag'onk'rakag, the axe of ill repute",
+"the sword of scourging",
+"the tome of Strahd",
+"'Einjar' the titan shield of purity",
+"the writhing serpent of miracles",
+"a massive black steel club called Crusher",
+"a shard of bluestone called Freeze",
+"'B'ardingol', The Foe Hammer",
+"a dagger called 'Domination'",
+"a dagger called 'Submission'",
+"a huge double-bladed axe called 'Skull Splitter'",
+"a sacrificial blood dagger of Kvasir",
+"the mystic axe of the dragonkind",
+"the totem of the ancient dragon riders",
+"a black morningstar",
+"a drusus named 'Fade to Black'",
+"a falchion named 'Magebane'",
+"a longsword named 'Elfdawn'",
+"a massive sword named 'Lightning Bolt'",
+"a scimitar named 'Woundhealer'",
+"an ancient blade of paladins",
+"the blade of the Golden Flame",
+"a black-bladed dagger",
+"a fierce blade of doom",
+"Krazakan, the githyanki slayer",
+"a blood red sword named 'Death Rider'",
+"Tiamat's poison tail stinger",
+"the rod of Dispator",
+"a blazing longsword dubbed 'Rising Sun'",
+"a blazing mace dubbed 'Rising Sun'",
+"a massive longsword dubbed 'Dusk and Dawn'",
+"an icy longsword dubbed 'Rising Frost'",
+"an icy mace dubbed 'Rising Frost'",
+"the titan warhammer, 'Purelight'",
+"a mace of para-elemental ice",
+"a flaming sword of the valkyrie",
+"a great axe named 'Frostbite'",
+"Khildarak's war hammer",
+"a mace named 'Vengeance'",
+"a warhammer of the frozen north",
+"a longsword named 'Cinder'",
+"a fragment of moonstone heart",
+"a MaDMaNs slasher",
+"a MaDMaNs stabber",
+"a katana called 'Retribution'",
+"the lost sword of Cymrych Hugh",
+"a black longsword named 'Cauterizer'",
+"a cloak of Elvenkind",
+"a pair of pale, misty gloves",
+"a sleek adamantium dagger named 'Blight'",
+"an elaborate rune covered sword named 'Mournblade'",
+"the death-mask of Nakral",
+"a bloodblade called 'Lifereaver'",
+"a frost brand named 'Stormbringer'",
+"a ring of regeneration",
+"the legendary platemail of defense",
+"the shield of the earthwyrm",
+"a gold and ivory mace named 'Dragondeath'",
+"a severed tail spike",
+"the demonic warmace 'Pure-Dark'",
+"the icecrown of the frost revenants",
+"the sphere of wind",
+"a pair of dusty boots",
+"a pair of gauntlets formed of dust",
+"a pair of stone gauntlets",
+"the mace of the earth",
+"the orb of the sea",
+"the hammer of titankind",
+"a blood dagger of Tezcatlipoca",
+"a staff of power",
+"the doubling sword of Chaos",
+"Tsunami, the trident of storms",
+"the ice mace of Sevenoaks",
+"the unholy avenger named 'Bloodlust'",
+"something",
+"Illyn's Holy Sword",
+"Avernus the life stealer",
+"a black staff headed with a goat skull",
+"the huge bone broadsword 'Desecration'",
+"a runestone dagger",
+"'Starlight' the gold-linked morning star",
+"a strange scroll of enchantment",
+"an earring of wonderous power",
+"the heart of Bahamut",
+"the heart of Dragonnia",
+"the heart of Tiamat",
+"the infamous crystal dagger named 'Venom'",
+"the Legend of The Lore Keeper",
+"the neatly wrapped gift of the cosmos",
+"a flaming mace of the Ruzdo",
+"a jagged obsidian dagger with a sapphire hilt",
+"a faded-red dagger called 'Silencer'",
+"the crown of Aramus",
+"the stone mace 'Godsfury'",
+"the holy warhammer 'Discipline'",
+"a pair of aboleth leggings",
+"Chaos, The Unholy Avenger",
+"the pendant of the aboleth",
+"the totem of Mox",
+"the Soulrender",
+"Silence, the dagger of anguish",
+"an electium katar dubbed 'Miasma'",
+"an obsidian buckle named Rage",
+"the humming sword named 'Blaze'",
+"the lost blade of the Astral Dancer, 'Ender'",
+"a caustic dagger",
+"a flaming axe of the Azer",
+"a diorite shard named 'Seeker'",
+"a rune-covered svalich wood quarterstaff",
+"the rod of summoning",
+"a darkened blade bearing a Thieves Guild insignia",
+"a black bladed longsword",
+"a dagger named 'Fade'",
+"a giant longsword named 'Disintegrator'",
+"the three-headed flail of Yeenoghu",
+"a barbed whip dubbed 'Cometstrike'",
+"the staff of the storm",
+"a two-handed black minotaur axe",
+"grenadier proc",
+"a great warhammer named 'Fearfrost'",
+"a tricksters dagger of deception and illusions",
+"a crumpled note",
+"the globe of shadows",
+"trash",
+"a massive blackrock hammer named 'Searing Fist'",
+"a saber of the Felwood Kings",
+"the claw of Krizzix",
+"a cold saber called 'icicle'",
+"the Soulsword",
+"an adamantium dirk",
+"a large glowing sword of the tundra",
+"a sword named Snakebite"
+}</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Class Epic Skills</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+Epic_Skills = {"empower song",
+"enchant",
+"epic agility",
+"epic charisma",
+"epic constitution",
+"epic dexterity",
+"epic intelligence",
+"epic luck",
+"epic power",
+"epic strength",
+"epic wisdom",
+"indomitable rage",
+"infuse life",
+"infuse magical device",
+"jin touch",
+"ki strike",
+"silent spell",
+"smelt",
+"spell penetration",
+"spellbind",
+"summon blizzard",
+"summon familiar",
+"toughness"
+}</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>shamanVariables</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+myTotem = "limestone"
+--AnimalTotem = "bear"
+--ElementalTotem = "obsidian"
+--SpiritualTotem = "quartz"
+AnimalTotem = "raven"
+ElementalTotem = "limestone"
+SpiritualTotem = "ivory"</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>DurisClasses</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+Duris_Classes = {"Warrior","Mercenary","Rogue","Bard","Conjurer","Summoner","Sorcerer","Psionicist","Druid","Cleric","Ethermancer","Monk","Paladin","Anti-Paladin","Berserker","Ranger","Reaver","Illusionist","Alchemist","Shaman","Necromancer","Blighter","Dreadlord","Avenger"}</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Necro variables</name>
+					<packageName></packageName>
+					<script>--Necro Variables
+Pet_1 = "1.wraith"
+Pet_2 = "2.wraith"
+Pet_3 = "3.wraith"
+Pet_4 = "4.wraith"</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>StringStuff</name>
+				<packageName></packageName>
+				<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+</script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>Title Case</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+function titlecase(str)
+    local buf = {}
+    for word in string.gfind(str, "%S+") do          
+        local first, rest = string.sub(word, 1, 1), string.sub(word, 2)
+        table.insert(buf, string.upper(first) .. string.lower(rest))
+    end    
+    return table.concat(buf, " ")
+end</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>DurisClassList</name>
+				<packageName></packageName>
+				<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+</script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>ClassList</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+DurisClassList = {
+"Warrior",
+"Ranger",
+"Paladin",
+"Anti-Paladin",
+"Monk",
+"Reaver",
+"Berserker",
+"Dreadlord",
+"Avenger",
+"Cleric",
+"Druid",
+"Shaman",
+"Ethermancer",
+"Rogue",
+"Bard",
+"Mercenary",
+"Sorcerer",
+"Conjurer",
+"Illusionist",
+"Alchemist",
+"Psionicist",
+"Necromancer",
+"Theurgist",
+"Summoner"
+}
+
+ActiveClass = "None"
+
+
+
+
+</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Decho Class List</name>
+					<packageName></packageName>
+					<script>DurisClassListDecho = {
+Warrior = "&lt;0,0,255:0,0,0&gt;Warrior",
+Swordsman = "&lt;0,0,255:0,0,0&gt;Swordsman",
+Guardian = "&lt;128,128,0:0,0,0&gt;Guardian",
+Swashbuckler = "&lt;85,85,255:0,0,0&gt;Swa&lt;0,0,255:0,0,0&gt;sh&lt;255,255,255:0,0,0&gt;buc&lt;0,0,255:0,0,0&gt;kler",
+Ranger = "&lt;0,255,0:0,0,0&gt;Ranger",
+Blademaster = "&lt;0,128,128:0,0,0&gt;Blademaster",
+Huntsman = "&lt;0,179,0:0,0,0&gt;Huntsman",
+Marshall = "&lt;0,179,0:0,0,0&gt;Ma&lt;128,128,0:0,0,0&gt;rsha&lt;0,179,0:0,0,0&gt;ll",
+Psionicist = "&lt;85,85,255:0,0,0&gt;Psionicist",
+Pyrokinetic = "&lt;128,0,0:0,0,0&gt;Pyr&lt;255,0,0:0,0,0&gt;okine&lt;128,0,0:0,0,0&gt;tic",
+Enslaver = "&lt;255,0,255:0,0,0&gt;En&lt;128,0,128:0,0,0&gt;slav&lt;255,0,255:0,0,0&gt;er",
+Psycheporter = "&lt;85,85,255:0,0,0&gt;Psyche&lt;128,128,128:0,0,0&gt;porter",
+Paladin = "&lt;255,255,255:0,0,0&gt;Paladin",
+Crusader = "&lt;192,192,192:0,0,0&gt;Crusa&lt;255,255,255:0,0,0&gt;der",
+Cavalier = "&lt;255,255,255:0,0,0&gt;Cavalier",
+["Anti-Paladin"] = "&lt;128,128,128:0,0,0&gt;Anti-Paladin",
+["Dark Knight"] =  "&lt;128,128,128:0,0,0&gt;Dark Knight",
+["Demonic Rider"] = "&lt;255,255,255:0,0,0&gt;&lt;128,128,128:0,0,0&gt;Dem&lt;128,0,0:0,0,0&gt;onic Ri&lt;128,128,128:0,0,0&gt;der",
+Violator = "&lt;128,128,128:0,0,0&gt;Vi&lt;128,0,0:0,0,0&gt;o&lt;128,128,128:0,0,0&gt;lat&lt;128,0,0:0,0,0&gt;or",
+Cleric = "&lt;0,128,128:0,0,0&gt;Cleric",
+Zealot = "&lt;255,255,0:0,0,0&gt;Zealot",
+Healer = "&lt;255,255,255:0,0,0&gt; Healer",
+Holyman = "&lt;0,128,128:0,0,0&gt;Holy&lt;255,255,255:0,0,0&gt;man",
+Monk = "&lt;128,128,128:0,0,0&gt;M&lt;255,255,255:0,0,0&gt;on&lt;128,128,128:0,0,0&gt;k",
+["Red Dragon"] = "&lt;128,0,0:0,0,0&gt;Re&lt;255,0,0:0,0,0&gt;d Dra&lt;128,0,0:0,0,0&gt;gon",
+Elaphidist = "&lt;0,179,0:0,0,0&gt;Elap&lt;0,255,0:0,0,0&gt;hi&lt;0,179,0:0,0,0&gt;dist:",
+Druid = "&lt;0,179,0:0,0,0&gt;Druid",
+["Forest Druid"] = "&lt;0,179,0:0,0,0&gt;Fo&lt;0,255,0:0,0,0&gt;re&lt;0,179,0:0,0,0&gt;st Druid",
+["Storm Druid"] = "&lt;0,128,128:0,0,0&gt;Storm &lt;0,255,255:0,0,0&gt;Druid",
+Shaman = "&lt;0,255,255:0,0,0&gt;Shaman",
+Elementalist = "&lt;128,0,0:0,0,0&gt;El&lt;255,0,0:0,0,0&gt;em&lt;128,128,128:0,0,0&gt;enta&lt;255,0,0:0,0,0&gt;li&lt;128,0,0:0,0,0&gt;st",
+Spiritualist = "&lt;255,255,255:0,0,0&gt;Spir&lt;0,255,255:0,0,0&gt;itua&lt;255,255,255:0,0,0&gt;list",
+Animalist = "&lt;128,128,0:0,0,0&gt;Ani&lt;255,255,0:0,0,0&gt;mal&lt;128,128,0:0,0,0&gt;ist",
+Sorcerer = "&lt;255,0,255:0,0,0&gt;Sorcerer",
+Wildmage = "&lt;255,0,255:0,0,0&gt;Wild&lt;128,0,128:0,0,0&gt;mage",
+Wizard = "&lt;128,128,128:0,0,0&gt;Wizard",
+Shadowmage = "&lt;128,128,128:0,0,0&gt;Shadow&lt;192,192,192:0,0,0&gt;mage",
+Necromancer = "&lt;128,0,128:0,0,0&gt;Necromancer",
+Diabolis = "&lt;128,0,128:0,0,0&gt;Dia&lt;128,0,0:0,0,0&gt;bolis",
+Necrolyte = "&lt;128,0,128:0,0,0&gt;Ne&lt;128,128,128:0,0,0&gt;cro&lt;128,0,128:0,0,0&gt;lyte",
+Reaper = "&lt;128,128,128:0,0,0&gt;Reap&lt;192,192,192:0,0,0&gt;er",
+Conjurer = "&lt;255,255,0:0,0,0&gt;Conjurer",
+["Air Magus"] = "&lt;0,255,255:0,0,0&gt;Air Magus",
+["Water Magus"] = "&lt;0,0,255:0,0,0&gt;Water Magus",
+["Fire Magus"] = "&lt;128,0,0:0,0,0&gt;Fire Magus",
+["Earth Magus"] = "&lt;128,128,0:0,0,0&gt;Earth Magus",
+Rogue = "&lt;128,0,0:0,0,0&gt;Rogue",
+Assassin = "&lt;128,0,0:0,0,0&gt;Assassin",
+Thief = "&lt;128,128,128:0,0,0&gt;Thief",
+["Shadow Archer"] = "&lt;128,128,128:0,0,0&gt;Sh&lt;192,192,192:0,0,0&gt;a&lt;128,128,128:0,0,0&gt;dow &lt;0,0,255:0,0,0&gt;Arc&lt;85,85,255:0,0,0&gt;her",
+Mercenary = "&lt;128,128,0:0,0,0&gt;Mercenary",
+Brigand = "&lt;128,128,0:0,0,0&gt;Br&lt;128,128,128:0,0,0&gt;ig&lt;128,128,0:0,0,0&gt;and",
+["Bounty Hunter"] = "&lt;128,128,0:0,0,0&gt;Bounty &lt;128,128,128:0,0,0&gt;Hunter",
+Bard = "&lt;128,128,128:0,0,0&gt;B&lt;85,85,255:0,0,0&gt;ar&lt;128,128,128:0,0,0&gt;d",
+Disharmonist = "&lt;128,0,0:0,0,0&gt;D&lt;128,0,128:0,0,0&gt;is&lt;0,179,0:0,0,0&gt;ha&lt;0,128,128:0,0,0&gt;rm&lt;128,128,0:0,0,0&gt;on&lt;85,85,255:0,0,0&gt;ist",
+Scoundrel = "&lt;255,0,0:0,0,0&gt;Scoundrel",
+Minstrel = "&lt;255,255,0:0,0,0&gt;Min&lt;128,128,0:0,0,0&gt;str&lt;255,255,0:0,0,0&gt;el",
+Alchemist = "&lt;0,255,255:0,0,0&gt;Alc&lt;0,128,128:0,0,0&gt;hem&lt;0,255,255:0,0,0&gt;ist",
+["Battle-Forger"] = "&lt;0,255,255:0,0,0&gt;Bat&lt;0,128,128:0,0,0&gt;tle-For&lt;0,255,255:0,0,0&gt;ger",
+Blacksmith = "&lt;128,128,128:0,0,0&gt;Bla&lt;0,128,128:0,0,0&gt;cksm&lt;128,128,128:0,0,0&gt;ith",
+BeRSeRKeR = "&lt;128,0,0:0,0,0&gt;BeR&lt;255,0,0:0,0,0&gt;SeR&lt;128,0,0:0,0,0&gt;KeR",
+MaUleR = "&lt;128,0,0:0,0,0&gt;Ma&lt;255,0,0:0,0,0&gt;Ule&lt;128,0,0:0,0,0&gt;R",
+RaGeloRd = "&lt;255,0,0:0,0,0&gt;Ra&lt;128,0,0:0,0,0&gt;Ge&lt;255,0,0:0,0,0&gt;lo&lt;128,0,0:0,0,0&gt;Rd",
+Reaver = "&lt;128,128,128:0,0,0&gt;Re&lt;255,255,255:0,0,0&gt;av&lt;128,128,128:0,0,0&gt;er",
+["Ice Reaver"] = "&lt;0,255,255:0,0,0&gt;I&lt;255,255,255:0,0,0&gt;c&lt;0,255,255:0,0,0&gt;e &lt;128,128,128:0,0,0&gt;Re&lt;192,192,192:0,0,0&gt;av&lt;128,128,128:0,0,0&gt;er",
+["Flame Reaver"] = "&lt;255,255,255:0,0,0&gt;&lt;128,0,0:0,0,0&gt;F&lt;255,0,0:0,0,0&gt;l&lt;255,255,0:0,0,0&gt;a&lt;255,0,0:0,0,0&gt;m&lt;128,0,0:0,0,0&gt;e &lt;128,128,128:0,0,0&gt;Re&lt;192,192,192:0,0,0&gt;av&lt;128,128,128:0,0,0&gt;er",
+["Shock Reaver"] = "&lt;85,85,255:0,0,0&gt;Sh&lt;0,0,255:0,0,0&gt;o&lt;255,255,255:0,0,0&gt;ck &lt;128,128,128:0,0,0&gt;Re&lt;192,192,192:0,0,0&gt;av&lt;128,128,128:0,0,0&gt;er",
+["Earth Reaver"] = "&lt;128,128,128:0,0,0&gt;Ea&lt;128,128,0:0,0,0&gt;rt&lt;128,128,128:0,0,0&gt;h R&lt;128,128,0:0,0,0&gt;ea&lt;128,128,128:0,0,0&gt;ve&lt;128,128,0:0,0,0&gt;r",
+Illusionist = "&lt;255,255,255:0,0,0&gt;Il&lt;0,255,255:0,0,0&gt;lu&lt;0,128,128:0,0,0&gt;si&lt;0,255,255:0,0,0&gt;on&lt;255,255,255:0,0,0&gt;ist",
+Magician = "&lt;0,0,255:0,0,0&gt;M&lt;255,255,0:0,0,0&gt;ag&lt;0,0,255:0,0,0&gt;ic&lt;255,255,0:0,0,0&gt;ia&lt;0,0,255:0,0,0&gt;n",
+["Dark Dreamer"] = "&lt;128,128,128:0,0,0&gt;Dark &lt;128,0,128:0,0,0&gt;Dreamer",
+Blighter = "&lt;128,128,128:0,0,0&gt;Bl&lt;128,128,0:0,0,0&gt;i&lt;0,179,0:0,0,0&gt;gh&lt;128,128,0:0,0,0&gt;t&lt;128,128,128:0,0,0&gt;er&lt;255,255,255:0,0,0&gt;",
+["Storm Bringer"] = "&lt;255,255,0:0,0,0&gt;St&lt;128,128,0:0,0,0&gt;or&lt;255,255,0:0,0,0&gt;m &lt;128,128,128:0,0,0&gt;Bringer",
+Scourge = "&lt;0,255,0:0,0,0&gt;Sc&lt;0,179,0:0,0,0&gt;ou&lt;255,255,0:0,0,0&gt;rg&lt;0,255,0:0,0,0&gt;e",
+Ruiner = "&lt;128,128,128:0,0,0&gt;Ru&lt;192,192,192:0,0,0&gt;in&lt;128,128,128:0,0,0&gt;er",
+Dreadlord = "&lt;128,128,128:0,0,0&gt;Dread&lt;128,0,0:0,0,0&gt;lord",
+Deathlord = "&lt;128,128,128:0,0,0&gt;Death&lt;128,0,0:0,0,0&gt;lord",
+Shadowlord = "&lt;128,128,128:0,0,0&gt;Shadow&lt;128,0,0:0,0,0&gt;lord",
+Ethermancer = "&lt;192,192,192:0,0,0&gt;Ethermancer",
+["Tempest Magus"] = "&lt;0,255,255:0,0,0&gt;Tem&lt;0,128,128:0,0,0&gt;pe&lt;0,255,255:0,0,0&gt;st Ma&lt;0,128,128:0,0,0&gt;gu&lt;0,255,255:0,0,0&gt;s",
+["Frost Magus"] = "&lt;255,255,255:0,0,0&gt;Fro&lt;0,128,128:0,0,0&gt;st &lt;0,255,255:0,0,0&gt;Magus",
+["Star Magus"] = "&lt;255,255,0:0,0,0&gt;St&lt;128,128,0:0,0,0&gt;a&lt;255,255,0:0,0,0&gt;r &lt;128,128,128:0,0,0&gt;Ma&lt;192,192,192:0,0,0&gt;gu&lt;128,128,128:0,0,0&gt;s",
+Avenger = "&lt;255,255,255:0,0,0&gt;Avenger",
+Lightbringer = "&lt;255,255,0:0,0,0&gt;Light&lt;255,255,255:0,0,0&gt;bringer",
+Inquisitor = "&lt;255,255,255:0,0,0&gt;Inq&lt;192,192,192:0,0,0&gt;uisi&lt;255,255,255:0,0,0&gt;tor",
+Theurgist = "&lt;0,128,128:0,0,0&gt;Th&lt;0,255,255:0,0,0&gt;eur&lt;255,255,255:0,0,0&gt;gist",
+Medium = "&lt;192,192,192:0,0,0&gt;Medium",
+Templar = "&lt;255,255,0:0,0,0&gt;T&lt;255,0,0:0,0,0&gt;e&lt;128,0,0:0,0,0&gt;mpl&lt;255,0,0:0,0,0&gt;a&lt;255,255,0:0,0,0&gt;r",
+Thaumaturge = "&lt;255,255,255:0,0,0&gt; T&lt;0,128,128:0,0,0&gt;h&lt;0,255,255:0,0,0&gt;a&lt;255,255,255:0,0,0&gt;u&lt;0,255,255:0,0,0&gt;m&lt;0,128,128:0,0,0&gt;a&lt;0,255,255:0,0,0&gt;t&lt;255,255,255:0,0,0&gt;u&lt;0,255,255:0,0,0&gt;r&lt;0,128,128:0,0,0&gt;g&lt;0,255,255:0,0,0&gt;e",
+Summoner = "&lt;255,0,0:0,0,0&gt;Summoner",
+Controller = "&lt;0,128,128:0,0,0&gt;Con&lt;0,255,255:0,0,0&gt;trol&lt;255,255,255:0,0,0&gt;ler",
+Mentalist = "&lt;128,0,0:0,0,0&gt;M&lt;255,0,0:0,0,0&gt;e&lt;255,255,0:0,0,0&gt;n&lt;255,255,255:0,0,0&gt;tal&lt;255,255,0:0,0,0&gt;i&lt;255,0,0:0,0,0&gt;s&lt;128,0,0:0,0,0&gt;t",
+Naturalist = "&lt;0,179,0:0,0,0&gt;Nat&lt;0,255,0:0,0,0&gt;ural&lt;128,128,0:0,0,0&gt;ist"
+}</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>WhoList</name>
+				<packageName></packageName>
+				<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+function WhoClass(xname)
+
+	if myWhoList[xname] ~= nil then
+		return ( myWhoList[xname].Class )
+	end
+
+	return(nil)	
+end</script>
+				<eventHandlerList />
+			</ScriptGroup>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>HealGrid Group</name>
+				<packageName></packageName>
+				<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+</script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>updateHealGrid</name>
+					<packageName></packageName>
+					<script>--Function to update the Heal Grid based on DurisMUD group command output
+function updateHealGrid ()
+	for i in ipairs(testGroup) do
+		local v = testGroup[i].PCT
+		local k = testGroup[i].Name
+		if v &gt; 100 then
+			v = 100
+		end
+		GUI["Group"..i]:setValue(v,100)
+		GUI["Group"..i].front:cecho("&lt;black&gt;"..string.sub(k,1,13))
+			if (v &gt;= 100) then
+				GUI.GaugeFrontCSS:set("background-color","#00FF00")
+				GUI["Group"..i].front:setStyleSheet(GUI.GaugeFrontCSS:getCSS())
+			elseif (v &gt;= 90) then
+				GUI.GaugeFrontCSS:set("background-color","#009900")
+				GUI["Group"..i].front:setStyleSheet(GUI.GaugeFrontCSS:getCSS())
+			elseif (v &gt;= 80) then
+				GUI.GaugeFrontCSS:set("background-color","#FFFF00")
+				GUI["Group"..i].front:setStyleSheet(GUI.GaugeFrontCSS:getCSS())
+			elseif (v &gt;= 70) then
+				GUI.GaugeFrontCSS:set("background-color","#999900")
+				GUI["Group"..i].front:setStyleSheet(GUI.GaugeFrontCSS:getCSS())
+			elseif (v &gt;= 60) then
+				GUI.GaugeFrontCSS:set("background-color","#FF00FF")
+				GUI["Group"..i].front:setStyleSheet(GUI.GaugeFrontCSS:getCSS())
+			elseif (v &gt;= 50) then
+				GUI.GaugeFrontCSS:set("background-color","#990099")
+				GUI["Group"..i].front:setStyleSheet(GUI.GaugeFrontCSS:getCSS())
+			elseif (v &gt;= 40) then
+				GUI.GaugeFrontCSS:set("background-color","#FF0000")
+				GUI["Group"..i].front:setStyleSheet(GUI.GaugeFrontCSS:getCSS())
+			elseif (v &gt;= 30) then
+				GUI.GaugeFrontCSS:set("background-color","#FF0000")
+				GUI["Group"..i].front:setStyleSheet(GUI.GaugeFrontCSS:getCSS())
+			elseif (v &gt;= 20) then
+				GUI.GaugeFrontCSS:set("background-color","#990000")
+				GUI["Group"..i].front:setStyleSheet(GUI.GaugeFrontCSS:getCSS())
+			else
+				GUI.GaugeFrontCSS:set("background-color","#990000")
+				GUI["Group"..i].front:setStyleSheet(GUI.GaugeFrontCSS:getCSS())
+			end
+		GUI["Group"..i].front:setClickCallback("heal_bot", k)
+	end
+
+
+	for z=#testGroup+1,25 do
+		GUI.GaugeFrontCSS:set("background-color","black")
+		GUI["Group"..z].front:setStyleSheet(GUI.GaugeFrontCSS:getCSS())
+		GUI["Group"..z]:setValue(100,100)
+		GUI["Group"..z].front:echo([[&lt;span style = "color: black"&gt;___&lt;/span&gt;]])
+	end
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>updateGroupDisplay</name>
+					<packageName></packageName>
+					<script>--updateGroupDisplay
+--Populates GUI.Box3.Mini with modified Group command output
+
+function updateGroupDisplay ()
+	-- New Group Output
+	clearUserWindow("GUI.Box3Mini")
+
+
+	GUI.Box3Mini:decho(string.format("\n"..RGB.G.."%4s  "..RGB.Y.."%4s  "..RGB.W.."%-30s  %-16s", "HP%", "Move", "Name", "Class"))
+	GUI.Box3Mini:decho(string.format("\n"..RGB.G.."%4s  "..RGB.Y.."%4s  "..RGB.W.."%-30s  %-16s", "====", "====", "========================","================"))
+	for key in ipairs(testGroup) do
+		CharName = testGroup[key].Name
+		local pct = tonumber(testGroup[key].PCT)
+		local MVpct = (testGroup[key].MV/testGroup[key].MAXMV)*100
+		local HPcolor = RGB.G
+		local MVcolor = RGB.G
+
+	--Set HPcolor
+		if pct &lt; 95 and pct &gt; 84 then
+			HPcolor= RGB.g
+		elseif pct &lt; 85 and pct &gt; 74 then
+			HPcolor= RGB.Y
+		elseif pct &lt; 75 and pct &gt; 64 then
+			HPcolor= RGB.y
+		elseif pct &lt; 65 and pct &gt; 54 then
+			HPcolor= RGB.M
+		elseif pct &lt; 55 and pct &gt; 44 then
+			HPcolor= RGB.m
+		elseif pct &lt; 45 and pct &gt; 34 then
+			HPcolor= RGB.R			
+		elseif pct &lt; 35 and pct &gt; -500 then
+			HPcolor= RGB.r
+		end
+		
+	--Set MVcolor
+		if MVpct &lt; 95 and MVpct &gt; 84 then
+			MVcolor= RGB.g
+		elseif MVpct &lt; 85 and MVpct &gt; 74 then
+			MVcolor= RGB.Y
+		elseif MVpct &lt; 75 and MVpct &gt; 64 then
+			MVcolor= RGB.y
+		elseif MVpct &lt; 65 and MVpct &gt; 54 then
+			MVcolor= RGB.M
+		elseif MVpct &lt; 55 and MVpct &gt; 44 then
+			MVcolor= RGB.m
+		elseif MVpct &lt; 45 and MVpct &gt; 34 then
+			MVcolor= RGB.R			
+		elseif MVpct &lt; 35 and MVpct &gt; -500 then
+			MVcolor= RGB.r
+		end
+
+	--Build Group Display
+		if string.findPattern(string.trim(CharName), " ") ~= nil then
+			GUI.Box3Mini:decho(string.format("\n"..HPcolor.."%4s  "..MVcolor.."%4s  "..RGB.W.."%-30s  %-10s", testGroup[key].PCT, testGroup[key].MV, string.cut(testGroup[key].Name, 30), RGB.Y.."Pet"))
+		else
+			CharClass = DurisClassListDecho[string.trim(myWhoList[CharName].Class)] or myWhoList[CharName].Class
+			CharLevel = myWhoList[CharName].Level
+			GUI.Box3Mini:decho(string.format("\n"..HPcolor.."%4s  "..MVcolor.."%4s  "..RGB.W.."%-30s  %-16s", testGroup[key].PCT, testGroup[key].MV, string.cut(testGroup[key].Name, 30), CharClass))
+		end
+	end
+end</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>RaceList</name>
+				<packageName></packageName>
+				<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+</script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>DurisMUD Race List</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+RaceList = {
+"Human",
+"Barbarian",
+"Grey Elf",
+"Dwarf",
+"Halfling",
+"Gnome",
+"Centaur",
+"Githzerai",
+"Firbolg",
+"Drow Elf",
+"Duergar",
+"Ogre",
+"Troll",
+"Orc",
+"Githyanki",
+"Goblin",
+"Drider",
+"Kobold",
+"Thri-Kreen",
+"Minotaur",
+"Illithid"
+}</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>Duris Spell Casting from Table</name>
+				<packageName></packageName>
+				<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+</script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>castSpell</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+function castSpell(charClass, spellname, target)
+	local c = charClass
+	local s = c[spellname]
+	local t = target or false
+   if s and t then
+		send("cast '"..s.."'"..t)
+   elseif s then
+		send("cast '"..s.."'")
+	else
+      for k, v in pairs(c) do
+         print(k , v)
+		end
+   end
+end</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Druid Spell Table</name>
+					<packageName></packageName>
+					<script>-- Druid Spell Table
+
+druid = {
+ani = "Animal Friendship",
+af = "Awaken Forest",
+ag = "Animal Growth",
+aid = "Aid",
+as = "Acid Stream",
+av = "Animal Vision",
+bark = "Barkskin",
+blade = "Flame Blade",
+bs = "Blood to Stone",
+bw = "Binding Wind",
+call = "Call woodland beings",
+cd = "Creeping Doom",
+land = "Consecrate Land",
+cl = "Call Lightning",
+cs = "Create Spring",
+cy = "Cyclone",
+dis = "Disease",
+dm = "Dispel Magic",
+ea = "Elemental Aura",
+em = "Earthen Maul",
+en = "Entangle",
+endu = "Endurance",
+eq = "Earthquake",
+es = "Earth Spike",
+els = "Elemental Swarm",
+ff = "Faerie Fire",
+fog = "Faerie Fog",
+fort = "Fortitude",
+fs = "Firestorm",
+g = "Grow",
+hu = "Hurricane",
+iw = "Ironwood",
+lb = "Lightning Bolt",
+lc = "Lightning Curtain",
+moon = "Moonstone",
+nb = "Natures Blessing",
+nova = "Nova",
+nt = "Natures Touch",
+po = "Poison",
+prota = "Protection from Animals",
+pul = "Pulchritude",
+pwt = "Pass Without Trace",
+reg = "Regeneration",
+si = "Summon insects",
+sb = "spore burst",
+ser = "Serendipity",
+sg = "Spike Growth",
+sr = "Sunray",
+ss = "Sticks to Snakes",
+storm = "Storm Shield",
+tran = "Tranquility",
+v = "Vines",
+well = "Moonwell",
+wt = "Wind Tunnel",
+ww = "Wandering Woods"
+}</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Necromancer Spell Table</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+Necromancer = {
+detm = "Detect Magic",
+mm = "Magic Missile",
+mc = "Minor Creation",
+pres = "Preserve",
+protu = "Protection from Undead",
+ct = "Chill Touch",
+protc = "Protection from Cold",
+protl = "Protection from Living",
+sl = "Sleep",
+vto = "Vampiric Touch",
+ad = "Animate Dead",
+dm = "Dispel Magic",
+emb = "Embalm",
+sense = "Sense Follower",
+rmin = "Rejuvenate Minor",
+str = "Strength",
+wit = "Wither",
+ll = "Life Leech",
+unm = "Unmaking",
+cs = "Coldshield",
+conc = "Concealment",
+fe = "Feeblemind",
+fs = "Fireshield",
+hu = "Heal Undead",
+lev = "Levitate",
+rs = "Raise Spectre",
+qq = "Teleport",
+cc = "Cone of Cold",
+mg = "Minor Globe of Invulnerability",
+rmaj = "Rejuvenate Major",
+vu = "Vitalize Undead",
+en = "Enervation",
+pu = "Protect Undead",
+rw = "Raise Wraith",
+rtn = "Reveal True Name",
+knock = "Knock",
+di = "Detect Invisibility",
+disi = "Dispel Invisible",
+has = "Haste",
+invis = "Improved Invisibility",
+nc = "Negative Concussion Blast",
+age = "Age",
+dim = "Dimension Door",
+rv = "Raise Vampire",
+ud = "Undeath to Death",
+ed = "Energy Drain",
+cof = "Cloak of Fear",
+fly = "Fly",
+me = "Mass Embalm",
+rl = "Raise Lich",
+tran = "Vampiric Trance",
+wb = "Wall of Bones",
+cf = "Corpseform",
+cd = "Create Dracolich",
+pwk = "Power Word Kill",
+bm = "Blackmantle",
+sg = "Summon Ghasts",
+cgd = "Create Greater Dracolich"
+}</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Summoner Spell Table</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+
+Summoner = {
+detm = "Detect Magic",
+mm = "Magic Missile",
+mc = "Minor Creation",
+ct = "Chill Touch",
+bh = "Burning Hands",
+mi = "Mirror Image",
+sleep = "Sleep",
+ai = "Acidimmolate",
+agi = "Agility",
+conc = "Concealment",
+dm = "Dispel Magic",
+mf = "Mage Flame",
+sg = "Shocking Grasp",
+str = "Strength",
+ew = "Enchant Weapon",
+infra = "Infravision",
+lev = "Levitate",
+lb = "Lightning Bolt",
+ray = "Ray of Enfeeblement",
+rtn = "Reveal True Name",
+wall = "Wall of Force",
+cs = "Coldshield",
+cb = "Contain Being",
+fs = "Fireshield",
+id = "Identify",
+sf = "Sense Follower",
+slow = "Slowness",
+color = "Color Spray",
+fe = "Feeblemind",
+mglobe = "Minor Globe of Invulnerability",
+ss = "Stone skin",
+qq = "Teleport",
+aw = "Airy Water",
+cc = "Cone of Cold",
+dim = "Dimension Door",
+fb = "Fireball",
+has = "Haste",
+is = "Icestorm",
+wallf = "Wall of Flames",
+walli = "Wall of Ice",
+web = "Web",
+di = "Detect Invisibility",
+globe = "Globe of Invulnerability",
+invis = "Improved Invisibility",
+ps = "Prismatic Spray",
+relo = "Relocate",
+far = "Farsee",
+gss = "Group Stone Skin",
+gglobe = "Group Globe of Invulnerability",
+cube = "Prismatic Cube",
+cc = "Prismatic Cube"
+}</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Conjurer Spell Table</name>
+					<packageName></packageName>
+					<script>Conjurer = {
+agi = "agility",
+aw = "airy water",
+bh = "burning hands",
+ce = "conjure elemental",
+cge = "conjure greater elemental",
+conc = "concealment",
+cone = "cone of cold",
+cs = "coldshield",
+cs = "color spray",
+ct = "chill touch",
+cube = "prismatic cube",
+detm = "detect magic",
+di = "detect invisibility",
+dim = "dimension door",
+dis = "disintegrate",
+dm = "dispel magic",
+ew = "enchant weapon",
+farsee = "farsee",
+fb = "fireball",
+feeb = "feeblemind",
+fly = "fly",
+fs = "fireshield",
+gate = "gate",
+gglobe = "group globe of invulnerability",
+globe = "globe of invulnerability",
+gss = "group stornogs spheres",
+gstone = "group stone skin",
+has = "haste",
+id = "identify",
+ii = "improved invisibility",
+infra = "infravision",
+is = "ice storm",
+lb = "lightning bolt",
+lev = "levitate",
+mc = "minor creation",
+mf = "mage flame",
+mglobe = "minor globe of invulnerability",
+mi = "mirror image",
+mm = "magic missile",
+pris = "prismatic spray",
+ray = "ray of enfeeblement",
+relo = "relocate",
+rtn = "reveal true name",
+sf = "sense follower",
+sg = "shocking grasp",
+shroud = "stornogs metamagic shroud",
+sle = "sleep",
+slow = "slowness",
+ss = "stornogs spheres",
+shell = "stornogs shimmering starshell",
+stone = "stone skin",
+str = "strength",
+tel = "teleport",
+web = "web",
+wf = "wall of force",
+fw = "wall of flames",
+iw = "wall of iron",
+wi = "wall of ice",
+ws = "wall of stone"
+}</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Ethermancer Spell Table</name>
+					<packageName></packageName>
+					<script>Ethermancer = {
+aw = "arcane whirlwind",
+beacon = "frost beacon",
+blur = "blur",
+cc = "cone of cold",
+cold = "coldshield",
+cs = "cold snap",
+ct = "chill touch",
+detm = "detect magic",
+dm = "dispel magic",
+ef = "ethereal form",
+er = "ethereal recharge",
+fb = "frost bolt",
+ff = "faerie fire",
+fog = "faerie fog",
+frost = "frostbite",
+fs = "faerie sight",
+im = "ice missile",
+is = "ice storm",
+it = "induce tupor",
+lb = "lightning bolt",
+lc = "lightning curtain",
+ls = "lightning shield",
+mfly = "mass fly",
+purs = "purify spirit",
+ps = "plane shift",
+purge = "purge",
+sd = "static discharge",
+se = "storm empathy",
+tt = "tempest terrain",
+va = "vapor armor",
+vs = "vapor strike",
+wb = "wind blade",
+wind = "windwalk"
+}</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Illusionist Spell Table</name>
+					<packageName></packageName>
+					<script>Illusionist = {
+as = "asphyxiate",
+b = "blindness",
+bb = "boulder",
+bh = "burning hands",
+cd = "darkness",
+cl = "continual light",
+clone = "clone form",
+conc = "concealment",
+del = "delirium",
+deti = "detect illusion",
+detm = "detect magic",
+dim = "shadow travel",
+dis = "dispel invisible",
+dm = "dispel magic",
+drag = "dragon",
+dt = "dream travel",
+f = "hammer",
+farsee = "farsee",
+fl = "flicker",
+fly = "fly",
+ii = "insects",
+imp = "imprisonment",
+infra = "infravision",
+iq = "illusionary wall",
+lev = "levitate",
+mask = "mask",
+massi = "mass invisibility",
+mc = "minor creation",
+mi = "mirror image",
+mir = "mirage",
+mm = "magic missile",
+nm = "nightmare",
+non = "nonexistence",
+pa = "phantom armor",
+ref = "reflection",
+rtn = "reveal true name",
+sle = "sleep",
+sm = "shadow monster",
+ss = "shadow shield",
+sv = "stunning visions",
+titan = "titan",
+v = "vanish"
+}</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Paladin Spell Table</name>
+					<packageName></packageName>
+					<script>Paladin = {
+ah = "accelerated healing",
+bless = "bless",
+ca = "armor",
+cb = "cure blind",
+cc = "cure critic",
+cd = "cure disease",
+cl = "cure light",
+light = "continual light",
+cs = "cure serious",
+de = "dispel evil",
+dh = "dharma",
+du = "destroy undead",
+gh = "group heal",
+h = "heal",
+hw = "holy word",
+inv = "invigorate",
+j = "judgement",
+prote = "protection from evil",
+ra = "righteous aura",
+rc = "remove curse",
+rp = "remove poison",
+sanc = "sanctuary",
+ss = "soulshield",
+tu = "turn undead"
+}</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>Psionicist Spell Table</name>
+					<packageName></packageName>
+					<script>Psionicist = {
+ac = "adrenaline control",
+as = "aura sight",
+ba = "ballistic attack",
+bio = "biofeedback",
+ca = "cell adjustment",
+cs = "create sound",
+df = "death field",
+ea = "enhance agility",
+eb = "ego blast",
+ec = "enhance constitution",
+ed = "enhance dexterity",
+ef = "ectoplasmic form",
+en = "enrage",
+energy = "energy containment",
+eq = "ether warp",
+es = "enhance strength",
+ew = "ego whip",
+ex = "excogitate",
+f = "detonate",
+farsee = "flesh armor",
+fly = "flight",
+intf = "intellect fortress",
+ip = "inflict pain",
+iw = "tower of iron will",
+lh = "lend health",
+ma = "molecular agitation",
+mc = "molecular control",
+pc = "psychic crush",
+worm = "wormhole"
+}</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>Load Duris Database</name>
+				<packageName></packageName>
+				<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+
+--- Initialize the duris db
+db:create("durisdata", {stats={"VNUM", "TYPE", "SLOT", "NAME", "LOCATIONLOWERCASE", "LOCATION", "STATS", "ITEMVALUE"}})
+</script>
+				<eventHandlerList />
+			</ScriptGroup>
+			<ScriptGroup isActive="yes" isFolder="yes">
+				<name>Colors</name>
+				<packageName></packageName>
+				<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+</script>
+				<eventHandlerList />
+				<Script isActive="yes" isFolder="no">
+					<name>RGB</name>
+					<packageName></packageName>
+					<script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+RGB = {}
+RGB.r = "&lt;128,0,0&gt;"			-- Dark Red
+RGB.R = "&lt;255,0,0&gt;"			-- Bright Red
+RGB.m = "&lt;128,0,128&gt;"		-- Dark Magenta
+RGB.M = "&lt;255,0,255&gt;"		-- Bright Magenta
+RGB.y = "&lt;128,128,0&gt;"		-- Dark Yellow
+RGB.Y = "&lt;255,255,0&gt;"		-- Bright Yellow
+RGB.g = "&lt;0,179,0&gt;"			-- Dark Green
+RGB.G = "&lt;0,255,0&gt;"			-- Bright Green
+RGB.c = "&lt;0,128,128&gt;"		-- Dark Cyan
+RGB.C = "&lt;0,255,255&gt;"		-- Bright Cyan
+RGB.b = "&lt;0,0,128&gt;"			-- Dark Blue
+RGB.B = "&lt;0,0,255&gt;"			-- Bright Blue
+RGB.w = "&lt;192,192,192&gt;"	-- Dark White
+RGB.W = "&lt;255,255,255&gt;"	-- Bright White
+RGB.l = "&lt;64,64,64&gt;"		-- Dark Black
+RGB.L = "&lt;128,128,128&gt;"	-- Bright Black</script>
+					<eventHandlerList />
+				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>ANSI</name>
+					<packageName></packageName>
+					<script>--ANSI COLOR to HTML
+ANSI = {
+l = "#000000",
+r = "#800000", 
+g = "#008000",
+y = "#808000",
+b = "#000080",
+m = "#800080",
+c = "#008080",
+w = "#C0C0C0",
+L = "#808080",
+R = "#FF0000",
+G = "#00FF00",
+Y = "#FFFF00",
+B = "#0000FF",
+M = "#FF00FF",
+C = "#00FFFF",
+W = "#EBEBEB"
+}</script>
+					<eventHandlerList />
+				</Script>
+			</ScriptGroup>
+		</ScriptGroup>
+	</ScriptPackage>
+</MudletPackage>

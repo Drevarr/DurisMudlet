@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.0">
+    <ScriptPackage>
+        <ScriptGroup isActive="yes" isFolder="yes">
+            <name>Duris Spell Casting from Table</name>
+            <packageName></packageName>
+            <script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+</script>
+            <eventHandlerList/>
+            <Script isActive="yes" isFolder="no">
+                <name>castSpell</name>
+                <packageName></packageName>
+                <script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+function castSpell(charClass, spellname, target)
+	local c = charClass
+	local s = c[spellname]
+	local t = target or false
+   if s and t then
+		send(&quot;cast '&quot;..s..&quot;'&quot;..t)
+   elseif s then
+		send(&quot;cast '&quot;..s..&quot;'&quot;)
+	else
+      for k, v in pairs(c) do
+         print(k , v)
+		end
+   end
+end</script>
+                <eventHandlerList/>
+            </Script>
+            <Script isActive="yes" isFolder="no">
+                <name>Druid Spell Table</name>
+                <packageName></packageName>
+                <script>-- Druid Spell Table
+
+druid = {
+ani = &quot;Animal Friendship&quot;,
+af = &quot;Awaken Forest&quot;,
+ag = &quot;Animal Growth&quot;,
+aid = &quot;Aid&quot;,
+as = &quot;Acid Stream&quot;,
+av = &quot;Animal Vision&quot;,
+bark = &quot;Barkskin&quot;,
+blade = &quot;Flame Blade&quot;,
+bs = &quot;Blood to Stone&quot;,
+bw = &quot;Binding Wind&quot;,
+call = &quot;Call woodland beings&quot;,
+cd = &quot;Creeping Doom&quot;,
+land = &quot;Consecrate Land&quot;,
+cl = &quot;Call Lightning&quot;,
+cs = &quot;Create Spring&quot;,
+cy = &quot;Cyclone&quot;,
+dis = &quot;Disease&quot;,
+dm = &quot;Dispel Magic&quot;,
+ea = &quot;Elemental Aura&quot;,
+em = &quot;Earthen Maul&quot;,
+en = &quot;Entangle&quot;,
+endu = &quot;Endurance&quot;,
+eq = &quot;Earthquake&quot;,
+es = &quot;Earth Spike&quot;,
+els = &quot;Elemental Swarm&quot;,
+ff = &quot;Faerie Fire&quot;,
+fog = &quot;Faerie Fog&quot;,
+fort = &quot;Fortitude&quot;,
+fs = &quot;Firestorm&quot;,
+g = &quot;Grow&quot;,
+hu = &quot;Hurricane&quot;,
+iw = &quot;Ironwood&quot;,
+lb = &quot;Lightning Bolt&quot;,
+lc = &quot;Lightning Curtain&quot;,
+moon = &quot;Moonstone&quot;,
+nb = &quot;Natures Blessing&quot;,
+nova = &quot;Nova&quot;,
+nt = &quot;Natures Touch&quot;,
+po = &quot;Poison&quot;,
+prota = &quot;Protection from Animals&quot;,
+pul = &quot;Pulchritude&quot;,
+pwt = &quot;Pass Without Trace&quot;,
+reg = &quot;Regeneration&quot;,
+si = &quot;Summon insects&quot;,
+sb = &quot;spore burst&quot;,
+ser = &quot;Serendipity&quot;,
+sg = &quot;Spike Growth&quot;,
+sr = &quot;Sunray&quot;,
+ss = &quot;Sticks to Snakes&quot;,
+storm = &quot;Storm Shield&quot;,
+tran = &quot;Tranquility&quot;,
+v = &quot;Vines&quot;,
+well = &quot;Moonwell&quot;,
+wt = &quot;Wind Tunnel&quot;,
+ww = &quot;Wandering Woods&quot;
+}</script>
+                <eventHandlerList/>
+            </Script>
+            <Script isActive="yes" isFolder="no">
+                <name>Necromancer Spell Table</name>
+                <packageName></packageName>
+                <script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+Necromancer = {
+detm = &quot;Detect Magic&quot;,
+mm = &quot;Magic Missile&quot;,
+mc = &quot;Minor Creation&quot;,
+pres = &quot;Preserve&quot;,
+protu = &quot;Protection from Undead&quot;,
+ct = &quot;Chill Touch&quot;,
+protc = &quot;Protection from Cold&quot;,
+protl = &quot;Protection from Living&quot;,
+sl = &quot;Sleep&quot;,
+vto = &quot;Vampiric Touch&quot;,
+ad = &quot;Animate Dead&quot;,
+dm = &quot;Dispel Magic&quot;,
+emb = &quot;Embalm&quot;,
+sense = &quot;Sense Follower&quot;,
+rmin = &quot;Rejuvenate Minor&quot;,
+str = &quot;Strength&quot;,
+wit = &quot;Wither&quot;,
+ll = &quot;Life Leech&quot;,
+unm = &quot;Unmaking&quot;,
+cs = &quot;Coldshield&quot;,
+conc = &quot;Concealment&quot;,
+fe = &quot;Feeblemind&quot;,
+fs = &quot;Fireshield&quot;,
+hu = &quot;Heal Undead&quot;,
+lev = &quot;Levitate&quot;,
+rs = &quot;Raise Spectre&quot;,
+qq = &quot;Teleport&quot;,
+cc = &quot;Cone of Cold&quot;,
+mg = &quot;Minor Globe of Invulnerability&quot;,
+rmaj = &quot;Rejuvenate Major&quot;,
+vu = &quot;Vitalize Undead&quot;,
+en = &quot;Enervation&quot;,
+pu = &quot;Protect Undead&quot;,
+rw = &quot;Raise Wraith&quot;,
+rtn = &quot;Reveal True Name&quot;,
+knock = &quot;Knock&quot;,
+di = &quot;Detect Invisibility&quot;,
+disi = &quot;Dispel Invisible&quot;,
+has = &quot;Haste&quot;,
+invis = &quot;Improved Invisibility&quot;,
+nc = &quot;Negative Concussion Blast&quot;,
+age = &quot;Age&quot;,
+dim = &quot;Dimension Door&quot;,
+rv = &quot;Raise Vampire&quot;,
+ud = &quot;Undeath to Death&quot;,
+ed = &quot;Energy Drain&quot;,
+cof = &quot;Cloak of Fear&quot;,
+fly = &quot;Fly&quot;,
+me = &quot;Mass Embalm&quot;,
+rl = &quot;Raise Lich&quot;,
+tran = &quot;Vampiric Trance&quot;,
+wb = &quot;Wall of Bones&quot;,
+cf = &quot;Corpseform&quot;,
+cd = &quot;Create Dracolich&quot;,
+pwk = &quot;Power Word Kill&quot;,
+bm = &quot;Blackmantle&quot;,
+sg = &quot;Summon Ghasts&quot;,
+cgd = &quot;Create Greater Dracolich&quot;
+}</script>
+                <eventHandlerList/>
+            </Script>
+            <Script isActive="yes" isFolder="no">
+                <name>Summoner Spell Table</name>
+                <packageName></packageName>
+                <script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+
+Summoner = {
+detm = &quot;Detect Magic&quot;,
+mm = &quot;Magic Missile&quot;,
+mc = &quot;Minor Creation&quot;,
+ct = &quot;Chill Touch&quot;,
+bh = &quot;Burning Hands&quot;,
+mi = &quot;Mirror Image&quot;,
+sleep = &quot;Sleep&quot;,
+ai = &quot;Acidimmolate&quot;,
+agi = &quot;Agility&quot;,
+conc = &quot;Concealment&quot;,
+dm = &quot;Dispel Magic&quot;,
+mf = &quot;Mage Flame&quot;,
+sg = &quot;Shocking Grasp&quot;,
+str = &quot;Strength&quot;,
+ew = &quot;Enchant Weapon&quot;,
+infra = &quot;Infravision&quot;,
+lev = &quot;Levitate&quot;,
+lb = &quot;Lightning Bolt&quot;,
+ray = &quot;Ray of Enfeeblement&quot;,
+rtn = &quot;Reveal True Name&quot;,
+wall = &quot;Wall of Force&quot;,
+cs = &quot;Coldshield&quot;,
+cb = &quot;Contain Being&quot;,
+fs = &quot;Fireshield&quot;,
+id = &quot;Identify&quot;,
+sf = &quot;Sense Follower&quot;,
+slow = &quot;Slowness&quot;,
+color = &quot;Color Spray&quot;,
+fe = &quot;Feeblemind&quot;,
+mglobe = &quot;Minor Globe of Invulnerability&quot;,
+ss = &quot;Stone skin&quot;,
+qq = &quot;Teleport&quot;,
+aw = &quot;Airy Water&quot;,
+cc = &quot;Cone of Cold&quot;,
+dim = &quot;Dimension Door&quot;,
+fb = &quot;Fireball&quot;,
+has = &quot;Haste&quot;,
+is = &quot;Icestorm&quot;,
+wallf = &quot;Wall of Flames&quot;,
+walli = &quot;Wall of Ice&quot;,
+web = &quot;Web&quot;,
+di = &quot;Detect Invisibility&quot;,
+globe = &quot;Globe of Invulnerability&quot;,
+invis = &quot;Improved Invisibility&quot;,
+ps = &quot;Prismatic Spray&quot;,
+relo = &quot;Relocate&quot;,
+far = &quot;Farsee&quot;,
+gss = &quot;Group Stone Skin&quot;,
+gglobe = &quot;Group Globe of Invulnerability&quot;,
+cube = &quot;Prismatic Cube&quot;,
+cc = &quot;Prismatic Cube&quot;
+}</script>
+                <eventHandlerList/>
+            </Script>
+            <Script isActive="yes" isFolder="no">
+                <name>Conjurer Spell Table</name>
+                <packageName></packageName>
+                <script>Conjurer = {
+agi = &quot;agility&quot;,
+aw = &quot;airy water&quot;,
+bh = &quot;burning hands&quot;,
+ce = &quot;conjure elemental&quot;,
+cge = &quot;conjure greater elemental&quot;,
+conc = &quot;concealment&quot;,
+cone = &quot;cone of cold&quot;,
+cs = &quot;coldshield&quot;,
+cs = &quot;color spray&quot;,
+ct = &quot;chill touch&quot;,
+cube = &quot;prismatic cube&quot;,
+detm = &quot;detect magic&quot;,
+di = &quot;detect invisibility&quot;,
+dim = &quot;dimension door&quot;,
+dis = &quot;disintegrate&quot;,
+dm = &quot;dispel magic&quot;,
+ew = &quot;enchant weapon&quot;,
+farsee = &quot;farsee&quot;,
+fb = &quot;fireball&quot;,
+feeb = &quot;feeblemind&quot;,
+fly = &quot;fly&quot;,
+fs = &quot;fireshield&quot;,
+gate = &quot;gate&quot;,
+gglobe = &quot;group globe of invulnerability&quot;,
+globe = &quot;globe of invulnerability&quot;,
+gss = &quot;group stornogs spheres&quot;,
+gstone = &quot;group stone skin&quot;,
+has = &quot;haste&quot;,
+id = &quot;identify&quot;,
+ii = &quot;improved invisibility&quot;,
+infra = &quot;infravision&quot;,
+is = &quot;ice storm&quot;,
+lb = &quot;lightning bolt&quot;,
+lev = &quot;levitate&quot;,
+mc = &quot;minor creation&quot;,
+mf = &quot;mage flame&quot;,
+mglobe = &quot;minor globe of invulnerability&quot;,
+mi = &quot;mirror image&quot;,
+mm = &quot;magic missile&quot;,
+pris = &quot;prismatic spray&quot;,
+ray = &quot;ray of enfeeblement&quot;,
+relo = &quot;relocate&quot;,
+rtn = &quot;reveal true name&quot;,
+sf = &quot;sense follower&quot;,
+sg = &quot;shocking grasp&quot;,
+shroud = &quot;stornogs metamagic shroud&quot;,
+sle = &quot;sleep&quot;,
+slow = &quot;slowness&quot;,
+ss = &quot;stornogs spheres&quot;,
+shell = &quot;stornogs shimmering starshell&quot;,
+stone = &quot;stone skin&quot;,
+str = &quot;strength&quot;,
+tel = &quot;teleport&quot;,
+web = &quot;web&quot;,
+wf = &quot;wall of force&quot;,
+fw = &quot;wall of flames&quot;,
+iw = &quot;wall of iron&quot;,
+wi = &quot;wall of ice&quot;,
+ws = &quot;wall of stone&quot;
+}</script>
+                <eventHandlerList/>
+            </Script>
+            <Script isActive="yes" isFolder="no">
+                <name>Ethermancer Spell Table</name>
+                <packageName></packageName>
+                <script>Ethermancer = {
+aw = &quot;arcane whirlwind&quot;,
+beacon = &quot;frost beacon&quot;,
+blur = &quot;blur&quot;,
+cc = &quot;cone of cold&quot;,
+cold = &quot;coldshield&quot;,
+cs = &quot;cold snap&quot;,
+ct = &quot;chill touch&quot;,
+detm = &quot;detect magic&quot;,
+dm = &quot;dispel magic&quot;,
+ef = &quot;ethereal form&quot;,
+er = &quot;ethereal recharge&quot;,
+fb = &quot;frost bolt&quot;,
+ff = &quot;faerie fire&quot;,
+fog = &quot;faerie fog&quot;,
+frost = &quot;frostbite&quot;,
+fs = &quot;faerie sight&quot;,
+im = &quot;ice missile&quot;,
+is = &quot;ice storm&quot;,
+it = &quot;induce tupor&quot;,
+lb = &quot;lightning bolt&quot;,
+lc = &quot;lightning curtain&quot;,
+ls = &quot;lightning shield&quot;,
+mfly = &quot;mass fly&quot;,
+purs = &quot;purify spirit&quot;,
+ps = &quot;plane shift&quot;,
+purge = &quot;purge&quot;,
+sd = &quot;static discharge&quot;,
+se = &quot;storm empathy&quot;,
+tt = &quot;tempest terrain&quot;,
+va = &quot;vapor armor&quot;,
+vs = &quot;vapor strike&quot;,
+wb = &quot;wind blade&quot;,
+wind = &quot;windwalk&quot;
+}</script>
+                <eventHandlerList/>
+            </Script>
+            <Script isActive="yes" isFolder="no">
+                <name>Illusionist Spell Table</name>
+                <packageName></packageName>
+                <script>Illusionist = {
+as = &quot;asphyxiate&quot;,
+b = &quot;blindness&quot;,
+bb = &quot;boulder&quot;,
+bh = &quot;burning hands&quot;,
+cd = &quot;darkness&quot;,
+cl = &quot;continual light&quot;,
+clone = &quot;clone form&quot;,
+conc = &quot;concealment&quot;,
+del = &quot;delirium&quot;,
+deti = &quot;detect illusion&quot;,
+detm = &quot;detect magic&quot;,
+dim = &quot;shadow travel&quot;,
+dis = &quot;dispel invisible&quot;,
+dm = &quot;dispel magic&quot;,
+drag = &quot;dragon&quot;,
+dt = &quot;dream travel&quot;,
+f = &quot;hammer&quot;,
+farsee = &quot;farsee&quot;,
+fl = &quot;flicker&quot;,
+fly = &quot;fly&quot;,
+ii = &quot;insects&quot;,
+imp = &quot;imprisonment&quot;,
+infra = &quot;infravision&quot;,
+iq = &quot;illusionary wall&quot;,
+lev = &quot;levitate&quot;,
+mask = &quot;mask&quot;,
+massi = &quot;mass invisibility&quot;,
+mc = &quot;minor creation&quot;,
+mi = &quot;mirror image&quot;,
+mir = &quot;mirage&quot;,
+mm = &quot;magic missile&quot;,
+nm = &quot;nightmare&quot;,
+non = &quot;nonexistence&quot;,
+pa = &quot;phantom armor&quot;,
+ref = &quot;reflection&quot;,
+rtn = &quot;reveal true name&quot;,
+sle = &quot;sleep&quot;,
+sm = &quot;shadow monster&quot;,
+ss = &quot;shadow shield&quot;,
+sv = &quot;stunning visions&quot;,
+titan = &quot;titan&quot;,
+v = &quot;vanish&quot;
+}</script>
+                <eventHandlerList/>
+            </Script>
+            <Script isActive="yes" isFolder="no">
+                <name>Paladin Spell Table</name>
+                <packageName></packageName>
+                <script>Paladin = {
+ah = &quot;accelerated healing&quot;,
+bless = &quot;bless&quot;,
+ca = &quot;armor&quot;,
+cb = &quot;cure blind&quot;,
+cc = &quot;cure critic&quot;,
+cd = &quot;cure disease&quot;,
+cl = &quot;cure light&quot;,
+light = &quot;continual light&quot;,
+cs = &quot;cure serious&quot;,
+de = &quot;dispel evil&quot;,
+dh = &quot;dharma&quot;,
+du = &quot;destroy undead&quot;,
+gh = &quot;group heal&quot;,
+h = &quot;heal&quot;,
+hw = &quot;holy word&quot;,
+inv = &quot;invigorate&quot;,
+j = &quot;judgement&quot;,
+prote = &quot;protection from evil&quot;,
+ra = &quot;righteous aura&quot;,
+rc = &quot;remove curse&quot;,
+rp = &quot;remove poison&quot;,
+sanc = &quot;sanctuary&quot;,
+ss = &quot;soulshield&quot;,
+tu = &quot;turn undead&quot;
+}</script>
+                <eventHandlerList/>
+            </Script>
+            <Script isActive="yes" isFolder="no">
+                <name>Psionicist Spell Table</name>
+                <packageName></packageName>
+                <script>Psionicist = {
+ac = &quot;adrenaline control&quot;,
+as = &quot;aura sight&quot;,
+ba = &quot;ballistic attack&quot;,
+bio = &quot;biofeedback&quot;,
+ca = &quot;cell adjustment&quot;,
+cs = &quot;create sound&quot;,
+df = &quot;death field&quot;,
+ea = &quot;enhance agility&quot;,
+eb = &quot;ego blast&quot;,
+ec = &quot;enhance constitution&quot;,
+ed = &quot;enhance dexterity&quot;,
+ef = &quot;ectoplasmic form&quot;,
+en = &quot;enrage&quot;,
+energy = &quot;energy containment&quot;,
+eq = &quot;ether warp&quot;,
+es = &quot;enhance strength&quot;,
+ew = &quot;ego whip&quot;,
+ex = &quot;excogitate&quot;,
+f = &quot;detonate&quot;,
+farsee = &quot;flesh armor&quot;,
+fly = &quot;flight&quot;,
+intf = &quot;intellect fortress&quot;,
+ip = &quot;inflict pain&quot;,
+iw = &quot;tower of iron will&quot;,
+lh = &quot;lend health&quot;,
+ma = &quot;molecular agitation&quot;,
+mc = &quot;molecular control&quot;,
+pc = &quot;psychic crush&quot;,
+worm = &quot;wormhole&quot;
+}</script>
+                <eventHandlerList/>
+            </Script>
+        </ScriptGroup>
+    </ScriptPackage>
+</MudletPackage>

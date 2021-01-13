@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.0">
+    <AliasPackage>
+        <AliasGroup isActive="no" isFolder="yes">
+            <name>Druid</name>
+            <script></script>
+            <command></command>
+            <packageName></packageName>
+            <regex></regex>
+            <AliasGroup isActive="yes" isFolder="yes">
+                <name>DruidSpells</name>
+                <script></script>
+                <command></command>
+                <packageName></packageName>
+                <regex></regex>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>1stCircle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Barkskin</name>
+                        <script>if matches[2] then send(&quot;cast 'barkskin' &quot; .. matches[2])
+else
+	send(&quot;cast 'barkskin' me&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^bark(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Fortitude</name>
+                        <script>if matches[2] then send(&quot;cast 'fortitude' &quot; .. matches[2])
+else
+	send(&quot;cast 'fortitude' me&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^fort(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Pulchritude</name>
+                        <script>if matches[2] then send(&quot;cast 'pulchritude' &quot; .. matches[2])
+else
+	send(&quot;cast 'pulchritude' me&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^pul(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Animal Friendship</name>
+                        <script>if matches[2] then send(&quot;cast 'animal friendship' &quot; .. matches[2])
+else
+	send(&quot;cast 'animal friendship'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^af(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>2ndCircle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Aid</name>
+                        <script>if matches[2] then send(&quot;cast 'aid' &quot; .. matches[2])
+else
+	send(&quot;cast 'aid'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^aid(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Disease</name>
+                        <script>if matches[2] then send(&quot;cast 'disease' &quot; .. matches[2])
+else
+	send(&quot;cast 'disease'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^dis(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Sticks To Snakes</name>
+                        <script>if matches[2] then send(&quot;cast 'sticks to snakes' &quot; .. matches[2])
+else
+	send(&quot;cast 'sticks to snakes'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^ss(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>3rdCircle</name>
+                    <script>send(&quot;cast 'flame blade'&quot;)</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^fblade$</regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>FaerieFire</name>
+                        <script>if matches[2] then send(&quot;cast 'faerie fire' &quot; .. matches[2])
+else
+	send(&quot;cast 'faerie fire'&quot;)
+end
+</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^ff(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Faerie Fog</name>
+                        <script>send(&quot;cast 'faerie fog'&quot;)</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^fog$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Flame Blade</name>
+                        <script>send(&quot;cast 'flame blade'&quot;)</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^blade$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>ProtectionFromAnimals</name>
+                        <script>if matches[2] then send(&quot;cast 'protection from animals' &quot; .. matches[2])
+else
+	send(&quot;cast 'protection from animals' me&quot;)
+end
+</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^prota(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>4thCircle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Create Spring</name>
+                        <script>if matches[2] then send(&quot;cast 'create spring' &quot; .. matches[2])
+else
+	send(&quot;cast 'create spring'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^cs(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Lightning Bolt</name>
+                        <script>if matches[2] then send(&quot;cast 'lightning bolt' &quot; .. matches[2])
+else
+	send(&quot;cast 'lightning bolt'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^lb(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Poison</name>
+                        <script>if matches[2] then send(&quot;cast 'poison' &quot; .. matches[2])
+else
+	send(&quot;cast 'poison'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^po(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Serendipity</name>
+                        <script>if matches[2] then send(&quot;cast 'serendipity' &quot; .. matches[2])
+else
+	send(&quot;cast 'serendipity'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^luck$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>5thCircle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Earthquake</name>
+                        <script>if matches[2] then send(&quot;cast 'earthquake' &quot; .. matches[2])
+else
+	send(&quot;cast 'earthquake'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^qq(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Natures Touch</name>
+                        <script>if matches[2] then send(&quot;cast 'natures touch' &quot; .. matches[2])
+else
+	send(&quot;cast 'natures touch' me&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^nt(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Tranquility</name>
+                        <script>if matches[2] then send(&quot;cast 'tranquility' &quot; .. matches[2])
+else
+	send(&quot;cast 'tranquility'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^tr(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>6thCircle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Earthen Maul</name>
+                        <script>if matches[2] then send(&quot;cast 'earthen maul' &quot;..matches[2])
+else
+	send(&quot;cast 'earthen maul'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^em(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Endurance</name>
+                        <script>if matches[2] then send(&quot;cast 'endurance' &quot;..matches[2])
+else
+	send(&quot;cast 'endurance'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^end(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Regeneration</name>
+                        <script>if matches[2] then send(&quot;cast 'regeneration' &quot;..matches[2])
+else
+	send(&quot;cast 'regeneration' me&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^reg(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>7thCircle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Call Lightning - Storm Druid</name>
+                        <script>if matches[2] then send(&quot;cast 'call lightning' &quot;..matches[2])
+else
+	send(&quot;cast 'call lightning'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^cl(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Cyclone</name>
+                        <script>if matches[2] then send(&quot;cast 'cyclone' &quot; .. matches[2])
+else
+	send(&quot;cast 'cyclone'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^cy(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Dispel Magic</name>
+                        <script>if matches[2] then send(&quot;cast 'dispel magic' &quot;..matches[2])
+else
+	send(&quot;cast 'dispel magic'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^dm(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Earth Spike - Storm Druid</name>
+                        <script>if matches[2] then send(&quot;cast 'earth spike' &quot;..matches[2])
+else
+	send(&quot;cast 'earth spike'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^es(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Mielikki Vitality</name>
+                        <script>if matches[2] then send(&quot;cast 'Mielikki Vitality' &quot; .. matches[2])
+else
+	send(&quot;cast 'Mielikki Vitality'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^mv(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>8thCircle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Animal Vision</name>
+                        <script>if matches[2] then send(&quot;cast 'animal vision' &quot; .. matches[2])
+else
+	send(&quot;cast 'animal vision'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^av(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Pass Without Trace</name>
+                        <script>if matches[2] then send(&quot;cast 'pass without trace' &quot; .. matches[2])
+else
+	send(&quot;cast 'pass without trace'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^pwt(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Acid Stream - Storm Druid</name>
+                        <script>if matches[2] then send(&quot;cast 'acid stream' &quot;..matches[2])
+else
+	send(&quot;cast 'acid stream'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^as(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>9thCircle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Sunray</name>
+                        <script>if matches[2] then send(&quot;cast 'sunray' &quot; .. matches[2])
+else
+	send(&quot;cast 'sunray'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^f(\s([\w\.]+))?$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Storm Shield - Storm Druid</name>
+                        <script>if matches[2] then send(&quot;cast 'storm shield' &quot; .. matches[2])
+else
+	send(&quot;cast 'storm shield'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^storm$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Firestorm - Storm Druid</name>
+                        <script>if matches[2] then send(&quot;cast 'firestorm' &quot; .. matches[2])
+else
+	send(&quot;cast 'firestorm'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^fs(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>10thCircle</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Moonwell</name>
+                        <script>if matches[2] then send(&quot;cast 'moonwell' &quot; .. matches[2])
+else
+	send(&quot;cast 'moonwell'&quot;)
+end</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^well(\s([\w\.]+))?$</regex>
+                    </Alias>
+                </AliasGroup>
+                <AliasGroup isActive="yes" isFolder="yes">
+                    <name>SpellUpDruid</name>
+                    <script></script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex></regex>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Druid Spell Up Self</name>
+                        <script>CheckSpells = {&quot;aid&quot;, &quot;barkskin&quot;, &quot;fortitude&quot;, &quot;pulchritude&quot;, &quot;animal vision&quot;, &quot;pass without trace&quot;, &quot;serendipity&quot;, &quot;endurance&quot;, &quot;regeneration&quot;, &quot;protection from animals&quot;, &quot;mielikki vitality&quot;, &quot;storm shield&quot;}
+CheckSpellsAlias = {&quot;aid&quot;, &quot;bark&quot;, &quot;fort&quot;, &quot;pul&quot;, &quot;av&quot;, &quot;pwt&quot;, &quot;luck&quot;, &quot;end&quot;, &quot;reg&quot;, &quot;prota&quot;, &quot;mv&quot;, &quot;storm&quot;}
+
+--- Loop through active to find missing spells
+cecho(&quot;&lt;cyan&gt;&lt;=================================== Spell Up Activated\n&quot;)
+
+for i,v in ipairs(CheckSpells) do
+	if myActiveSpells[v] then echo(v..&quot; is active\n&quot;)
+	else 
+		-- cecho(&quot;&lt;cyan&gt;&lt;===casting &quot;..v&quot;\n&quot;)
+		expandAlias(CheckSpellsAlias[table.index_of(CheckSpells, v)], false)
+	end
+end
+
+send(&quot;score&quot;)</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^su$</regex>
+                    </Alias>
+                    <Alias isActive="yes" isFolder="no">
+                        <name>Druid Spell Up Others</name>
+                        <script>CheckSpells = {&quot;aid&quot;, &quot;barkskin&quot;, &quot;fortitude&quot;, &quot;pulchritude&quot;, &quot;animal vision&quot;, &quot;pass without trace&quot;, &quot;serendipity&quot;, &quot;endurance&quot;, &quot;regeneration&quot;, &quot;protection from animals&quot;, &quot;mielikki vitality&quot;, &quot;storm shield&quot;}
+CheckSpellsAlias = {&quot;aid&quot;, &quot;bark&quot;, &quot;fort&quot;, &quot;pul&quot;, &quot;av&quot;, &quot;pwt&quot;, &quot;luck&quot;, &quot;end&quot;, &quot;reg&quot;, &quot;prota&quot;, &quot;mv&quot;, &quot;storm&quot;}
+local spupTarget = matches[2]
+--- Loop through active to find missing spells
+cecho(&quot;&lt;cyan&gt;&lt;=================================== Spell Up Activated\n&quot;)
+
+for i,v in ipairs(CheckSpells) do
+	-- cecho(&quot;&lt;cyan&gt;&lt;===casting &quot;..v&quot;\n&quot;)
+	spupSpell = CheckSpellsAlias[table.index_of(CheckSpells, v)]..&quot; &quot;..spupTarget
+--	echo(spupSpell..&quot; &quot;..spupTarget..&quot;\n&quot;)
+	expandAlias(spupSpell, false)
+	--expandAlias(CheckSpellsAlias[table.index_of(CheckSpells, v)].. spupTarget, false)
+end
+
+send(&quot;score&quot;)</script>
+                        <command></command>
+                        <packageName></packageName>
+                        <regex>^spup (\w+)$</regex>
+                    </Alias>
+                </AliasGroup>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Commune</name>
+                    <script>clearWindow(&quot;Left1&quot;)
+send(&quot;commune;exp;blood&quot;)</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^mem|pray|zz$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Slash Cast - Table Casting</name>
+                    <script>--^\/(\w+)(\s([\w\.]+))?$
+castSpell(druid, matches[2], matches[3])</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^\/(\w+)(\s([\w\.]+))?$</regex>
+                </Alias>
+            </AliasGroup>
+        </AliasGroup>
+    </AliasPackage>
+</MudletPackage>

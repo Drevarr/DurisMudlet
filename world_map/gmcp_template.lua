@@ -92,6 +92,7 @@ registerAnonymousEventHandler("gmcp.Char.Status", "gmcp_char_status")
 function gmcp_combat_update()
     if not gmcp.Combat or not gmcp.Combat.Update or not gmcp.Combat.Update.target then return end
     targetInfo = gmcp.Combat.Update.target
+    --Breaks on rescue, targetInfo gets set to <userData>
     local t = targetInfo
     cecho(string.format("\n<red>[TARGET] %s - %s (%d%%)\n", t.name or "?", t.health or "?", t.healthPercent or 0))
     -- auto-assist and update target gauges

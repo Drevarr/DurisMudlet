@@ -116,6 +116,7 @@ function gmcp_group_status()
     cecho("\n<green>--- Group (%d/%d) ---\n", #groupMembers, gmcp.Group.Status.maxSize or 0)
     for _, mem in ipairs(groupMembers) do
         local hpPct = mem.maxHp and mem.hp and math.floor(mem.hp / mem.maxHp * 100) or "?"
+        local class = (type(mem.class) == "string") and mem.class or "PET"
         cecho(string.format("  %s [%s] %d%% HP\n", mem.name, mem.class or "?", hpPct))
     end
     -- Update group gauges and group window
@@ -147,6 +148,6 @@ function gmcp_room_info()
     end
 
     -- Room name display, use decho and convertMapToRGB()
-    cecho(string.format("\n<white>%s\n", roomInfo.colored_name or roomInfo.name or "Unknown Room"))
+    cecho(string.format("\n<white>%s\n", decho(convertMapToRGB(roomInfo.colored_name)) or roomInfo.name or "Unknown Room"))
 end
 registerAnonymousEventHandler("gmcp.Room.Info", "gmcp_room_info")

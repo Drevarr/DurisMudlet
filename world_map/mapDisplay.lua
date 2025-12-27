@@ -21,7 +21,7 @@ local function rgbTag(fg, bg)
   end
 end
 
-local function convertMapToRGB(text)
+function convertMapToRGB(text)
   -- reset (Mudlet default colors)
   text = text:gsub("&n", "<r>")
 

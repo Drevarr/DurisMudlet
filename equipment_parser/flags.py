@@ -234,3 +234,27 @@ modifiers_lookup = {
 
 # Reverse lookup: name → value
 SIZE_BY_NAME = {v: k for k, v in modifiers_lookup.items()}
+
+weapon_type_lookup = {
+	0: "WEAPON_NONE",
+	1: "WEAPON_AXE",
+	2: "WEAPON_DAGGER",
+	3: "WEAPON_FLAIL",
+	4: "WEAPON_HAMMER",
+	5: "WEAPON_LONGSWORD",
+	6: "WEAPON_MACE",
+	7: "WEAPON_SPIKED_MACE",
+	8: "WEAPON_POLEARM",
+	9: "WEAPON_SHORTSWORD",
+	10: "WEAPON_CLUB",
+	11: "WEAPON_SPIKED_CLUB",
+	12: "WEAPON_STAFF",
+	13: "WEAPON_2HANDSWORD",
+	14: "WEAPON_WHIP",
+	15: "WEAPON_SPEAR",
+	16: "WEAPON_LANCE",
+	17: "WEAPON_SICKLE",
+	18: "WEAPON_TRIDENT",
+	19: "WEAPON_HORN",
+	20: "WEAPON_NUMCHUCKS",
+}

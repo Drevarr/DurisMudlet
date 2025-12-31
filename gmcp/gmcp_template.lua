@@ -12,6 +12,36 @@ local function getSpellName(id)
     return spell_names[id] or ("ID:"..id)
 end
 
+function gmcpVarByPath(varPath)
+  local temp = gmcp
+  for varStep in varPath:gmatch("([^\\.]+)") do
+    if temp and temp[varStep] then
+      temp = temp[varStep]
+    else
+      return nil
+    end
+  end
+  return temp
+end
+
+
+-- Wires up GMCP subscriptions for a gauge.
+-- statName is the short version of the stat name to show after the value (mv, hp, etc)
+local function wireGaugeUpdate(gauge, valueVarName, maxVarName, statName, eventName)
+  local function doUpdate()
+    local current = gmcpVarByPath(valueVarName) or 0
+    local max = gmcpVarByPath(maxVarName) or 0
+    if max > 0 then
+      gauge:setValue(current, max, current.."/"..max.." "..statName)
+    else
+      gauge:setValue(0, 1, "")
+    end
+  end
+  registerEventHandler(eventName, doUpdate)
+end
+
+
+
 function gmcp_char_affects()
     if not gmcp.Char.Affects then return end
 

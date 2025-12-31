@@ -416,3 +416,12 @@ def decode_aff4_flags(mask: int) -> list[str]:
 
 def decode_aff5_flags(mask: int) -> list[str]:
     return decode_flags(mask, ITEM_AFF5_FLAGS, skip_zero=True)
+
+def has_wear_flag(mask: int, flag_name: str) -> bool:
+    return bool(mask & ITEM_WEAR_FLAGS[flag_name])
+
+def set_wear_flag(mask: int, flag_name: str) -> int:
+    return mask | ITEM_WEAR_FLAGS[flag_name]
+
+def remove_wear_flag(mask: int, flag_name: str) -> int:
+    return mask & ~ITEM_WEAR_FLAGS[flag_name]

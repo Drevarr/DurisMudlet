@@ -1,0 +1,22 @@
+function gmcp_combat_update()
+    local combatUpdate = gmcp.Combat.Update
+    if not combatUpdate or not combatUpdate.target then return end
+    local target = combatUpdate.target
+    if type(combatUpdate.target) == "string" then
+        local name = target.name or "Unknown"
+        local health = target.health or 0
+        local healthPercent = target.healthPercent or 0
+        local displayHealth = healthPercent > 0 and string.format("%d%%", healthPercent) or health
+        local position = target.position or "Standing"
+        cecho(string.format("\n<red>[TARGET] %s - %s\n", name, displayHealth))
+        -- Update target gauges and auto-assist
+        myEnemy=name
+        MYENEMYNAME(name)
+        myEnemyPos=matches[6]
+        MYENEMYPOSITION(position)
+        myEnemyCond=matches[7]
+    end
+end
+
+
+registerAnonymousEventHandler("gmcp.Combat.Update", "gmcp_combat_update")

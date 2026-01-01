@@ -3,15 +3,15 @@ function castSpell(charClass, spellname, target, direction)
 	local s = c[spellname]
 	local t = target or false
 	local d = direction or false
-   if s and t and d then
+	if s and t and d then
 		send("cast '"..s.."'"..t" "..d)	
-   if s and t then
+	elseif s and t then
 		send("cast '"..s.."'"..t)
-   elseif s then
+	elseif s then
 		send("cast '"..s.."'")
 	else
-      for k, v in pairs(c) do
-         print(k , v)
+		for k, v in pairs(c) do
+			print(k , v)
 		end
-   end
+	end
 end

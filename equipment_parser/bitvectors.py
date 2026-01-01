@@ -391,6 +391,9 @@ def decode_flags(
         if (not skip_zero or bit != 0) and (mask & bit)
     ]
 
+def decode_totem_sphere_flags(mask: int) -> list[str]:
+    return decode_flags(mask, TOTEM_SPHERE_FLAGS, skip_zero=True)
+
 
 def decode_wear_flags(mask: int) -> list[str]:
     return decode_flags(mask, ITEM_WEAR_FLAGS, skip_zero=True)

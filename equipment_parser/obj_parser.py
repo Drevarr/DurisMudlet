@@ -1,7 +1,7 @@
 from typing import Mapping
 from bitvectors import *
 from flags import *
-
+from spells_skills import *
 
 def read_tilde_block(lines):
     buf = []
@@ -17,9 +17,8 @@ def read_tilde_block(lines):
 def read_ints_line(lines):
     return list(map(int, next(lines).split()))
 
-def process_item_values(object):
-    item_type = object['item_type']
-    item_values = object["values"]
+
+def process_item_values(item_values, item_type):
     Item_Type_Notes={}
     
     match item_type:
@@ -329,6 +328,7 @@ def parse_obj_file(path):
             stats2 = read_ints_line(lines)
             stats2 = (stats2 + [0] * 8)[:8]
             item_vals = stats2
+            item_vals_notes = process_item_values(item_vals, item_type)
 
             # ---- stats line 3 ----
             stats3 = read_ints_line(lines)
@@ -382,6 +382,7 @@ def parse_obj_file(path):
                 "anti1_flags": decode_class_anti_flags(anti1_flags),
                 "anti2_flags": decode_race_anti_flags(anti2_flags),
                 "item_values": item_vals,
+                "item_value_notes": item_vals_notes,
                 "weight": weight,
                 "worth": worth,
                 "condition": condition,

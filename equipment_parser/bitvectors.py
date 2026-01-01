@@ -353,6 +353,19 @@ RACE_NAMES = [
     "TIEFLING",
 ]
 
+TOTEM_SPHERES = [
+    "TOTEM_LESS_ANIM",      #1     // Lesser Animal
+    "TOTEM_GR_ANIM",        #2     // Greater Animal
+    "TOTEM_LESS_ELEM",      #4     // Lesser Elemental
+    "TOTEM_GR_ELEM",        #8     // Greater Elemental
+    "TOTEM_LESS_SPIR",      #16    // Lesser Spirit
+    "TOTEM_GR_SPIR"         #32    // Greater Spirit
+]
+
+TOTEM_SPHERE_FLAGS = {
+    f"{cls.upper()}": BIT(i + 1)
+    for i, cls in enumerate(TOTEM_SPHERES)
+}
 
 ITEM_CLASS_ANTI_FLAGS = {
     f"{cls.upper()}": BIT(i + 1)

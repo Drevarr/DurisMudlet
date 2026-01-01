@@ -151,6 +151,48 @@ weapon_type_lookup = {
     20: "WEAPON_NUMCHUCKS"
 }
 
+herb_type_lookup = {
+    1900: "HERB_SMOKED",
+    1901: "HERB_OCULARIUS",
+    1902: "HERB_BLUE_HAZE",
+    1903: "HERB_MEDICUS",
+    1904: "HERB_BLACK_KUSH",
+    1905: "HERB_GOOTWIET"
+}
+
+shield_type_lookup = {
+    1: "SHIELDTYPE_STRAPARM",
+    2: "SHIELDTYPE_HANDHELD"
+}
+
+shield_shape_lookup = {
+    1: "SHIELDSHAPE_CIRCULAR",  #// perfect circle
+    2: "SHIELDSHAPE_SQUARE",    #// square..
+    3: "SHIELDSHAPE_RECTVERT",  #// a rectangle aligned vertically
+    4: "SHIELDSHAPE_RECTHORZ",  #// horizontally
+    5: "SHIELDSHAPE_OVALVERT",  #// vertical 'oval'
+    6: "SHIELDSHAPE_OVALHORZ",  #// horizontal 'oval'
+    7: "SHIELDSHAPE_TRIBIGUP",  #// triangle - wide side on top
+    8: "SHIELDSHAPE_TRISMLUP"   #// triangle - narrow point on top
+}
+
+shield_size_lookup = {
+    1: "SHIELDSIZE_TINY",        #// really small suckers
+    2: "SHIELDSIZE_SMALL",       #// bucklers, small shields
+    3: "SHIELDSIZE_MEDIUM",      #// normal shields
+    4: "SHIELDSIZE_LARGE",       #// big shields
+    5: "SHIELDSIZE_HUGE"         #// huge shields (might not need this)
+}
+
+missile_type_lookup ={
+    1: "MISSILE_ARROW",
+    2: "MISSILE_LIGHT_CBOW_QUARREL",
+    3: "MISSILE_HEAVY_CBOW_QUARREL",
+    4: "MISSILE_HAND_CBOW_QUARREL",
+    5: "MISSILE_SLING_BULLET",
+    6: "MISSILE_DART"
+}
+
 #Item Size Flags
 item_size_lookup = {	    
     0: "NONE",

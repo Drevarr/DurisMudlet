@@ -3,7 +3,149 @@ from typing import Mapping
 
 def BIT(n: int) -> int:
     return 1 << (n - 1)
-    
+
+ACTION_FLAGS = {
+    "ACT_SPEC",
+    "ACT_SENTINEL",
+    "ACT_SCAVENGER",
+    "ACT_ISNPC",
+    "ACT_NICE_THIEF",
+    "ACT_BREATHES_FIRE",
+    "ACT_STAY_ZONE",
+    "ACT_WIMPY",
+    "ACT_BREATHES_LIGHTNING",
+    "ACT_BREATHES_FROST",
+    "ACT_BREATHES_ACID",
+    "ACT_MEMORY",
+    "ACT_IMMUNE_TO_PARA",
+    "ACT_NO_SUMMON",
+    "ACT_NO_BASH",
+    "ACT_TEACHER",
+    "ACT_IGNORE",
+    "ACT_CANFLY",
+    "ACT_CANSWIM",
+    "ACT_BREATHES_GAS",
+    "ACT_BREATHES_SHADOW",
+    "ACT_BREATHES_BLIND_GAS",
+    "ACT_GUILD_GOLEM",
+    "ACT_SPEC_DIE",
+    "ACT_ELITE",
+    "ACT_BREAK_CHARM",
+    "ACT_PROTECTOR",
+    "ACT_MOUNT",
+    "ACT_WILDMAGIC",
+    "ACT_PATROL",
+    "ACT_HUNTER",
+    "ACT_SPEC_TEACHER",
+    "ACT2_COMBAT_NEARBY",
+    "ACT2_NO_LURE",
+    "ACT2_REMEMBERS_GROUP",
+    "ACT2_BACK_RANK",
+    "ACT2_WAIT",
+}
+
+
+
+AGGRO_FLAGS = {
+    "AGGR_ALL",             
+    "AGGR_DAY_ONLY",        
+    "AGGR_NIGHT_ONLY",      
+    "AGGR_GOOD_ALIGN",      
+    "AGGR_NEUTRAL_ALIGN",   
+    "AGGR_EVIL_ALIGN",      
+    "AGGR_GOOD_RACE",       
+    "AGGR_EVIL_RACE",       
+    "AGGR_UNDEAD_RACE",     
+    "AGGR_OUTCASTS",        
+    "AGGR_FOLLOWERS",       
+    "AGGR_UNDEAD_FOL",      
+    "AGGR_ELEMENTALS",      
+    "AGGR_DRACOLICH",       
+    "AGGR_HUMAN",           
+    "AGGR_BARBARIAN",       
+    "AGGR_DROW_ELF",        
+    "AGGR_GREY_ELF",        
+    "AGGR_MOUNT_DWARF",     
+    "AGGR_DUERGAR",         
+    "AGGR_HALFLING",        
+    "AGGR_GNOME",           
+    "AGGR_OGRE",            
+    "AGGR_TROLL",           
+    "AGGR_HALF_ELF",        
+    "AGGR_ILLITHID",        
+    "AGGR_ORC",             
+    "AGGR_THRIKREEN",       
+    "AGGR_CENTAUR",         
+    "AGGR_GITHYANKI",       
+    "AGGR_MINOTAUR",        
+    "AGGR_GOBLIN",          
+}
+
+
+
+AGGRO2_FLAGS = {
+    "AGGR2_ALL",            
+    "AGGR2_LICH",           
+    "AGGR2_PVAMPIRE",       
+    "AGGR2_PDKNIGHT",       
+    "AGGR2_PSBEAST",        
+    "AGGR2_WARRIOR",        
+    "AGGR2_RANGER",         
+    "AGGR2_PSIONICIST",     
+    "AGGR2_PALADIN",        
+    "AGGR2_ANTIPALADIN",    
+    "AGGR2_CLERIC",         
+    "AGGR2_MONK",           
+    "AGGR2_DRUID",          
+    "AGGR2_SHAMAN",         
+    "AGGR2_SORCERER",       
+    "AGGR2_NECROMANCER",    
+    "AGGR2_CONJURER",       
+    "AGGR2_ROGUE",          
+    "AGGR2_ASSASSIN",       
+    "AGGR2_MERCENARY",      
+    "AGGR2_BARD",           
+    "AGGR2_THIEF",          
+    "AGGR2_WARLOCK",        
+    "AGGR2_MINDFLAYER",     
+    "AGGR2_MALE",           
+    "AGGR2_FEMALE",         
+    "AGGR2_SGIANT",         
+    "AGGR2_WIGHT",          
+    "AGGR2_PHANTOM",        
+    "AGGR2_SHADE",          
+    "AGGR2_REVENANT",       
+    "AGGR2_GITHZERAI",      
+    "AGGR2_THEURGIST",      
+}
+
+
+
+AGGRO3_FLAGS = {
+    "AGGR3_ALL",            
+    "AGGR3_OROG",	        
+    "AGGR3_DRIDER",         
+    "AGGR3_KOBOLD",         
+    "AGGR3_KUOTOA",         
+    "AGGR3_WOODELF",        
+    "AGGR3_FIRBOLG",        
+    "AGGR3_AGATHINON",      
+    "AGGR3_ELADRIN",        
+    "AGGR3_PILLITHID",      
+    "AGGR3_ALCHEMIST",      
+    "AGGR3_BERSERKER",      
+    "AGGR3_REAVER",         
+    "AGGR3_ILLUSIONIST",    
+    "AGGR3_ETHERMANCER",    
+    "AGGR3_DREADLORD",      
+    "AGGR3_AVENGER",        
+    "AGGR3_BLIGHTER",       
+    "AGGR3_SUMMONER",       
+    "AGGR3_DRAGOON",        
+}
+
+
+
 ITEM_AFF_FLAGS = {
     "AFF_NONE":                 0,
     "AFF_BLIND":                BIT(1),
@@ -372,10 +514,29 @@ ITEM_CLASS_ANTI_FLAGS = {
     for i, cls in enumerate(CLASS_NAMES)
 }
 
-
 ITEM_ANTI2_FLAGS = {
     f"{race}": BIT(i + 1)
     for i, race in enumerate(RACE_NAMES)
+}
+
+MOB_AGGRO3_FLAGS = {
+    f"{race}": BIT(i + 1)
+    for i, race in enumerate(AGGRO3_FLAGS)
+}
+
+MOB_ACTION_FLAGS = {
+    f"{race}": BIT(i + 1)
+    for i, race in enumerate(ACTION_FLAGS)
+}
+   
+MOB_AGGRO_FLAGS = {
+    f"{race}": BIT(i + 1)
+    for i, race in enumerate(AGGRO_FLAGS)
+}
+
+MOB_AGGRO2_FLAGS = {
+    f"{race}": BIT(i + 1)
+    for i, race in enumerate(AGGRO2_FLAGS)
 }
 
 
@@ -390,6 +551,37 @@ def decode_flags(
         for name, bit in flags.items()
         if (not skip_zero or bit != 0) and (mask & bit)
     ]
+
+def decode_mob_action_flags(mask: int) -> list[str]:
+    return [
+        name
+        for name, bit in MOB_ACTION_FLAGS.items()
+        if mask & bit
+    ]
+
+
+def decode_mob_aggro_flags(mask: int) -> list[str]:
+    return [
+        name
+        for name, bit in MOB_AGGRO_FLAGS.items()
+        if mask & bit
+    ]
+
+
+def decode_mob_aggro2_flags(mask: int) -> list[str]:
+    return [
+        name
+        for name, bit in MOB_AGGRO2_FLAGS.items()
+        if mask & bit
+    ]
+
+def decode_mob_aggro3_flags(mask: int) -> list[str]:
+    return [
+        name
+        for name, bit in MOB_AGGRO3_FLAGS.items()
+        if mask & bit
+    ]
+
 
 def decode_totem_sphere_flags(mask: int) -> list[str]:
     return decode_flags(mask, TOTEM_SPHERE_FLAGS, skip_zero=True)

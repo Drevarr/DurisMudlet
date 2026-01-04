@@ -117,7 +117,6 @@ def insert_object_into_db(obj: Dict[str, Any], conn: sqlite3.Connection):
         obj['condition']
     ))
 
-    # Helper to insert flag lists 
     def insert_flags(table: str, flags: List[str]):
         if not flags:
             return
@@ -139,7 +138,6 @@ def insert_object_into_db(obj: Dict[str, Any], conn: sqlite3.Connection):
     insert_flags("object_aff3_flags", obj.get('aff3', []))
     insert_flags("object_aff4_flags", obj.get('aff4', []))
 
-    # Values (always 8 integers) 
     # Added item_notes based on item type
     values = obj.get('values', [])
     values_padded = (values + [0] * 8)[:8]

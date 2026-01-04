@@ -279,13 +279,12 @@ def process_item_values(item_values, item_type):
 def parse_obj_file(path):
     objects = {}
 
-    pending_line = None  # one-line lookahead buffer
+    pending_line = None
 
     with open(path, "r", encoding="utf-8") as f:
         lines = iter(f)
 
         while True:
-            # ---- fetch next line, honoring pushback ----
             if pending_line is not None:
                 raw = pending_line
                 pending_line = None
@@ -303,15 +302,15 @@ def parse_obj_file(path):
             if line.startswith("$"):
                 break
 
-            # ---- object header ----
+            # object header
             vnum = int(line[1:])
 
             namelist   = read_tilde_block(lines)
             short_desc = read_tilde_block(lines)
             long_desc  = read_tilde_block(lines)
-            _ = read_tilde_block(lines)  # action desc / unused
+            _ = read_tilde_block(lines)  # full desc / unused
 
-            # ---- stats line 1 ----
+            # stats line 1
             stats1 = read_ints_line(lines)
 
             defaults = [0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0]
@@ -324,19 +323,19 @@ def parse_obj_file(path):
                 extra2_flags, anti1_flags, anti2_flags
             ) = stats1
 
-            # ---- stats line 2 ----
+            # stats line 2
             stats2 = read_ints_line(lines)
             stats2 = (stats2 + [0] * 8)[:8]
             item_vals = stats2
             item_vals_notes = process_item_values(item_vals, item_type)
 
-            # ---- stats line 3 ----
+            # stats line 3
             stats3 = read_ints_line(lines)
             stats3 = (stats3 + [0] * 8)[:8]
 
             weight, worth, condition, aff1, aff2, aff3, aff4, aff5 = stats3
 
-            # ---- optional E / A sections ----
+            # optional E / A sections
             extra_desc = []
             affects = []
 

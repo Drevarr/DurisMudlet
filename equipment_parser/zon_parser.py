@@ -21,20 +21,20 @@ def parse_zon_file(filename):
     if len(meaningful) < 3:
         raise ValueError("Invalid .zon file: not enough data lines")
 
-    # ---- Line 1: zone vnum ----
+    #  Line 1: zone vnum
     if not meaningful[0].startswith('#'):
         raise ValueError("Invalid zone vnum line")
 
     vnum = int(meaningful[0][1:])
 
-    # ---- Line 2: zone name ----
+    # Line 2: zone name
     name_line = meaningful[1]
     if not name_line.endswith('~'):
         raise ValueError("Zone name not terminated with ~")
 
     zone_name = name_line[:-1]
 
-    # ---- Line 3: zone stats ----
+    # Line 3: zone stats
     parts = meaningful[2].split()
     if len(parts) != 6:
         raise ValueError("Invalid zone stat line")

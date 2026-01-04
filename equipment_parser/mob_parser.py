@@ -55,12 +55,12 @@ def parse_mob_file(filename):
                 mobs[vnum] = current
                 stage = 'keywords'
                 desc_lines = []
+                long_lines = []
                 continue
 
             if current is None:
                 continue
 
-            # ---- Text fields ----
             if stage == 'keywords':
                 if line.endswith('~'):
                     current['keywords'] = line[:-1]
@@ -75,8 +75,16 @@ def parse_mob_file(filename):
 
             if stage == 'long':
                 if line.endswith('~'):
-                    current['long_desc'] = line[:-1]
+                    long_lines.append(line[:-1])
+                    current['long_desc'] = '\n'.join(long_lines).rstrip()
+                    long_lines = []
                     stage = 'desc'
+                elif line == '~':
+                    current['long_desc'] = '\n'.join(long_lines).rstrip()
+                    long_lines = []
+                    stage = 'desc'
+                else:
+                    long_lines.append(line)
                 continue
 
             if stage == 'desc':
@@ -87,7 +95,6 @@ def parse_mob_file(filename):
                     desc_lines.append(line)
                 continue
 
-            # ---- Stat lines ----
             if stage == 'stats1':
                 parts = line.split()
                 # Example: 178250 0 0 0 33554468 12480 0 0 -100 S

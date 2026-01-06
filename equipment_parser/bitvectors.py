@@ -1,10 +1,6 @@
-from typing import Mapping
+#Bit vector flags
 
-
-def BIT(n: int) -> int:
-    return 1 << (n - 1)
-
-ACTION_FLAGS = {
+ACTION_FLAGS = [
     "ACT_SPEC",
     "ACT_SENTINEL",
     "ACT_SCAVENGER",
@@ -36,17 +32,18 @@ ACTION_FLAGS = {
     "ACT_WILDMAGIC",
     "ACT_PATROL",
     "ACT_HUNTER",
-    "ACT_SPEC_TEACHER",
+    "ACT_SPEC_TEACHER"
+]
+
+ACTION2_FLAGS = [
     "ACT2_COMBAT_NEARBY",
     "ACT2_NO_LURE",
     "ACT2_REMEMBERS_GROUP",
     "ACT2_BACK_RANK",
-    "ACT2_WAIT",
-}
+    "ACT2_WAIT"
+]
 
-
-
-AGGRO_FLAGS = {
+AGGRO_FLAGS = [
     "AGGR_ALL",             
     "AGGR_DAY_ONLY",        
     "AGGR_NIGHT_ONLY",      
@@ -79,11 +76,9 @@ AGGRO_FLAGS = {
     "AGGR_GITHYANKI",       
     "AGGR_MINOTAUR",        
     "AGGR_GOBLIN",          
-}
+]
 
-
-
-AGGRO2_FLAGS = {
+AGGRO2_FLAGS = [
     "AGGR2_ALL",            
     "AGGR2_LICH",           
     "AGGR2_PVAMPIRE",       
@@ -117,11 +112,9 @@ AGGRO2_FLAGS = {
     "AGGR2_REVENANT",       
     "AGGR2_GITHZERAI",      
     "AGGR2_THEURGIST",      
-}
+]
 
-
-
-AGGRO3_FLAGS = {
+AGGRO3_FLAGS = [
     "AGGR3_ALL",            
     "AGGR3_OROG",	        
     "AGGR3_DRIDER",         
@@ -142,286 +135,278 @@ AGGRO3_FLAGS = {
     "AGGR3_BLIGHTER",       
     "AGGR3_SUMMONER",       
     "AGGR3_DRAGOON",        
-}
+]
 
+AFF_FLAGS = [
+    "AFF_NONE"
+    "AFF_BLIND",                
+    "AFF_INVISIBLE",            
+    "AFF_FARSEE",               
+    "AFF_DETECT_INVISIBLE",     
+    "AFF_HASTE",                
+    "AFF_SENSE_LIFE",           
+    "AFF_MINOR_GLOBE",          
+    "AFF_STONE_SKIN",           
+    "AFF_UD_VISION",            
+    "AFF_ARMOR",                
+    "AFF_WRAITHFORM",           
+    "AFF_WATERBREATH",          
+    "AFF_KNOCKED_OUT",          
+    "AFF_PROTECT_EVIL",         
+    "AFF_BOUND",                
+    "AFF_SLOW_POISON",          
+    "AFF_PROTECT_GOOD",         
+    "AFF_SLEEP",                
+    "AFF_SKILL_AWARE",          
+    "AFF_SNEAK",                
+    "AFF_HIDE",                 
+    "AFF_FEAR",                 
+    "AFF_CHARM",                
+    "AFF_MEDITATE",             
+    "AFF_BARKSKIN",             
+    "AFF_INFRAVISION",          
+    "AFF_LEVITATE",             
+    "AFF_FLY",                  
+    "AFF_AWARE",                
+    "AFF_PROT_FIRE",            
+    "AFF_CAMPING",              
+    "AFF_BIOFEEDBACK",          
+    "AFF_INFERNAL_FURY",        
+    "AFF_FREEDOM_OF_MVMNT",     
+    "AFF_SANCTUM_DRACONIS",     
+]
 
+AFF2_FLAGS = [
+    "AFF2_FIRESHIELD",          
+    "AFF2_ULTRAVISION",         
+    "AFF2_DETECT_EVIL",         
+    "AFF2_DETECT_GOOD",         
+    "AFF2_DETECT_MAGIC",        
+    "AFF2_MAJOR_PHYSICAL",      
+    "AFF2_PROT_COLD",           
+    "AFF2_PROT_LIGHTNING",      
+    "AFF2_MINOR_PARALYSIS",     
+    "AFF2_MAJOR_PARALYSIS",     
+    "AFF2_SLOW",                
+    "AFF2_GLOBE",               
+    "AFF2_PROT_GAS",            
+    "AFF2_PROT_ACID",           
+    "AFF2_POISONED",            
+    "AFF2_SOULSHIELD",          
+    "AFF2_SILENCED",            
+    "AFF2_MINOR_INVIS",         
+    "AFF2_VAMPIRIC_TOUCH",      
+    "AFF2_STUNNED",             
+    "AFF2_EARTH_AURA",          
+    "AFF2_WATER_AURA",          
+    "AFF2_FIRE_AURA",           
+    "AFF2_AIR_AURA",            
+    "AFF2_HOLDING_BREATH",      
+    "AFF2_MEMORIZING",          
+    "AFF2_IS_DROWNING",         
+    "AFF2_PASSDOOR",            
+    "AFF2_FLURRY",              
+    "AFF2_CASTING",             
+    "AFF2_SCRIBING",            
+    "AFF2_HUNTER",              
+]
 
-ITEM_AFF_FLAGS = {
-    "AFF_NONE":                 0,
-    "AFF_BLIND":                BIT(1),
-    "AFF_INVISIBLE":            BIT(2),
-    "AFF_FARSEE":               BIT(3),
-    "AFF_DETECT_INVISIBLE":     BIT(4),
-    "AFF_HASTE":                BIT(5),
-    "AFF_SENSE_LIFE":           BIT(6),
-    "AFF_MINOR_GLOBE":          BIT(7),
-    "AFF_STONE_SKIN":           BIT(8),
-    "AFF_UD_VISION":            BIT(9),
-    "AFF_ARMOR":                BIT(10),
-    "AFF_WRAITHFORM":           BIT(11),
-    "AFF_WATERBREATH":          BIT(12),
-    "AFF_KNOCKED_OUT":          BIT(13),
-    "AFF_PROTECT_EVIL":         BIT(14),
-    "AFF_BOUND":                BIT(15),
-    "AFF_SLOW_POISON":          BIT(16),
-    "AFF_PROTECT_GOOD":         BIT(17),
-    "AFF_SLEEP":                BIT(18),
-    "AFF_SKILL_AWARE":          BIT(19),
-    "AFF_SNEAK":                BIT(20),
-    "AFF_HIDE":                 BIT(21),
-    "AFF_FEAR":                 BIT(22),
-    "AFF_CHARM":                BIT(23),
-    "AFF_MEDITATE":             BIT(24),
-    "AFF_BARKSKIN":             BIT(25),
-    "AFF_INFRAVISION":          BIT(26),
-    "AFF_LEVITATE":             BIT(27),
-    "AFF_FLY":                  BIT(28),
-    "AFF_AWARE":                BIT(29),
-    "AFF_PROT_FIRE":            BIT(30),
-    "AFF_CAMPING":              BIT(31),
-    "AFF_BIOFEEDBACK":          BIT(32),
-    "AFF_INFERNAL_FURY":        BIT(33),
-    "AFF_FREEDOM_OF_MVMNT":     BIT(34),
-    "AFF_SANCTUM_DRACONIS":     BIT(35)
-}
+AFF3_FLAGS = [
+    "AFF3_TENSORS_DISC",        
+    "AFF3_TRACKING",            
+    "AFF3_SINGING",             
+    "AFF3_ECTOPLASMIC_FORM",    
+    "AFF3_ABSORBING",           
+    "AFF3_PROT_ANIMAL",         
+    "AFF3_SPIRIT_WARD",         
+    "AFF3_GR_SPIRIT_WARD",      
+    "AFF3_NON_DETECTION",       
+    "AFF3_SILVER",              
+    "AFF3_PLUSONE",             
+    "AFF3_PLUSTWO",             
+    "AFF3_PLUSTHREE",           
+    "AFF3_PLUSFOUR",            
+    "AFF3_PLUSFIVE",            
+    "AFF3_ENLARGE",             
+    "AFF3_REDUCE",              
+    "AFF3_COVER",               
+    "AFF3_FOUR_ARMS",           
+    "AFF3_INERTIAL_BARRIER",    
+    "AFF3_LIGHTNINGSHIELD",     
+    "AFF3_COLDSHIELD",          
+    "AFF3_CANNIBALIZE",         
+    "AFF3_SWIMMING",            
+    "AFF3_TOWER_IRON_WILL",     
+    "AFF3_UNDERWATER",          
+    "AFF3_BLUR",                
+    "AFF3_ENHANCE_HEALING",     
+    "AFF3_ELEMENTAL_FORM",      
+    "AFF3_PASS_WITHOUT_TRACE",  
+    "AFF3_PALADIN_AURA",        
+    "AFF3_FAMINE",              
+    "AFF3_VIVERNAE_CONCORDIA",  
+]
 
-ITEM_AFF2_FLAGS = {
-    "AFF2_FIRESHIELD":          BIT(1),
-    "AFF2_ULTRAVISION":         BIT(2),
-    "AFF2_DETECT_EVIL":         BIT(3),
-    "AFF2_DETECT_GOOD":         BIT(4),
-    "AFF2_DETECT_MAGIC":        BIT(5),
-    "AFF2_MAJOR_PHYSICAL":      BIT(6),
-    "AFF2_PROT_COLD":           BIT(7),
-    "AFF2_PROT_LIGHTNING":      BIT(8),
-    "AFF2_MINOR_PARALYSIS":     BIT(9),
-    "AFF2_MAJOR_PARALYSIS":     BIT(10),
-    "AFF2_SLOW":                BIT(11),
-    "AFF2_GLOBE":               BIT(12),
-    "AFF2_PROT_GAS":            BIT(13),
-    "AFF2_PROT_ACID":           BIT(14),
-    "AFF2_POISONED":            BIT(15),
-    "AFF2_SOULSHIELD":          BIT(16),
-    "AFF2_SILENCED":            BIT(17),
-    "AFF2_MINOR_INVIS":         BIT(18),
-    "AFF2_VAMPIRIC_TOUCH":      BIT(19),
-    "AFF2_STUNNED":             BIT(20),
-    "AFF2_EARTH_AURA":          BIT(21),
-    "AFF2_WATER_AURA":          BIT(22),
-    "AFF2_FIRE_AURA":           BIT(23),
-    "AFF2_AIR_AURA":            BIT(24),
-    "AFF2_HOLDING_BREATH":      BIT(25),
-    "AFF2_MEMORIZING":          BIT(26),
-    "AFF2_IS_DROWNING":         BIT(27),
-    "AFF2_PASSDOOR":            BIT(28),
-    "AFF2_FLURRY":              BIT(29),
-    "AFF2_CASTING":             BIT(30),
-    "AFF2_SCRIBING":            BIT(31),
-    "AFF2_HUNTER":              BIT(32)
-}
+AFF4_FLAGS = [
+    "AFF4_LOOTER",                  
+    "AFF4_CARRY_PLAGUE",            
+    "AFF4_SACKING",                 
+    "AFF4_SENSE_FOLLOWER",          
+    "AFF4_STORNOGS_SPHERES",        
+    "AFF4_STORNOGS_GREATER_SPHERES",
+    "AFF4_VAMPIRE_FORM",            
+    "AFF4_NO_UNMORPH",              
+    "AFF4_HOLY_SACRIFICE",          
+    "AFF4_BATTLE_ECSTASY",          
+    "AFF4_DAZZLER",                 
+    "AFF4_PHANTASMAL_FORM",         
+    "AFF4_NOFEAR",                  
+    "AFF4_REGENERATION",            
+    "AFF4_DEAF",                    
+    "AFF4_BATTLETIDE",              
+    "AFF4_EPIC_INCREASE",           
+    "AFF4_MAGE_FLAME",              
+    "AFF4_GLOBE_OF_DARKNESS",       
+    "AFF4_DEFLECT",                 
+    "AFF4_HAWKVISION",              
+    "AFF4_MULTI_CLASS",             
+    "AFF4_SANCTUARY",               
+    "AFF4_HELLFIRE",                
+    "AFF4_SENSE_HOLINESS",          
+    "AFF4_PROT_LIVING",             
+    "AFF4_DETECT_ILLUSION",         
+    "AFF4_ICE_AURA",                
+    "AFF4_REV_POLARITY",            
+    "AFF4_NEG_SHIELD",              
+    "AFF4_TUPOR",                   
+    "AFF4_WILDMAGIC",               
+]
 
-ITEM_AFF3_FLAGS = {
-    "AFF3_TENSORS_DISC":        BIT(1),
-    "AFF3_TRACKING":            BIT(2),
-    "AFF3_SINGING":             BIT(3),
-    "AFF3_ECTOPLASMIC_FORM":    BIT(4),
-    "AFF3_ABSORBING":           BIT(5),
-    "AFF3_PROT_ANIMAL":         BIT(6),
-    "AFF3_SPIRIT_WARD":         BIT(7),
-    "AFF3_GR_SPIRIT_WARD":      BIT(8),
-    "AFF3_NON_DETECTION":       BIT(9),
-    "AFF3_SILVER":              BIT(10),
-    "AFF3_PLUSONE":             BIT(11),
-    "AFF3_PLUSTWO":             BIT(12),
-    "AFF3_PLUSTHREE":           BIT(13),
-    "AFF3_PLUSFOUR":            BIT(14),
-    "AFF3_PLUSFIVE":            BIT(15),
-    "AFF3_ENLARGE":             BIT(16),
-    "AFF3_REDUCE":              BIT(17),
-    "AFF3_COVER":               BIT(18),
-    "AFF3_FOUR_ARMS":           BIT(19),
-    "AFF3_INERTIAL_BARRIER":    BIT(20),
-    "AFF3_LIGHTNINGSHIELD":     BIT(21),
-    "AFF3_COLDSHIELD":          BIT(22),
-    "AFF3_CANNIBALIZE":         BIT(23),
-    "AFF3_SWIMMING":            BIT(24),
-    "AFF3_TOWER_IRON_WILL":     BIT(25),
-    "AFF3_UNDERWATER":          BIT(26),
-    "AFF3_BLUR":                BIT(27),
-    "AFF3_ENHANCE_HEALING":     BIT(28),
-    "AFF3_ELEMENTAL_FORM":      BIT(29),
-    "AFF3_PASS_WITHOUT_TRACE":  BIT(30),
-    "AFF3_PALADIN_AURA":        BIT(31),
-    "AFF3_FAMINE":              BIT(32),
-    "AFF3_VIVERNAE_CONCORDIA":  BIT(33)
-}
+AFF5_FLAGS = [
+    "AFF5_DAZZLEE",             
+    "AFF5_MENTAL_ANGUISH",      
+    "AFF5_MEMORY_BLOCK",        
+    "AFF5_VINES",               
+    "AFF5_ETHEREAL_ALLIANCE",   
+    "AFF5_BLOOD_SCENT",         
+    "AFF5_FLESH_ARMOR",         
+    "AFF5_WET",                 
+    "AFF5_HOLY_DHARMA",         
+    "AFF5_ENH_HIDE",            
+    "AFF5_LISTEN",              
+    "AFF5_PROT_UNDEAD",         
+    "AFF5_IMPRISON",            
+    "AFF5_TITAN_FORM",          
+    "AFF5_DELIRIUM",            
+    "AFF5_SHADE_MOVEMENT",      
+    "AFF5_NOBLIND",             
+    "AFF5_MAGICAL_GLOW",        
+    "AFF5_REFRESHING_GLOW",     
+    "AFF5_MINE",                
+    "AFF5_STANCE_OFFENSIVE",    
+    "AFF5_STANCE_DEFENSIVE",    
+    "AFF5_OBSCURING_MIST",      
+    "AFF5_NOT_OFFENSIVE",       
+    "AFF5_DECAYING_FLESH",      
+    "AFF5_DREADNAUGHT",         
+    "AFF5_FOREST_SIGHT",        
+    "AFF5_THORNSKIN",           
+    "AFF5_FOLLOWING",           
+    "AFF5_ORDERING",            
+    "AFF5_STONED",              
+    "AFF5_JUDICIUM_FIDEI",      
+]
 
+EXTRA_FLAGS = [
+    "ITEM_GLOW",            
+    "ITEM_NOSHOW",          
+    "ITEM_BURIED",          
+    "ITEM_NOSELL",          
+    "ITEM_CAN_THROW2",      
+    "ITEM_INVISIBLE",       
+    "ITEM_NOREPAIR",        
+    "ITEM_NODROP",          
+    "ITEM_RETURNING",       
+    "ITEM_ALLOWED_RACES",   
+    "ITEM_ALLOWED_CLASSES", 
+    "ITEM_PROCLIB",         
+    "ITEM_SECRET",          
+    "ITEM_FLOAT",           
+    "ITEM_NORESET",         
+    "ITEM_NOLOCATE",        
+    "ITEM_NOIDENTIFY",      
+    "ITEM_NOSUMMON",        
+    "ITEM_LIT",             
+    "ITEM_TRANSIENT",       
+    "ITEM_NOSLEEP",         
+    "ITEM_NOCHARM",         
+    "ITEM_TWOHANDS",        
+    "ITEM_NORENT",          
+    "ITEM_CAN_THROW1",      
+    "ITEM_HUM",             
+    "ITEM_LEVITATES",       
+    "ITEM_IGNORE",          
+    "ITEM_ARTIFACT",        
+    "ITEM_WHOLE_BODY",      
+    "ITEM_WHOLE_HEAD",      
+    "ITEM_ENCRUSTED",       
+]
 
-ITEM_AFF4_FLAGS = {
-    "AFF4_LOOTER":                  BIT(1),
-    "AFF4_CARRY_PLAGUE":            BIT(2),
-    "AFF4_SACKING":                 BIT(3),
-    "AFF4_SENSE_FOLLOWER":          BIT(4),
-    "AFF4_STORNOGS_SPHERES":        BIT(5),
-    "AFF4_STORNOGS_GREATER_SPHERES":BIT(6),
-    "AFF4_VAMPIRE_FORM":            BIT(7),
-    "AFF4_NO_UNMORPH":              BIT(8),
-    "AFF4_HOLY_SACRIFICE":          BIT(9),
-    "AFF4_BATTLE_ECSTASY":          BIT(10),
-    "AFF4_DAZZLER":                 BIT(11),
-    "AFF4_PHANTASMAL_FORM":         BIT(12),
-    "AFF4_NOFEAR":                  BIT(13),
-    "AFF4_REGENERATION":            BIT(14),
-    "AFF4_DEAF":                    BIT(15),
-    "AFF4_BATTLETIDE":              BIT(16),
-    "AFF4_EPIC_INCREASE":           BIT(17),
-    "AFF4_MAGE_FLAME":              BIT(18),
-    "AFF4_GLOBE_OF_DARKNESS":       BIT(19),
-    "AFF4_DEFLECT":                 BIT(20),
-    "AFF4_HAWKVISION":              BIT(21),
-    "AFF4_MULTI_CLASS":             BIT(22),
-    "AFF4_SANCTUARY":               BIT(23),
-    "AFF4_HELLFIRE":                BIT(24),
-    "AFF4_SENSE_HOLINESS":          BIT(25),
-    "AFF4_PROT_LIVING":             BIT(26),
-    "AFF4_DETECT_ILLUSION":         BIT(27),
-    "AFF4_ICE_AURA":                BIT(28),
-    "AFF4_REV_POLARITY":            BIT(29),
-    "AFF4_NEG_SHIELD":              BIT(30),
-    "AFF4_TUPOR":                   BIT(31),
-    "AFF4_WILDMAGIC":               BIT(32)
-}
+EXTRA2_FLAGS = [
+    "ITEM2_SILVER",        
+    "ITEM2_BLESS",         
+    "ITEM2_SLAY_GOOD",     
+    "ITEM2_SLAY_EVIL",     
+    "ITEM2_SLAY_UNDEAD",   
+    "ITEM2_SLAY_LIVING",   
+    "ITEM2_MAGIC",         
+    "ITEM2_LINKABLE",      
+    "ITEM2_NOPROC",        
+    "ITEM2_NOTIMER",       
+    "ITEM2_NOLOOT",        
+    "ITEM2_CRUMBLELOOT",   
+    "ITEM2_STOREITEM",     
+    "ITEM2_SOULBIND",      
+    "ITEM2_CRAFTED",       
+    "ITEM2_QUESTITEM",     
+    "ITEM2_TRANSPARENT",   
+]
 
-
-ITEM_AFF5_FLAGS = {
-    "AFF5_DAZZLEE":             BIT(1),
-    "AFF5_MENTAL_ANGUISH":      BIT(2),
-    "AFF5_MEMORY_BLOCK":        BIT(3),
-    "AFF5_VINES":               BIT(4),
-    "AFF5_ETHEREAL_ALLIANCE":   BIT(5),
-    "AFF5_BLOOD_SCENT":         BIT(6),
-    "AFF5_FLESH_ARMOR":         BIT(7),
-    "AFF5_WET":                 BIT(8),
-    "AFF5_HOLY_DHARMA":         BIT(9),
-    "AFF5_ENH_HIDE":            BIT(10),
-    "AFF5_LISTEN":              BIT(11),
-    "AFF5_PROT_UNDEAD":         BIT(12),
-    "AFF5_IMPRISON":            BIT(13),
-    "AFF5_TITAN_FORM":          BIT(14),
-    "AFF5_DELIRIUM":            BIT(15),
-    "AFF5_SHADE_MOVEMENT":      BIT(16),
-    "AFF5_NOBLIND":             BIT(17),
-    "AFF5_MAGICAL_GLOW":        BIT(18),
-    "AFF5_REFRESHING_GLOW":     BIT(19),
-    "AFF5_MINE":                BIT(20),
-    "AFF5_STANCE_OFFENSIVE":    BIT(21),
-    "AFF5_STANCE_DEFENSIVE":    BIT(22),
-    "AFF5_OBSCURING_MIST":      BIT(23),
-    "AFF5_NOT_OFFENSIVE":       BIT(24),
-    "AFF5_DECAYING_FLESH":      BIT(25),
-    "AFF5_DREADNAUGHT":         BIT(26),
-    "AFF5_FOREST_SIGHT":        BIT(27),
-    "AFF5_THORNSKIN":           BIT(28),
-    "AFF5_FOLLOWING":           BIT(29),
-    "AFF5_ORDERING":            BIT(30),
-    "AFF5_STONED":              BIT(31),
-    "AFF5_JUDICIUM_FIDEI":      BIT(32)
-}
-
-
-ITEM_EXTRA_FLAGS = {
-    "ITEM_GLOW":            BIT(1),
-    "ITEM_NOSHOW":          BIT(2),
-    "ITEM_BURIED":          BIT(3),
-    "ITEM_NOSELL":          BIT(4),
-    "ITEM_CAN_THROW2":      BIT(5),
-    "ITEM_INVISIBLE":       BIT(6),
-    "ITEM_NOREPAIR":        BIT(7),
-    "ITEM_NODROP":          BIT(8),
-    "ITEM_RETURNING":       BIT(9),
-    "ITEM_ALLOWED_RACES":   BIT(10),
-    "ITEM_ALLOWED_CLASSES": BIT(11),
-    "ITEM_PROCLIB":         BIT(12),
-    "ITEM_SECRET":          BIT(13),
-    "ITEM_FLOAT":           BIT(14),
-    "ITEM_NORESET":         BIT(15),
-    "ITEM_NOLOCATE":        BIT(16),
-    "ITEM_NOIDENTIFY":      BIT(17),
-    "ITEM_NOSUMMON":        BIT(18),
-    "ITEM_LIT":             BIT(19),
-    "ITEM_TRANSIENT":       BIT(20),
-    "ITEM_NOSLEEP":         BIT(21),
-    "ITEM_NOCHARM":         BIT(22),
-    "ITEM_TWOHANDS":        BIT(23),
-    "ITEM_NORENT":          BIT(24),
-    "ITEM_CAN_THROW1":      BIT(25),
-    "ITEM_HUM":             BIT(26),
-    "ITEM_LEVITATES":       BIT(27),
-    "ITEM_IGNORE":          BIT(28),
-    "ITEM_ARTIFACT":        BIT(29),
-    "ITEM_WHOLE_BODY":      BIT(30),
-    "ITEM_WHOLE_HEAD":      BIT(31),
-    "ITEM_ENCRUSTED":       BIT(32),
-}
-
-ITEM_EXTRA2_FLAGS = {
-    "ITEM2_SILVER":        BIT(1),   # Item harm AFF_SILVER
-    "ITEM2_BLESS":         BIT(2),
-    "ITEM2_SLAY_GOOD":     BIT(3),
-    "ITEM2_SLAY_EVIL":     BIT(4),
-    "ITEM2_SLAY_UNDEAD":   BIT(5),
-    "ITEM2_SLAY_LIVING":   BIT(6),
-    "ITEM2_MAGIC":         BIT(7),
-    "ITEM2_LINKABLE":      BIT(8),   # Makes an item linkable by a player
-    "ITEM2_NOPROC":        BIT(9),
-    "ITEM2_NOTIMER":       BIT(10),
-    "ITEM2_NOLOOT":        BIT(11),
-    "ITEM2_CRUMBLELOOT":   BIT(12),
-    "ITEM2_STOREITEM":     BIT(13),  # Item bought from a shop
-    "ITEM2_SOULBIND":      BIT(14),  # Item is soulbound
-    "ITEM2_CRAFTED":       BIT(15),
-    "ITEM2_QUESTITEM":     BIT(16),
-    "ITEM2_TRANSPARENT":   BIT(17),  # Item shows contents when looked at
-}
-
-
-ITEM_WEAR_FLAGS = {
-    "ITEM_NONE":            0,
-    "ITEM_TAKE":            BIT(1),
-    "ITEM_WEAR_FINGER":     BIT(2),
-    "ITEM_WEAR_NECK":       BIT(3),
-    "ITEM_WEAR_BODY":       BIT(4),
-    "ITEM_WEAR_HEAD":       BIT(5),
-    "ITEM_WEAR_LEGS":       BIT(6),
-    "ITEM_WEAR_FEET":       BIT(7),
-    "ITEM_WEAR_HANDS":      BIT(8),
-    "ITEM_WEAR_ARMS":       BIT(9),
-    "ITEM_WEAR_SHIELD":     BIT(10),
-    "ITEM_WEAR_ABOUT":      BIT(11),
-    "ITEM_WEAR_WAIST":      BIT(12),
-    "ITEM_WEAR_WRIST":      BIT(13),
-    "ITEM_WIELD":           BIT(14),
-    "ITEM_HOLD":            BIT(15),
-    "ITEM_THROW":           BIT(16),
-    "ITEM_LIGHT_SOURCE":    BIT(17),
-    "ITEM_WEAR_EYES":       BIT(18),
-    "ITEM_WEAR_FACE":       BIT(19),
-    "ITEM_WEAR_EARRING":    BIT(20),
-    "ITEM_WEAR_QUIVER":     BIT(21),
-    "ITEM_GUILD_INSIGNIA":  BIT(22),
-    "ITEM_WEAR_BACK":       BIT(23),
-    "ITEM_ATTACH_BELT":     BIT(24),
-    "ITEM_HORSE_BODY":      BIT(25),
-    "ITEM_WEAR_TAIL":       BIT(26),
-    "ITEM_WEAR_NOSE":       BIT(27),
-    "ITEM_WEAR_HORN":       BIT(28),
-    "ITEM_WEAR_IOUN":       BIT(29),
-    "ITEM_SPIDER_BODY":     BIT(30),
-}
-
+WEAR_FLAGS = [
+    "ITEM_NONE",            
+    "ITEM_TAKE",            
+    "ITEM_WEAR_FINGER",     
+    "ITEM_WEAR_NECK",       
+    "ITEM_WEAR_BODY",       
+    "ITEM_WEAR_HEAD",       
+    "ITEM_WEAR_LEGS",       
+    "ITEM_WEAR_FEET",       
+    "ITEM_WEAR_HANDS",      
+    "ITEM_WEAR_ARMS",       
+    "ITEM_WEAR_SHIELD",     
+    "ITEM_WEAR_ABOUT",      
+    "ITEM_WEAR_WAIST",      
+    "ITEM_WEAR_WRIST",      
+    "ITEM_WIELD",           
+    "ITEM_HOLD",            
+    "ITEM_THROW",           
+    "ITEM_LIGHT_SOURCE",    
+    "ITEM_WEAR_EYES",       
+    "ITEM_WEAR_FACE",       
+    "ITEM_WEAR_EARRING",    
+    "ITEM_WEAR_QUIVER",     
+    "ITEM_GUILD_INSIGNIA",  
+    "ITEM_WEAR_BACK",       
+    "ITEM_ATTACH_BELT",     
+    "ITEM_HORSE_BODY",      
+    "ITEM_WEAR_TAIL",       
+    "ITEM_WEAR_NOSE",       
+    "ITEM_WEAR_HORN",       
+    "ITEM_WEAR_IOUN",       
+    "ITEM_SPIDER_BODY",     
+]
 
 CLASS_NAMES = [
-    "ALL",
     "Warrior",
     "Ranger",
     "Psionicist",
@@ -453,7 +438,6 @@ CLASS_NAMES = [
     "Summoner",
     "Dragoon",
 ]
-
 
 RACE_NAMES = [
     "HUMAN",
@@ -504,132 +488,90 @@ TOTEM_SPHERES = [
     "TOTEM_GR_SPIR"         #32    // Greater Spirit
 ]
 
-TOTEM_SPHERE_FLAGS = {
-    f"{cls.upper()}": BIT(i + 1)
-    for i, cls in enumerate(TOTEM_SPHERES)
-}
+def BIT(n) -> int:
+    return 1 << (n - 1)
 
-ITEM_CLASS_ANTI_FLAGS = {
-    f"{cls.upper()}": BIT(i + 1)
-    for i, cls in enumerate(CLASS_NAMES)
-}
+
+TOTEM_SPHERE_FLAGS = [
+    (name, BIT(i + 1))
+    for i, name in enumerate(TOTEM_SPHERES)
+]
+
+ITEM_CLASS_ANTI_FLAGS = [
+    (name, BIT(i + 1))
+    for i, name in enumerate(CLASS_NAMES)
+]
 
 ITEM_ANTI2_FLAGS = {
-    f"{race}": BIT(i + 1)
-    for i, race in enumerate(RACE_NAMES)
+    (name, BIT(i + 1))
+    for i, name in enumerate(RACE_NAMES)
 }
 
-MOB_AGGRO3_FLAGS = {
-    f"{race}": BIT(i + 1)
-    for i, race in enumerate(AGGRO3_FLAGS)
+ITEM_WEAR_FLAGS = {
+    (name, BIT(i + 1))
+    for i, name in enumerate(WEAR_FLAGS)
+}
+
+ITEM_EXTRA_FLAGS = {
+    (name, BIT(i + 1))
+    for i, name in enumerate(EXTRA_FLAGS)
+}
+
+ITEM_EXTRA2_FLAGS = {
+    (name, BIT(i + 1))
+    for i, name in enumerate(EXTRA2_FLAGS)
 }
 
 MOB_ACTION_FLAGS = {
-    f"{race}": BIT(i + 1)
-    for i, race in enumerate(ACTION_FLAGS)
+    (name, BIT(i + 1))
+    for i, name in enumerate(ACTION_FLAGS)
 }
    
 MOB_AGGRO_FLAGS = {
-    f"{race}": BIT(i + 1)
-    for i, race in enumerate(AGGRO_FLAGS)
+    (name, BIT(i + 1))
+    for i, name in enumerate(AGGRO_FLAGS)
 }
 
 MOB_AGGRO2_FLAGS = {
-    f"{race}": BIT(i + 1)
-    for i, race in enumerate(AGGRO2_FLAGS)
+    (name, BIT(i + 1))
+    for i, name in enumerate(AGGRO2_FLAGS)
 }
 
+MOB_AGGRO3_FLAGS = {
+    (name, BIT(i + 1))
+    for i, name in enumerate(AGGRO3_FLAGS)
+}
 
-def decode_flags(
-    mask: int,
-    flags: Mapping[str, int],
-    *,
-    skip_zero: bool = False,
-) -> list[str]:
-    return [
-        name
-        for name, bit in flags.items()
-        if (not skip_zero or bit != 0) and (mask & bit)
-    ]
+ITEM_AFF1_FLAGS = {
+    (name, BIT(i + 1))
+    for i, name in enumerate(AFF_FLAGS)
+}
 
-def decode_mob_action_flags(mask: int) -> list[str]:
-    return [
-        name
-        for name, bit in MOB_ACTION_FLAGS.items()
-        if mask & bit
-    ]
+ITEM_AFF2_FLAGS = {
+    (name, BIT(i + 1))
+    for i, name in enumerate(AFF2_FLAGS)
+}
 
+ITEM_AFF3_FLAGS = {
+    (name, BIT(i + 1))
+    for i, name in enumerate(AFF3_FLAGS)
+}
 
-def decode_mob_aggro_flags(mask: int) -> list[str]:
-    return [
-        name
-        for name, bit in MOB_AGGRO_FLAGS.items()
-        if mask & bit
-    ]
+ITEM_AFF4_FLAGS = {
+    (name, BIT(i + 1))
+    for i, name in enumerate(AFF4_FLAGS)
+}
 
+ITEM_AFF5_FLAGS = {
+    (name, BIT(i + 1))
+    for i, name in enumerate(AFF5_FLAGS)
+}
 
-def decode_mob_aggro2_flags(mask: int) -> list[str]:
-    return [
-        name
-        for name, bit in MOB_AGGRO2_FLAGS.items()
-        if mask & bit
-    ]
+CLASS_NAME_FLAGS = {
+    (name, BIT(i + 1))
+    for i, name in enumerate(CLASS_NAMES)    
+}
 
-def decode_mob_aggro3_flags(mask: int) -> list[str]:
-    return [
-        name
-        for name, bit in MOB_AGGRO3_FLAGS.items()
-        if mask & bit
-    ]
+def decode_bit_flags(mask: int, table: list[tuple[str, int]]) -> list[str]:
 
-
-def decode_totem_sphere_flags(mask: int) -> list[str]:
-    return decode_flags(mask, TOTEM_SPHERE_FLAGS, skip_zero=True)
-
-
-def decode_wear_flags(mask: int) -> list[str]:
-    return decode_flags(mask, ITEM_WEAR_FLAGS, skip_zero=True)
-
-
-def decode_class_anti_flags(mask: int) -> list[str]:
-    return decode_flags(mask, ITEM_CLASS_ANTI_FLAGS)
-
-
-def decode_race_anti_flags(mask: int) -> list[str]:
-    return decode_flags(mask, ITEM_ANTI2_FLAGS)
-
-
-def decode_extra_flags(mask: int) -> list[str]:
-    return decode_flags(mask, ITEM_EXTRA_FLAGS)
-
-
-def decode_extra2_flags(mask: int) -> list[str]:
-    return decode_flags(mask, ITEM_EXTRA2_FLAGS)
-
-
-def decode_aff1_flags(mask: int) -> list[str]:
-    return decode_flags(mask, ITEM_AFF_FLAGS, skip_zero=True)
-
-def decode_aff2_flags(mask: int) -> list[str]:
-    return decode_flags(mask, ITEM_AFF2_FLAGS, skip_zero=True)
-
-
-def decode_aff3_flags(mask: int) -> list[str]:
-    return decode_flags(mask, ITEM_AFF3_FLAGS, skip_zero=True)
-
-
-def decode_aff4_flags(mask: int) -> list[str]:
-    return decode_flags(mask, ITEM_AFF4_FLAGS, skip_zero=True)
-                        
-
-def decode_aff5_flags(mask: int) -> list[str]:
-    return decode_flags(mask, ITEM_AFF5_FLAGS, skip_zero=True)
-
-def has_wear_flag(mask: int, flag_name: str) -> bool:
-    return bool(mask & ITEM_WEAR_FLAGS[flag_name])
-
-def set_wear_flag(mask: int, flag_name: str) -> int:
-    return mask | ITEM_WEAR_FLAGS[flag_name]
-
-def remove_wear_flag(mask: int, flag_name: str) -> int:
-    return mask & ~ITEM_WEAR_FLAGS[flag_name]
+    return [name for name, bit in table if mask & bit]

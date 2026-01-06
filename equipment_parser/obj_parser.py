@@ -1,4 +1,3 @@
-from typing import Mapping
 from bitvectors import *
 from flags import *
 from spells_skills import *
@@ -26,7 +25,7 @@ def process_item_values(item_values, item_type):
             spell_level = item_values[0] 
             max_charges = item_values[1]
             charges_left = item_values[2]
-            spell_1 = spell_lookup[item_values[3]]
+            spell_1 = item_values[3]   #spell_lookup[item_values[3]]
             Item_Type_Notes = {
             "Spell": spell_1,
             "Level": spell_level,
@@ -36,9 +35,9 @@ def process_item_values(item_values, item_type):
             
         case "ITEM_SCROLL" | "ITEM_POTION":
             spell_level = item_values[0] 
-            spell_1 = spell_lookup[item_values[1]]
-            spell_2 = spell_lookup[item_values[2]] or ""
-            spell_3 = spell_lookup[item_values[3]] or ""
+            spell_1 = item_values[1] #spell_lookup[item_values[1]]
+            spell_2 = item_values[1] #spell_lookup[item_values[2]] or ""
+            spell_3 = item_values[1] #spell_lookup[item_values[3]] or ""
             Item_Type_Notes = {
             "Spell Level": {spell_level},
             "Spells": f"{spell_1} {spell_2} {spell_3}"
@@ -63,7 +62,7 @@ def process_item_values(item_values, item_type):
             to_hit_mod = item_values[0]
             num_dice = item_values[1]            
             size_dice = item_values[2]
-            missile_type = missile_type_lookup[item_values[3]]
+            missile_type = missile_type_lookup.get(int(item_values[3]) ,"None")
             Item_Type_Notes = {
             "Missile Type": missile_type,
             "To Hit Mod": f"+{to_hit_mod}",
@@ -225,37 +224,34 @@ def process_item_values(item_values, item_type):
             }
                 
         case "ITEM_TOTEM":
-            spheres = ', '.join(decode_totem_sphere_flags(item_values[0]))
-            Item_Type_Notes = {
+            spheres = ', '.join(decode_bit_flags(item_values[0], TOTEM_SPHERE_FLAGS))
+            item_value_note = {
                 "Spheres": spheres
             }
     
         case "ITEM_BANDAGE":
             maxheal = item_values[0]
-            Item_Type_Notes = {
+            item_value_note = {
                 "Max Heal": maxheal
             }
     
         case "ITEM_HERB":
             level = item_values[0]
-            herb_1 = herb_type_lookup[item_values[1]]
-            herb_2 = herb_type_lookup[item_values[2]]
-            herb_3 = herb_type_lookup[item_values[3]]
-            duration = item_values[7]
-            if herb_2:
-                spell_2_level = level/2
-            if herb_3:
-                spell_3_level = level/3
+            herb_1 = herb_type_lookup.get(int(item_values[1]), 0)
+            herb_2 = herb_type_lookup.get(int(item_values[2]), 0)
+            herb_3 = herb_type_lookup.get(int(item_values[3]), 0)
+            spell_1_duration = item_values[7]
+            spell_2_level = level/2 if herb_2 else 0
+            spell_3_level = level/3 if herb_3 else 0
             stoned_duration = item_values[6]
-            Item_Type_Notes = {
-                "Level": level,
-                "Duration": duration,
+            item_value_note = {
+                "Spell_1 Level": level,
                 "Spell_1": herb_1,
-                "Spell_1 Level:": level,
+                "Duration": spell_1_duration,
                 "Spell_2": herb_2,
                 "Spell_2 Level": spell_2_level,
                 "Spell_3": herb_3,
-                "Spell_3 Duration": spell_3_level,
+                "Spell_3 Level": spell_3_level,
                 "Stoned Duration": stoned_duration
             }
                 
@@ -271,7 +267,8 @@ def process_item_values(item_values, item_type):
             }
             
         case _:
-            print("No specific item value notes, let Drevarr know if you think something is wrong.")  # Default case
+            item_value_note = None
+            
 
     return Item_Type_Notes
 
@@ -279,12 +276,13 @@ def process_item_values(item_values, item_type):
 def parse_obj_file(path):
     objects = {}
 
-    pending_line = None
+    pending_line = None  # one-line lookahead buffer
 
     with open(path, "r", encoding="utf-8") as f:
         lines = iter(f)
 
         while True:
+            # ---- fetch next line, honoring pushback ----
             if pending_line is not None:
                 raw = pending_line
                 pending_line = None
@@ -302,15 +300,16 @@ def parse_obj_file(path):
             if line.startswith("$"):
                 break
 
-            # object header
+            # ---- object header ----
             vnum = int(line[1:])
 
             namelist   = read_tilde_block(lines)
+            #DEBUG print(f"CheckVNUM: {vnum} - {namelist}")
             short_desc = read_tilde_block(lines)
             long_desc  = read_tilde_block(lines)
-            _ = read_tilde_block(lines)  # full desc / unused
+            _ = read_tilde_block(lines)  # action desc / unused
 
-            # stats line 1
+            # ---- stats line 1 ----
             stats1 = read_ints_line(lines)
 
             defaults = [0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0]
@@ -323,19 +322,19 @@ def parse_obj_file(path):
                 extra2_flags, anti1_flags, anti2_flags
             ) = stats1
 
-            # stats line 2
+            # ---- stats line 2 ----
             stats2 = read_ints_line(lines)
             stats2 = (stats2 + [0] * 8)[:8]
             item_vals = stats2
-            item_vals_notes = process_item_values(item_vals, item_type)
+            item_notes = process_item_values(item_vals, item_type_lookup[int(item_type)])
 
-            # stats line 3
+            # ---- stats line 3 ----
             stats3 = read_ints_line(lines)
             stats3 = (stats3 + [0] * 8)[:8]
 
             weight, worth, condition, aff1, aff2, aff3, aff4, aff5 = stats3
 
-            # optional E / A sections
+            # ---- optional E / A sections ----
             extra_desc = []
             affects = []
 
@@ -375,21 +374,21 @@ def parse_obj_file(path):
                 "space": space,
                 "craftsmanship": craftmanship_lookup[craftsmanship],
                 "damage_resist": dmg_resist,
-                "wear_flags": decode_wear_flags(wear_flags),
-                "extra1_flags": decode_extra_flags(extra1_flags),
-                "extra2_flags": decode_extra2_flags(extra2_flags),
-                "anti1_flags": decode_class_anti_flags(anti1_flags),
-                "anti2_flags": decode_race_anti_flags(anti2_flags),
-                "item_values": item_vals,
-                "item_value_notes": item_vals_notes,
+                "wear_flags": decode_bit_flags(wear_flags, ITEM_WEAR_FLAGS),
+                "extra1_flags": decode_bit_flags(extra1_flags, ITEM_EXTRA_FLAGS),
+                "extra2_flags": decode_bit_flags(extra2_flags, ITEM_EXTRA2_FLAGS),
+                "anti1_flags": decode_bit_flags(anti1_flags, ITEM_CLASS_ANTI_FLAGS),
+                "anti2_flags": decode_bit_flags(anti2_flags, ITEM_ANTI2_FLAGS),
+                "values": item_vals,
+                "item_notes": item_notes,
                 "weight": weight,
                 "worth": worth,
                 "condition": condition,
-                "aff1": decode_aff1_flags(aff1),
-                "aff2": decode_aff2_flags(aff2),
-                "aff3": decode_aff3_flags(aff3),
-                "aff4": decode_aff4_flags(aff4),
-                "aff5": decode_aff5_flags(aff5),
+                "aff1": decode_bit_flags(aff1, ITEM_AFF1_FLAGS),
+                "aff2": decode_bit_flags(aff2, ITEM_AFF2_FLAGS),
+                "aff3": decode_bit_flags(aff3, ITEM_AFF3_FLAGS),
+                "aff4": decode_bit_flags(aff4, ITEM_AFF4_FLAGS),
+                "aff5": decode_bit_flags(aff5, ITEM_AFF5_FLAGS),
                 "affects": affects,
                 "extra_descriptions": extra_desc,
             }

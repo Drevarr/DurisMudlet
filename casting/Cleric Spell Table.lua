@@ -1,0 +1,78 @@
+Cleric = {
+--1st CIRCLE:
+ca = "armor",
+bless = "bless",
+cal = "cause light",
+cl = "cure light",
+dete = "detect evil",
+detg = "detect good",
+dm = "detect magic",
+tu = "turn undead",
+--2nd CIRCLE:
+cb = "blindness",
+cas = "cause serious",
+cs = "cure serious",
+pres = "preserve",
+pc = "protection from cold",
+pf = "protection from fire",
+sp = "slow poison",
+wc = "word of command",
+--3rd CIRCLE:
+cac = "cause critical",
+cub = "cure blind",
+cc = "cure critic",
+de = "dispel evil",
+dg = "dispel good",
+eq = "earthquake",
+rp = "remove poison",
+sl = "sense life",
+--4th CIRCLE:
+cud = "cure disease",
+inv = "invigorate",
+pa = "protection from acid",
+pe = "protection from evil",
+pga = "protection from gas",
+pg = "protection from good",
+pl = "protection from lightning",
+rc = "remove curse",
+sc = "self comprehension",
+sum = "summon",
+--5th CIRCLE:
+du = "destroy undead",
+ch = "heal",
+ss = "soulshield",
+vit = "vitality",
+--6th CIRCLE:
+cli = "continual light",
+cur = "curse",
+da = "darkness",
+fe = "fear",
+fs = "flame strike",
+cah = "harm",
+neg = "negative energy barrier",
+--7th CIRCLE:
+fh = "full heal",
+lres = "lesser resurrect",
+wb = "water breathing",
+--8th CIRCLE:
+dis = "dispel magic",
+mh = "mass heal",
+--9th CIRCLE:
+hw = "holy word",
+ps = "plane shift",
+res = "resurrect",
+si = "silence",
+uw = "unholy word",
+wr = "word of recall",
+--10th CIRCLE:
+ah = "accelerated healing",
+fm = "freedom of movement",
+cfh = "full harm",
+t = "taint",
+--11th CIRCLE:
+gr = "group recall",
+mp = "mass preserve",
+ts = "true seeing",
+--12th CIRCLE:
+mir = "miracle",
+}

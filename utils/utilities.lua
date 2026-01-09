@@ -13,3 +13,16 @@ function comma_value(amount)
     end
     return formatted
 end
+
+function strip_mud_colors(text)
+    -- Remove combined bg+fg codes (e.g. &=ab)
+    text = text:gsub("&=%a%a", "")
+
+    -- Remove foreground / background codes (e.g. &+r or &-B)
+    text = text:gsub("&[+-]%a", "")
+
+    -- Remove reset codes
+    text = text:gsub("&[nN]", "")
+
+    return text
+end

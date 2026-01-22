@@ -16,7 +16,7 @@ GroupUI.panel = TabPanel:new({
   attach    = "right",
   tabHeight = "5%",
   styles    = UIStyles,
-  default   = "map",
+  default   = "groupGrid",
 
   tabs = {
     groupGrid = {

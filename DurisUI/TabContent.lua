@@ -1,108 +1,86 @@
-DurisGUI = DurisGUI or {}
+TabPanel = TabPanel or {}
 
-DurisGUI.menu = DurisGUI.menu or {
-  tabs = {"Tab1","Tab2","Tab3","Tab4"},
-  color1 = "rgb(0,0,70)",
-  color2 = "rgb(0,0,50)",
-  width = "20%",
-  height = "40%",
-}
-DurisGUI.menu.current = DurisGUI.menu.current or DurisGUI.menu.tabs[1]
+function TabPanel:new(def)
+  local o = {}
+  setmetatable(o, self)
+  self.__index = self
 
-DurisGUI.menu.container = Geyser.Container:new({
-  name = "DurisGUI.menu.back",
-  x = "50%", y = "25%",
-  width = DurisGUI.menu.width,
-  height = DurisGUI.menu.height,
-},main)
+  o.name    = def.name
+  o.styles  = def.styles
+  o.default = def.default
+  o.tabs    = {}
 
 
-DurisGUI.menu.header = Geyser.HBox:new({
-  name = "DurisGUI.menu.header",
-  x = 0, y = 0,
-  width = "100%",
-  height = "10%",
-},DurisGUI.menu.container)
+  -- Container
+  o.container = Adjustable.Container:new(def.container)
 
-DurisGUI.menu.footer = Geyser.Label:new({
-  name = "DurisGUI.menu.footer",
-  x = 0, y = "10%",
-  width = "100%",
-  height = "90%",
-},DurisGUI.menu.container)
-
-DurisGUI.menu.footer:setStyleSheet([[
-  background-color: ]]..DurisGUI.menu.color1..[[;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-]])
-
-DurisGUI.menu.center = Geyser.Label:new({
-  name = "DurisGUI.menu.center",
-  x = 0, y = 0,
-  width = "100%",
-  height = "100%",
-},DurisGUI.menu.footer)
-DurisGUI.menu.center:setStyleSheet([[
-  background-color: ]]..DurisGUI.menu.color2..[[;
-  border-radius: 10px;
-  margin: 5px;
-]])
+  if def.attach then
+    o.container:attachToBorder(def.attach)
+  end
 
 
-for k,v in pairs(DurisGUI.menu.tabs) do
-  DurisGUI.menu[v.."tab"] = Geyser.Label:new({
-    name = "DurisGUI.menu."..v.."tab",
-  },DurisGUI.menu.header)
-  
-  DurisGUI.menu[v.."tab"]:setStyleSheet([[
-    background-color: ]]..DurisGUI.menu.color1..[[;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    margin-right: 1px;
-    margin-left: 1px;
-  ]])
-  
-  DurisGUI.menu[v.."tab"]:echo("<center>"..v)
-  
-  DurisGUI.menu[v.."tab"]:setClickCallback("DurisGUI.menu.click",v)
-  
-  DurisGUI.menu[v] = Geyser.Label:new({
-    name = "DurisGUI.menu."..v,
-    x = 0, y = 0,
-    width = "100%",
-    height = "100%",
-  },DurisGUI.menu.footer)
+  -- Tab bar
+  o.tabHeight = def.tabHeight or "10px"
 
-  DurisGUI.menu[v]:setStyleSheet([[
-    background-color: ]]..DurisGUI.menu.color1..[[;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-  ]])
-  
-  DurisGUI.menu[v.."center"] = Geyser.Label:new({
-    name = "DurisGUI.menu."..v.."center",
-    x = 0, y = 0,
-    width = "100%",
-    height = "100%",
-  },DurisGUI.menu[v])
-  
-  DurisGUI.menu[v.."center"]:setStyleSheet([[
-    background-color: ]]..DurisGUI.menu.color2..[[;
-    border-radius: 10px;
-    margin: 5px;
-  ]])
-  
-  DurisGUI.menu[v]:hide()
+  o.tabBar = Geyser.HBox:new({
+    name   = o.name .. "_HBox",
+    x      = 0,
+    y      = 0,
+    width  = "100%",
+    height = o.tabHeight,
+  }, o.container)
+
+
+  -- Content area
+  o.view = Geyser.Label:new({
+    name   = o.name .. "_View",
+    x      = "0%",
+    y      = o.tabHeight,
+    width  = "100%",
+    height = "95%",
+  }, o.container)
+
+
+  -- Tabs (factories)
+  for key, tab in pairs(def.tabs) do
+    -- Create view using factory
+    local view = tab.create(o.view)
+    view:hide()
+
+    local button = Geyser.Label:new({
+      name    = o.name .. "_Tab_" .. key,
+      message = ("<center>%s</center>"):format(tab.label),
+    }, o.tabBar)
+
+    button:setStyleSheet(o.styles.tabInactive)
+    button:setClickCallback(function()
+      o:showTab(key)
+    end)
+
+    o.tabs[key] = {
+      label  = tab.label,
+      view   = view,
+      button = button,
+    }
+  end
+
+
+  -- Default tab
+  o:showTab(o.default)
+
+  return o
 end
 
-function DurisGUI.menu.click(tab)
-  DurisGUI.menu[DurisGUI.menu.current]:hide()
-  DurisGUI.menu.current = tab
-  DurisGUI.menu[DurisGUI.menu.current]:show()
+function TabPanel:showTab(tabName)
+  for _, tab in pairs(self.tabs) do
+    tab.view:hide()
+    tab.button:setStyleSheet(self.styles.tabInactive)
+  end
+
+  local active = self.tabs[tabName]
+  if not active then return end
+
+  active.view:show()
+  active.button:setStyleSheet(self.styles.tabActive)
 end
 
-DurisGUI.menu.Tab1center:echo("1: Testing echo to Tab1center")
-DurisGUI.menu.Tab2center:echo("2: Testing echo to Tab2center")
-DurisGUI.menu.Tab3center:echo("3: Testing echo to Tab3center")
-DurisGUI.menu.Tab4center:echo("4: Testing echo to Tab4center")

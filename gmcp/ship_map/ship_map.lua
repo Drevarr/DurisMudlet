@@ -1,5 +1,5 @@
 shipMap = shipMap or {
-  mapRange = 2000,
+  mapRange = 50,
   radarItems = {},
   genPoints = {},
   genLabels = {}
@@ -14,7 +14,7 @@ local controlButtonStyle = [[
 ]]
 
 function shipMap.setup()
-  disableTrigger("system-map-radar")
+  disableTrigger("ship-map-radar")
 
   local tabContents = layout.upperRightTabData.contents["system"]
   shipMap.container = Geyser.Label:new({}, tabContents)
@@ -31,10 +31,10 @@ function shipMap.setup()
   zoomInButton:setStyleSheet(controlButtonStyle)
   zoomInButton:echo("+", "white", "c16b")
   zoomInButton:setClickCallback(function()
-    if shipMap.mapRange > 1000 then
-      shipMap.mapRange = shipMap.mapRange - 1000
-    elseif shipMap.mapRange == 1000 then
-      shipMap.mapRange = 500
+    if shipMap.mapRange > 100 then
+      shipMap.mapRange = shipMap.mapRange - 100
+    elseif shipMap.mapRange == 50 then
+      shipMap.mapRange = 50
     else
       return
     end
@@ -133,7 +133,7 @@ function shipMap.drawMap()
     local point, label = shipMap.pointAndLabel(i)
 
     local color = "yellow"
-    if item.class and string.match(item.class, "Pirated") then
+    if item.class and string.match(item.class, "Pirate") then
       color = "red"
     elseif item == selfData then
       color = "white"
@@ -318,5 +318,5 @@ function shipMap.findTarget(targetName)
 end
 
 function shipMap.log(text)
-  cecho("[<cyan>System Map<reset>] "..text.."\n")
+  cecho("[<cyan>Ship Map<reset>] "..text.."\n")
 end

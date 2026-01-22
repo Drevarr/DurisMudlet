@@ -1,103 +1,108 @@
-menu = menu or {
+DurisGUI = DurisGUI or {}
+
+DurisGUI.menu = DurisGUI.menu or {
   tabs = {"Tab1","Tab2","Tab3","Tab4"},
   color1 = "rgb(0,0,70)",
   color2 = "rgb(0,0,50)",
   width = "20%",
   height = "40%",
 }
-menu.current = menu.current or menu.tabs[1]
+DurisGUI.menu.current = DurisGUI.menu.current or DurisGUI.menu.tabs[1]
 
-menu.container = Geyser.Container:new({
-  name = "menu.back",
+DurisGUI.menu.container = Geyser.Container:new({
+  name = "DurisGUI.menu.back",
   x = "50%", y = "25%",
-  width = menu.width,
-  height = menu.height,
+  width = DurisGUI.menu.width,
+  height = DurisGUI.menu.height,
 },main)
 
 
-menu.header = Geyser.HBox:new({
-  name = "menu.header",
+DurisGUI.menu.header = Geyser.HBox:new({
+  name = "DurisGUI.menu.header",
   x = 0, y = 0,
   width = "100%",
   height = "10%",
-},menu.container)
+},DurisGUI.menu.container)
 
-menu.footer = Geyser.Label:new({
-  name = "menu.footer",
+DurisGUI.menu.footer = Geyser.Label:new({
+  name = "DurisGUI.menu.footer",
   x = 0, y = "10%",
   width = "100%",
   height = "90%",
-},menu.container)
+},DurisGUI.menu.container)
 
-menu.footer:setStyleSheet([[
-  background-color: ]]..menu.color1..[[;
+DurisGUI.menu.footer:setStyleSheet([[
+  background-color: ]]..DurisGUI.menu.color1..[[;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 ]])
 
-menu.center = Geyser.Label:new({
-  name = "menu.center",
+DurisGUI.menu.center = Geyser.Label:new({
+  name = "DurisGUI.menu.center",
   x = 0, y = 0,
   width = "100%",
   height = "100%",
-},menu.footer)
-menu.center:setStyleSheet([[
-  background-color: ]]..menu.color2..[[;
+},DurisGUI.menu.footer)
+DurisGUI.menu.center:setStyleSheet([[
+  background-color: ]]..DurisGUI.menu.color2..[[;
   border-radius: 10px;
   margin: 5px;
 ]])
 
 
-for k,v in pairs(menu.tabs) do
-  menu[v.."tab"] = Geyser.Label:new({
-    name = "menu."..v.."tab",
-  },menu.header)
+for k,v in pairs(DurisGUI.menu.tabs) do
+  DurisGUI.menu[v.."tab"] = Geyser.Label:new({
+    name = "DurisGUI.menu."..v.."tab",
+  },DurisGUI.menu.header)
   
-  menu[v.."tab"]:setStyleSheet([[
-    background-color: ]]..menu.color1..[[;
+  DurisGUI.menu[v.."tab"]:setStyleSheet([[
+    background-color: ]]..DurisGUI.menu.color1..[[;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     margin-right: 1px;
     margin-left: 1px;
   ]])
   
-  menu[v.."tab"]:echo("<center>"..v)
+  DurisGUI.menu[v.."tab"]:echo("<center>"..v)
   
-  menu[v.."tab"]:setClickCallback("menu.click",v)
+  DurisGUI.menu[v.."tab"]:setClickCallback("DurisGUI.menu.click",v)
   
-  menu[v] = Geyser.Label:new({
-    name = "menu."..v,
+  DurisGUI.menu[v] = Geyser.Label:new({
+    name = "DurisGUI.menu."..v,
     x = 0, y = 0,
     width = "100%",
     height = "100%",
-  },menu.footer)
+  },DurisGUI.menu.footer)
 
-  menu[v]:setStyleSheet([[
-    background-color: ]]..menu.color1..[[;
+  DurisGUI.menu[v]:setStyleSheet([[
+    background-color: ]]..DurisGUI.menu.color1..[[;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   ]])
   
-  menu[v.."center"] = Geyser.Label:new({
-    name = "menu."..v.."center",
+  DurisGUI.menu[v.."center"] = Geyser.Label:new({
+    name = "DurisGUI.menu."..v.."center",
     x = 0, y = 0,
     width = "100%",
     height = "100%",
-  },menu[v])
+  },DurisGUI.menu[v])
   
-  menu[v.."center"]:setStyleSheet([[
-    background-color: ]]..menu.color2..[[;
+  DurisGUI.menu[v.."center"]:setStyleSheet([[
+    background-color: ]]..DurisGUI.menu.color2..[[;
     border-radius: 10px;
     margin: 5px;
   ]])
   
-  menu[v]:hide()
+  DurisGUI.menu[v]:hide()
 end
 
-function menu.click(tab)
-  menu[menu.current]:hide()
-  menu.current = tab
-  menu[menu.current]:show()
+function DurisGUI.menu.click(tab)
+  DurisGUI.menu[DurisGUI.menu.current]:hide()
+  DurisGUI.menu.current = tab
+  DurisGUI.menu[DurisGUI.menu.current]:show()
 end
 
-menu.Tab1center:echo("Testing echo to Tab1center")
+DurisGUI.menu.Tab1center:echo("1: Testing echo to Tab1center")
+DurisGUI.menu.Tab2center:echo("2: Testing echo to Tab2center")
+DurisGUI.menu.Tab3center:echo("3: Testing echo to Tab3center")
+DurisGUI.menu.Tab4center:echo("4: Testing echo to Tab4center")

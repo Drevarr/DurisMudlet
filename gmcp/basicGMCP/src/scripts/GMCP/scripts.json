@@ -1,0 +1,35 @@
+[
+       {
+              "name": "GMCP_DATA",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "gmcp_char_vitals",
+              "isActive": "yes",
+              "eventHandlerList": [
+                     "gmcp.Char.Vitals"
+              ],
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "gmcp_room_info",
+              "isActive": "yes",
+              "eventHandlerList": [
+                     "gmcp.Room.Info"
+              ],
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "gmcp_char_affects",
+              "isActive": "yes",
+              "eventHandlerList": [
+                     "gmcp.Char.Affects"
+              ],
+              "script": "",
+              "isFolder": "no"
+       }
+]

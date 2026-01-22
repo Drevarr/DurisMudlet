@@ -9,7 +9,7 @@ GUIFlex.GroupGrid = Geyser.HBox:new({
   height = "35%",
 },GUIFlex.Box2)
 
-for i=1,3 do
+for i=1,4 do
   GUIFlex["GroupButton"..i] = Geyser.Label:new({
     name = "GUIFlex.GroupButton"..i,
     clickCommand = "GroupButton "..i.." pressed",

@@ -1,0 +1,145 @@
+if not GMCP then GMCP = {} end
+
+registerAnonymousEventHandler("gmcp", "GMCP.dispatch")
+
+GMCP.last = {}
+
+function GMCP.dispatch()
+  if not gmcp then return end
+
+  for namespace, payload in pairs(gmcp) do
+    -- fire namespace-level event
+    raiseEvent("gmcp" .. namespace, payload)
+
+    -- diff detection for sub-objects
+    GMCP.diff(namespace, payload)
+  end
+end
+
+function GMCP.diff(namespace, payload)
+  GMCP.last[namespace] = GMCP.last[namespace] or {}
+
+  for key, value in pairs(payload) do
+    if GMCP.last[namespace][key] ~= value then
+      raiseEvent(
+        "gmcp" .. namespace .. key,
+        value,
+        GMCP.last[namespace][key]
+      )
+      GMCP.last[namespace][key] = value
+    end
+  end
+end
+
+
+registerAnonymousEventHandler("gmcpCharVitals", function(v)
+  if not v then return end
+
+  hpGauge:setValue(v.hp, v.maxHp)
+  manaGauge:setValue(v.mana, v.maxMana)
+  moveGauge:setValue(v.move, v.maxMove)
+end)
+
+registerAnonymousEventHandler("gmcpRoomInfo", function(room)
+  if not room then return end
+
+  map:setRoom(room.num)
+  map:setArea(room.zone)
+
+  -- exits
+  updateExitDisplay(room.exits)
+end)
+
+registerAnonymousEventHandler("gmcpCombatUpdate", function(update)
+  local t = update and update.target
+  if not t then return end
+
+  targetNameLabel:echo(t.name)
+  targetHpGauge:setValue(t.healthPercent, 100)
+end)
+
+
+registerAnonymousEventHandler("gmcpGroupStatus", function(status)
+  updateGroupUI(status.members)
+end)
+
+registerAnonymousEventHandler("gmcpCommChannel", function(msg)
+  cecho(string.format(
+    "<%s>%s: %s\n",
+    msg.channel,
+    msg.sender,
+    msg.text
+  ))
+end)
+
+GMCP.Char = {}
+
+function GMCP.Char:getVitals()
+  return gmcp.Char and gmcp.Char.Vitals
+end
+
+function GMCP.Char:getHP()
+  local v = self:getVitals()
+  return v and v.hp, v and v.maxHp
+end
+
+function GMCP.Char:getMana()
+  local v = self:getVitals()
+  return v and v.mana, v and v.maxMana
+end
+
+function GMCP.Char:isFighting()
+  local v = self:getVitals()
+  return v and v.fighting ~= ""
+end
+
+function GMCP.Char:getAffects()
+  return gmcp.Char and gmcp.Char.Affects or {}
+end
+
+function GMCP.Char:hasAffect(name)
+  for _, a in ipairs(self:getAffects()) do
+    if a.name == name then return true end
+  end
+  return false
+end
+
+GMCP.Room = {}
+
+function GMCP.Room:getInfo()
+  return gmcp.Room and gmcp.Room.Info
+end
+
+function GMCP.Room:getID()
+  local r = self:getInfo()
+  return r and r.num
+end
+
+function GMCP.Room:getExits()
+  local r = self:getInfo()
+  return r and r.exits or {}
+end
+
+function GMCP.Room:getNPCs()
+  local r = self:getInfo()
+  return r and r.npcs or {}
+end
+
+function GMCP.Room:hasNPC(keyword)
+  for _, n in ipairs(self:getNPCs()) do
+    if n.keyword == keyword then return true end
+  end
+  return false
+end
+
+GMCP.Group = {}
+
+function GMCP.Group:getMembers()
+  return gmcp.Group and gmcp.Group.Status and gmcp.Group.Status.members or {}
+end
+
+function GMCP.Group:getLeader()
+  for _, m in ipairs(self:getMembers()) do
+    if m.rank == "head" then return m end
+  end
+end

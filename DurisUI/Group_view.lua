@@ -1,3 +1,15 @@
+--[[
+Group View
+Author: Drevarr
+License: Public Domain
+
+Example Usage:
+cecho("GroupGrid", "<green>Group member joined!\n")
+echo("GroupGrid", "Hello GroupGrid!\n")
+
+]]
+
+
 GroupUI = GroupUI or {}
 GroupUI.widgets = GroupUI.widgets or {}
 

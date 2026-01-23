@@ -1,3 +1,11 @@
+--[[
+Format Comma Value Numbers
+Author: Drevarr
+License: Public Domain
+
+]]
+
+
 function comma_value(amount)
     -- Convert the number to a string and ensure it's an integer part for comma separation
     local formatted = string.format('%.0f', amount)

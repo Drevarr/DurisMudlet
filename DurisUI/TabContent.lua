@@ -1,3 +1,11 @@
+--[[
+TabPanel
+Author: Drevarr
+License: Public Domain
+
+]]
+
+
 TabPanel = TabPanel or {}
 
 function TabPanel:new(def)

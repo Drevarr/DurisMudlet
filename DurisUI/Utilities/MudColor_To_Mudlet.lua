@@ -1,3 +1,11 @@
+--[[
+Convert MudColor test to Mudlet
+Author: Drevarr
+License: Public Domain
+
+]]
+
+
 local rgb = {
   L = {64, 64, 64},    l = {128, 128, 128},
   R = {255, 0, 0},     r = {128, 0, 0},

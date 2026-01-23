@@ -1,3 +1,11 @@
+--[[
+Map UI
+Author: Drevarr
+License: Public Domain
+
+]]
+
+
 MapUI = MapUI or {}
 
 MapUI.panel = TabPanel:new({

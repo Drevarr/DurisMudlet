@@ -1,3 +1,11 @@
+--[[
+Spell and SKill Table for Duris
+Author: Drevarr
+License: Public Domain
+
+]]
+
+
 spell_names = {
     -- Spells (1 - 652)
     [1]   = "armor",

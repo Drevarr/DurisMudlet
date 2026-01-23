@@ -1,4 +1,18 @@
+--[[
+Character UI
+Author: Drevarr
+License: Public Domain
+
+Example usge:
+CharacterUI.widgets.stats:clear()
+CharacterUI.widgets.stats:echo("<white>STR: 18  DEX: 17  CON: 19\n")
+CharacterUI.widgets.affects:echo("<green>fly (65s)\n")
+CharacterUI.widgets.skills:echo("Backstab 92%\n")
+]]
+
+
 CharacterUI = CharacterUI or {}
+CharacterUI.widgets = CharacterUI.widgets or {}
 
 CharacterUI.panel = TabPanel:new({
   name = "CharacterUI",
@@ -13,58 +27,57 @@ CharacterUI.panel = TabPanel:new({
   },
 
   attach    = "left",
-  tabHeight = "20px", --8%
+  tabHeight = "20px",
   styles    = UIStyles,
   default   = "stats",
 
   tabs = {
+
     stats = {
       label = "Stats",
       create = function(parent)
-        local mini = Geyser.MiniConsole:new({
+        CharacterUI.widgets.stats = Geyser.MiniConsole:new({
           name     = "statsMini",
           autoWrap = true,
           x        = "0%", y = "0%",
           width    = "100%", height = "100%",
         }, parent)
 
-        mini:setColor("black")
-        mini:echo("Stats here\n")
-        return mini
+        CharacterUI.widgets.stats:setColor("black")
+        return CharacterUI.widgets.stats
       end
     },
 
     affects = {
       label = "Affects",
       create = function(parent)
-        local mini = Geyser.MiniConsole:new({
+        CharacterUI.widgets.affects = Geyser.MiniConsole:new({
           name     = "affectsMini",
           autoWrap = true,
           x        = "0%", y = "0%",
           width    = "100%", height = "100%",
         }, parent)
 
-        mini:setColor("black")
-        mini:echo("Affects here\n")
-        return mini
+        CharacterUI.widgets.affects:setColor("black")
+        return CharacterUI.widgets.affects
       end
     },
 
     skills = {
-      label = "Skills",
+      label = "Spells|Skills",
       create = function(parent)
-        local mini = Geyser.MiniConsole:new({
+        CharacterUI.widgets.skills = Geyser.MiniConsole:new({
           name     = "skillsMini",
           autoWrap = true,
           x        = "0%", y = "0%",
           width    = "100%", height = "100%",
         }, parent)
 
-        mini:setColor("black")
-        mini:echo("Skills here\n")
-        return mini
+        CharacterUI.widgets.skills:setColor("black")
+        return CharacterUI.widgets.skills
       end
     },
+
   }
 })
 

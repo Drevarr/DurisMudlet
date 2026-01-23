@@ -5,7 +5,7 @@ License: Public Domain
 
 Example Usage:
 InRoomUI.widgets.mobs:clear()
-InRoomUI.widgets.mobs:echo("<red>Goblin warrior\n")
+InRoomUI:updateMobs(testMobs)
 InRoomUI.widgets.items:echo("a rusty sword\n")
 InRoomUI.widgets.players:echo("<cyan>Drevarr\n")
 
@@ -29,35 +29,37 @@ InRoomUI.panel = TabPanel:new({
   attach    = "left",
   tabHeight = "20px",
   styles    = UIStyles,
-  default   = "mobs",
+  default   = "players",
 
   tabs = {
 
     mobs = {
       label = "Mobs",
       create = function(parent)
-        InRoomUI.widgets.mobs = Geyser.MiniConsole:new({
-          name     = "mobsMini",
-          autoWrap = true,
-          x        = "0%", y = "0%",
-          width    = "100%", height = "100%",
+        InRoomUI.widgets.mobs = Geyser.Label:new({
+          name   = "InRoomMobsView",
+          x      = "0%", y = "0%",
+          width  = "100%", height = "100%",
         }, parent)
+    
+        InRoomUI.widgets.mobsRows = {}
+        InRoomUI.widgets.mobs:setColor('black')
+        return InRoomUI.widgets.mobs      
 
-        InRoomUI.widgets.mobs:setColor("black")
-        return InRoomUI.widgets.mobs
       end
     },
 
     items = {
       label = "Items",
       create = function(parent)
-        InRoomUI.widgets.items = Geyser.MiniConsole:new({
-          name     = "itemsMini",
+        InRoomUI.widgets.items = Geyser.Label:new({
+          name     = "InRoomItemsView",
           autoWrap = true,
           x        = "0%", y = "0%",
           width    = "100%", height = "100%",
         }, parent)
 
+        InRoomUI.widgets.itemsRows = {}
         InRoomUI.widgets.items:setColor("black")
         return InRoomUI.widgets.items
       end
@@ -66,13 +68,14 @@ InRoomUI.panel = TabPanel:new({
     players = {
       label = "Players",
       create = function(parent)
-        InRoomUI.widgets.players = Geyser.MiniConsole:new({
-          name     = "playersMini",
+        InRoomUI.widgets.players = Geyser.Label:new({
+          name     = "InRoomPlayerView",
           autoWrap = true,
           x        = "0%", y = "0%",
           width    = "100%", height = "100%",
         }, parent)
 
+        InRoomUI.widgets.playersRows = {}
         InRoomUI.widgets.players:setColor("black")
         return InRoomUI.widgets.players
       end

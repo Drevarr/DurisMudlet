@@ -1,3 +1,11 @@
+--[[
+Duris UI
+Author: Drevarr
+License: Public Domain
+
+]]
+
+
 DurisUI = DurisUI or {}
 DurisUI.panels = {}
 

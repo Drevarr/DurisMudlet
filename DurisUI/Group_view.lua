@@ -31,27 +31,27 @@ GroupUI.panel = TabPanel:new({
   default   = "groupGrid",
 
   tabs = {
+
     groupGrid = {
-        label = "GroupGrid",
-        create = function(parent)
+      label = "GroupGrid",
+      create = function(parent)
         GroupUI.widgets.groupGrid = Geyser.Label:new({
-            name     = "GroupGrid",
-            autoWrap = true,
-            x        = "0%", y = "0%",
-            width    = "100%", height = "100%",
+          name     = "groupGridLabel",
+          autoWrap = true,
+          x        = "0%", y = "0%",
+          width    = "100%", height = "100%",
         }, parent)
 
         GroupUI.widgets.groupGrid:setColor("black")
         return GroupUI.widgets.groupGrid
-        end
+      end
     },
-
 
     comms = {
       label = "GroupText",
       create = function(parent)
-      GroupUI.widgets.groupText = Geyser.MiniConsole:new({
-          name     = "GroupTextMini",
+        GroupUI.widgets.groupText = Geyser.MiniConsole:new({
+          name     = "groupTextMini",
           autoWrap = true,
           x        = "0%", y = "0%",
           width    = "100%", height = "100%",
@@ -66,21 +66,21 @@ GroupUI.panel = TabPanel:new({
       label = "DualMode",
       create = function(parent)
         GroupUI.widgets.dualMode = Geyser.Container:new({
-          name   = "DualMode",
+          name   = "dualModeContainer",
           x      = "0%", y = "0%",
           width  = "100%", height = "100%",
         }, parent)
 
         GroupUI.widgets.dualGrid = Geyser.Label:new({
-          name     = "DualGrid",
+          name     = "dualGridLabel",
           autoWrap = true,
           x        = "0%", y = "0%",
           width    = "100%", height = "50%",
-        }, GroupUI.widgets.dualMode)   
+        }, GroupUI.widgets.dualMode)
         GroupUI.widgets.dualGrid:setColor("black")
 
         GroupUI.widgets.dualMini = Geyser.MiniConsole:new({
-          name   = "DualMini",
+          name   = "dualMiniConsole",
           x      = "0%", y = "50%",
           width  = "100%", height = "50%",
         }, GroupUI.widgets.dualMode)
@@ -89,5 +89,8 @@ GroupUI.panel = TabPanel:new({
         return GroupUI.widgets.dualMode
       end
     },
+
   }
 })
+
+DurisUI.panels.GroupUI = GroupUI.panel

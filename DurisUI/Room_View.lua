@@ -38,7 +38,7 @@ InRoomUI.panel = TabPanel:new({
     
         InRoomUI.widgets.mobsRows = {}
         InRoomUI.widgets.mobs:setColor('black')
-        return InRoomUI.widgets.mobs      
+        return InRoomUI.widgets.mobs
 
       end
     },

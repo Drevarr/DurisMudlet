@@ -7,6 +7,7 @@ License: Public Domain
 
 
 MapUI = MapUI or {}
+MapUI.widgets = MapUI.widgets or {}
 
 MapUI.panel = TabPanel:new({
   name = "MapUI",
@@ -26,54 +27,57 @@ MapUI.panel = TabPanel:new({
   default   = "map",
 
   tabs = {
+
     map = {
       label = "Map",
       create = function(parent)
-        local c = Geyser.Container:new({
+        MapUI.widgets.mapContainer = Geyser.Container:new({
           name   = "mapView",
           x      = "0%", y = "0%",
           width  = "100%", height = "100%",
         }, parent)
 
-        MapUI.mapBox = Geyser.Container:new({
-          name   = "MapBox",
+        MapUI.widgets.mapBox = Geyser.Label:new({
+          name   = "mapBox",
           x      = "0%", y = "0%",
           width  = "100%", height = "100%",
-        }, c)
+        }, MapUI.widgets.mapContainer)
 
-        return c
+        MapUI.widgets.mapBox:setColor("black")
+        return MapUI.widgets.mapContainer
       end
     },
 
     comms = {
       label = "Comms",
       create = function(parent)
-        local m = Geyser.MiniConsole:new({
+        MapUI.widgets.comms = Geyser.MiniConsole:new({
           name     = "commsMini",
           autoWrap = true,
           x        = "0%", y = "0%",
           width    = "100%", height = "100%",
         }, parent)
 
-        m:setColor("black")
-        return m
+        MapUI.widgets.comms:setColor("black")
+        return MapUI.widgets.comms
       end
     },
 
     misc = {
       label = "Misc",
       create = function(parent)
-        local m = Geyser.MiniConsole:new({
+        MapUI.widgets.misc = Geyser.MiniConsole:new({
           name     = "miscMini",
           autoWrap = true,
           x        = "0%", y = "0%",
           width    = "100%", height = "100%",
         }, parent)
 
-        m:setColor("black")
-        return m
+        MapUI.widgets.misc:setColor("black")
+        return MapUI.widgets.misc
       end
     },
+
   }
 })
 
